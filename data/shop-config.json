@@ -12,15 +12,15 @@
   "vouchers": {
     "ANHBA20K": {
       "discount": 20000,
-      "desc": "Giảm 20.000đ trực tiếp cho sĩ tử"
+      "desc": "Giảm ~20.000đ trực tiếp cho sĩ tử"
     },
     "SITU2026": {
       "discount": 30000,
-      "desc": "Giảm 30.000đ ưu đãi mùa thi"
+      "desc": "Giảm ~30.000đ ưu đãi mùa thi"
     },
     "FREESHIP": {
       "discount": 25000,
-      "desc": "Hỗ trợ 25.000đ phí vận chuyển"
+      "desc": "Hỗ trợ ~25.000đ phí vận chuyển"
     }
   }
 }

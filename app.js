@@ -17,15 +17,15 @@ const DEFAULT_CONFIG = {
   "vouchers": {
     "ANHBA20K": {
       "discount": 20000,
-      "desc": "Giảm 20.000đ trực tiếp cho sĩ tử"
+      "desc": "Giảm ~20.000đ trực tiếp cho sĩ tử"
     },
     "SITU2026": {
       "discount": 30000,
-      "desc": "Giảm 30.000đ ưu đãi mùa thi"
+      "desc": "Giảm ~30.000đ ưu đãi mùa thi"
     },
     "FREESHIP": {
       "discount": 25000,
-      "desc": "Hỗ trợ 25.000đ phí vận chuyển"
+      "desc": "Hỗ trợ ~25.000đ phí vận chuyển"
     }
   }
 };
@@ -134,7 +134,7 @@ const DEFAULT_PRODUCTS = [
     "name": "Casio fx-880BTG (Hạng A • Đẹp 95% Giá Sinh Viên)",
     "series": "fx-880BTG",
     "grade": "95%",
-    "badge": "Tiết Kiệm 360k",
+    "badge": "Tiết Kiệm ~360k",
     "originalPrice": 890000,
     "salePrice": 530000,
     "savePercent": 40,
@@ -199,7 +199,7 @@ const DEFAULT_PRODUCTS = [
     "name": "Casio fx-570ES Plus (Hạng A • Giá Siêu Mềm Sinh Viên)",
     "series": "fx-570ES Plus",
     "grade": "95%",
-    "badge": "Chỉ 220K",
+    "badge": "Chỉ ~220K",
     "originalPrice": 480000,
     "salePrice": 220000,
     "savePercent": 54,
@@ -538,7 +538,7 @@ function renderProducts() {
             </span>
             ${product.badge ? `
               <span class="px-2 py-0.5 text-[11px] font-bold rounded-md bg-slate-900/85 text-white shadow-sm">
-                ${product.badge}
+                ${product.badge.replace(/(\d+k)/i, '~$1')}
               </span>
             ` : ''}
           </div>
@@ -708,7 +708,7 @@ function filterByNeed(tag) {
   const target = document.getElementById('products-section');
   if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   const labels = {
-    cap2: 'Học sinh Cấp 2 (220k – 290k)',
+    cap2: 'Học sinh Cấp 2 (~220k – ~290k)',
     thpt: 'Ôn thi THPTQG & ĐGNL',
     sgkmoi: 'SGK Mới & Công nghệ QR (fx-880BTG)',
     phukien: 'Phụ kiện bảo vệ & Pin Maxell'
@@ -1560,16 +1560,16 @@ function runCalculatorQuiz() {
 
   if (budget === 'low' || grade === 'thcs') {
     recId = 'fx-570vnplus-99';
-    reason = 'Casio fx-570VN Plus (99%) giá 290k cực kỳ tiết kiệm, bền bỉ cho học sinh cấp 2 hoặc làm máy phụ dự phòng.';
+    reason = 'Casio fx-570VN Plus (99%) giá ~290k cực kỳ tiết kiệm, bền bỉ cho học sinh cấp 2 hoặc làm máy phụ dự phòng.';
   } else if (budget === 'high' && (style === 'modern' || grade === 'lop10')) {
     recId = 'combo-luoi-hoc-chinh-phuc-9';
     reason = 'Combo fx-880BTG (99%) + Cẩm nang & Bao da phù hợp hoàn hảo với chương trình SGK mới, có Bảng tính & Quét QR vẽ đồ thị tại nhà.';
   } else if (style === 'modern' || grade === 'lop10') {
     recId = 'fx-880btg-95';
-    reason = 'Casio fx-880BTG (95%) giá 530k (tiết kiệm 360k) giúp bạn sở hữu đầy đủ công nghệ màn hình 4 cấp độ xám, Math Box & Thống kê mới.';
+    reason = 'Casio fx-880BTG (95%) giá ~530k (tiết kiệm ~360k) giúp bạn sở hữu đầy đủ công nghệ màn hình 4 cấp độ xám, Math Box & Thống kê mới.';
   } else if (budget === 'mid' && style === 'speed') {
     recId = 'fx-580vnx-95';
-    reason = 'Casio fx-580VN X (95%) giá chỉ 399k — main zin 100%, phím êm như mới, tối ưu chi phí cho sĩ tử cày đề.';
+    reason = 'Casio fx-580VN X (95%) giá chỉ ~399k — main zin 100%, phím êm như mới, tối ưu chi phí cho sĩ tử cày đề.';
   }
 
   const product = state.products.find(p => p.id === recId) || state.products[0];
@@ -1674,5 +1674,8 @@ function setupEventListeners() {
 }
 
 function formatMoney(amount) {
-  return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+  if (amount == null || isNaN(amount)) return '~0đ';
+  const num = Math.round(Number(amount));
+  const formatted = Math.abs(num).toLocaleString('vi-VN');
+  return num < 0 ? `-~${formatted}đ` : `~${formatted}đ`;
 }
