@@ -1,0 +1,24 @@
+{
+  "shopName": "ANH BA TỰ NHIÊN",
+  "tagline": "Kho Máy Tính Casio Cũ Chuẩn Sĩ Tử",
+  "hotline": "0987.xxx.xxx",
+  "zaloPhone": "0987654321",
+  "facebookUrl": "https://www.facebook.com/anh3tunhien/",
+  "tiktokUrl": "https://www.tiktok.com/@anh3tunhien",
+  "tiktokHandle": "@anh3tunhien",
+  "promoBanner": "Tặng Bảng 100 Công Thức Bấm Máy Casio + Pin Nhật Zin + Miễn Phí Giao Hàng Toàn Quốc!",
+  "vouchers": {
+    "ANHBA20K": {
+      "discount": 20000,
+      "desc": "Giảm 20.000đ trực tiếp cho sĩ tử"
+    },
+    "SITU2026": {
+      "discount": 30000,
+      "desc": "Giảm 30.000đ ưu đãi mùa thi"
+    },
+    "FREESHIP": {
+      "discount": 25000,
+      "desc": "Hỗ trợ 25.000đ phí vận chuyển"
+    }
+  }
+}

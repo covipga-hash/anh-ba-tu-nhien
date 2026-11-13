@@ -1,0 +1,86 @@
+[
+  {
+    "id": "trick-cuc-tri-580",
+    "title": "Tính Khoảng Cách 2 Điểm Cực Trị Hàm Bậc 3 Trong 5 Giây",
+    "model": "fx-580VN X",
+    "topic": "Hàm số",
+    "timeSaved": "Tiết kiệm 3 phút",
+    "sourceStyle": "Giải đề Chuyên Chu Văn An",
+    "problem": "Tìm độ dài đoạn thẳng nối hai điểm cực trị A, B của đồ thị hàm số y = x³ - 3x² + 2.",
+    "steps": [
+      "MENU", "9", "2", "3", "Nhập hệ số a, b, c, d", "=", "=", "=", "Nhấn [=] liên tiếp để xem (x₁, y₁) và (x₂, y₂)"
+    ],
+    "explain": "Casio fx-580VN X tự động giải phương trình bậc 3 và in thẳng tọa độ Điểm Cực Đại (x, y) lẫn Điểm Cực Tiểu (x, y) mà không cần đạo hàm bằng tay! Sau đó bấm √((x₁-x₂)² + (y₁-y₂)²) là ra đáp án.",
+    "recommendedProductId": "fx-580vnx-99"
+  },
+  {
+    "id": "trick-thong-ke-880",
+    "title": "Thống Kê Ghép Nhóm & Độ Lệch Chuẩn Chuẩn GDPT 2018",
+    "model": "fx-880BTG",
+    "topic": "Xác suất & Oxyz",
+    "timeSaved": "Chuẩn SGK Mới 100%",
+    "sourceStyle": "Đề Minh Họa THPTQG Mới",
+    "problem": "Tính số trung bình, phương sai s² và độ lệch chuẩn s của mẫu số liệu ghép nhóm điểm thi.",
+    "steps": [
+      "HOME", "Statistics", "1-Variable", "TOOLS", "Frequency ON", "Nhập giá trị đại diện + Tần số", "EXE", "1-Var Results"
+    ],
+    "explain": "Dòng Casio fx-880BTG (và bản PLUS) hiển thị rõ Tứ phân vị Q₁, Q₂, Q₃, Phương sai mẫu s²ₓ và Độ lệch chuẩn σₓ trên cùng 1 màn hình độ phân giải cao.",
+    "recommendedProductId": "fx-880btg-99"
+  },
+  {
+    "id": "trick-tich-phan-ham-an",
+    "title": "Kiểm Tra Đáp Án Nguyên Hàm - Tích Phân Bằng d/dx + CALC",
+    "model": "fx-580VN X",
+    "topic": "Tích phân",
+    "timeSaved": "Chính xác 99.9%",
+    "sourceStyle": "Tuyệt chiêu chống sai dấu",
+    "problem": "Tìm nguyên hàm F(x) của hàm số f(x) = x·e^(2x) (hoặc các bài hàm phức tạp nhiều tham số).",
+    "steps": [
+      "SHIFT", "∫ (d/dx)", "Nhập đáp án F(x)", "x = 1.5", "-", "Nhập đề f(1.5)", "="
+    ],
+    "explain": "Theo định nghĩa F'(x) = f(x). Chỉ cần tính đạo hàm tại điểm x bất kỳ (ví dụ x = 1.5) trừ đi giá trị f(1.5). Đáp án nào cho kết quả bằng 0 (hoặc 10⁻¹⁰) là đáp án đúng tuyệt đối!",
+    "recommendedProductId": "fx-580vnx-95"
+  },
+  {
+    "id": "trick-tiem-can-table",
+    "title": "Quét Tiệm Cận Đứng & Tiệm Cận Ngang Siêu Tốc",
+    "model": "fx-580VN X",
+    "topic": "Hàm số",
+    "timeSaved": "Không cần viết nháp",
+    "sourceStyle": "Mẹo Lười Học Cấp Tốc",
+    "problem": "Tìm tổng số đường tiệm cận đứng và tiệm cận ngang của đồ thị chứa căn thức ở tử và mẫu.",
+    "steps": [
+      "CALC (hoặc MENU 8)", "Nhập hàm phân thức f(x)", "Thử x = 10⁹ (Tiệm cận ngang +∞)", "Thử x = -10⁹ (-∞)", "Thử x = x₀ ± 10⁻⁶ (Tiệm cận đứng)"
+    ],
+    "explain": "Khi thay x = 10⁹ mà kết quả ra một hằng số hữu hạn thì đó chính là tiệm cận ngang. Khi thay nghiệm mẫu x₀ + 0.000001 mà ra số cực lớn (>10⁶) thì đó là tiệm cận đứng!",
+    "recommendedProductId": "fx-580vnx-99"
+  },
+  {
+    "id": "trick-do-thi-qr-880",
+    "title": "Vẽ Đồ Thị Hàm Số Bằng Mã QR & Math Box Mô Phỏng Xác Suất",
+    "model": "fx-880BTG",
+    "topic": "Xác suất & Oxyz",
+    "timeSaved": "Trực quan 100%",
+    "sourceStyle": "Đặc quyền fx-880BTG",
+    "problem": "Khảo sát sự biến thiên, số giao điểm f(x) = m và bảng tính nghiệm hàm phức tạp khi ôn luyện tại nhà.",
+    "steps": [
+      "HOME", "Table", "Nhập f(x) & g(x)", "EXE", "SHIFT", "QR", "Quét mã trên điện thoại xem đồ thị màu"
+    ],
+    "explain": "Casio fx-880BTG tạo mã QR trực tiếp cho phép học sinh ôn thi tại nhà nhìn thấy ngay hình dạng đồ thị, cực đại/cực tiểu và nghiệm giao điểm cực kỳ dễ hiểu.",
+    "recommendedProductId": "fx-880btg-95"
+  },
+  {
+    "id": "trick-oxyz-vector",
+    "title": "Tính Tích Có Hướng & Khoảng Cách Chéo Nhau Oxyz Trong 10s",
+    "model": "fx-580VN X",
+    "topic": "Xác suất & Oxyz",
+    "timeSaved": "Tiết kiệm 4 phút",
+    "sourceStyle": "Ăn chắc điểm 8+ Hình Oxyz",
+    "problem": "Cho 2 đường thẳng chéo nhau Δ₁, Δ₂ trong không gian Oxyz. Tính khoảng cách d(Δ₁, Δ₂).",
+    "steps": [
+      "MENU", "5 (Vector)", "Tạo VctA = u₁, VctB = u₂, VctC = M₁M₂", "OPTN", "Abs((VctA × VctB) • VctC) ÷ Abs(VctA × VctB)"
+    ],
+    "explain": "Thay vì tính tay 3 lần tích có hướng rất dễ nhầm dấu âm/dương, nhập thẳng vào Vector Mode giúp bạn bấm công thức |[u₁, u₂] · M₁M₂| / |[u₁, u₂]| ra đáp án chính xác từng dấu phẩy.",
+    "recommendedProductId": "fx-580vnx-99"
+  }
+]

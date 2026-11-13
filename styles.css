@@ -1,0 +1,118 @@
+/* Anh Ba Tự Nhiên - Professional Student Tech Store Stylesheet */
+
+:root {
+  --brand-primary: #2563eb;
+  --brand-primary-dark: #1d4ed8;
+  --brand-ink: #0f172a;
+  --brand-muted: #64748b;
+  --surface-page: #f8fafc;
+  --surface-card: #ffffff;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Hide scrollbars on horizontal filter rails while keeping touch scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Glass Navbar */
+.glass-nav {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* Subtle Graph Paper Pattern (Academic / Math aesthetic) */
+.bg-math-grid {
+  background-color: #f8fafc;
+  background-image: 
+    linear-gradient(to right, rgba(37, 99, 235, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(37, 99, 235, 0.045) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Tactile Calculator Key Press Effect */
+.calc-key {
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+  box-shadow: 0 3px 0 rgba(15, 23, 42, 0.45);
+}
+.calc-key:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.45);
+}
+
+/* Realistic LCD Screen Glow */
+.casio-lcd {
+  background: linear-gradient(145deg, #c6decb 0%, #b5d3bc 100%);
+  box-shadow: inset 0 2px 8px rgba(15, 23, 42, 0.25);
+}
+.casio-lcd-880 {
+  background: linear-gradient(145deg, #e2e8f0 0%, #cbd5e1 100%);
+  box-shadow: inset 0 2px 8px rgba(15, 23, 42, 0.2);
+}
+
+/* Smooth Fade-in Animation */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-up {
+  animation: fadeSlideUp 0.28s ease-out forwards;
+}
+
+/* Mobile bottom bar safe area padding */
+.mobile-bottom-nav {
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+}
+
+@media (max-width: 767px) {
+  body {
+    padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* 2026 Bento Grid & Card Micro-Interactions */
+.bento-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.bento-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Glassmorphism Drawer & Modals */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Interactive Focus Ring */
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}

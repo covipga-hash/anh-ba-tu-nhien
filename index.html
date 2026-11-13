@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anh Ba Tự Nhiên | Máy Tính Casio Cũ Chính Hãng Cho Học Sinh - Sinh Viên</title>
+  <meta name="description" content="Kho máy tính Casio cũ chính hãng fx-580VN X, fx-880BTG, fx-570VN Plus tuyển chọn Like New 95-99%. Bảo hành 1 đổi 1 12 tháng, bao test SHIFT 7 ON trước khi trả tiền.">
+
+  <!-- Google Fonts: Be Vietnam Pro & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Be Vietnam Pro"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-blue-600 selection:text-white">
+
+  <!-- TOAST CONTAINER -->
+  <div id="toast-container" class="fixed bottom-20 md:bottom-6 right-4 sm:right-6 z-50 flex flex-col gap-2 max-w-sm w-[calc(100%-2rem)] sm:w-full pointer-events-none"></div>
+
+  <!-- TOP PROMO STRIP -->
+  <div class="bg-slate-900 text-slate-200 text-[11px] sm:text-xs font-medium py-2 px-4 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1.5">
+      <div class="flex items-center gap-2 text-center sm:text-left">
+        <span class="bg-blue-600 text-white px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wide shrink-0">
+          Ưu Đãi Sĩ Tử
+        </span>
+        <span class="truncate">Tặng Ebook 100 Mẹo Casio + Pin Maxell Nhật + Đồng kiểm trước khi trả tiền</span>
+      </div>
+      <div class="flex items-center gap-2 text-[11px] shrink-0 text-slate-300">
+        <span class="hidden lg:inline">Kỳ thi THPTQG còn:</span>
+        <div id="exam-countdown" class="flex items-center gap-1 font-mono font-semibold text-amber-400">
+          <span>Đang tính...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STICKY HEADER -->
+  <header class="sticky top-0 z-40 glass-nav border-b border-slate-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center gap-2.5 group shrink-0">
+        <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-sm group-hover:bg-blue-700 transition">
+          <i class="fa-solid fa-calculator text-lg"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="font-extrabold text-base sm:text-lg tracking-tight text-slate-900">ANH BA TỰ NHIÊN</span>
+            <i class="fa-solid fa-circle-check text-blue-600 text-xs" title="Chính chủ TikTok & Facebook"></i>
+          </div>
+          <p class="text-[11px] text-slate-500 font-medium hidden sm:block">Máy tính Casio cũ tuyển chọn • Main Zin 100%</p>
+        </div>
+      </a>
+
+      <!-- Desktop Search -->
+      <div class="hidden md:flex flex-1 max-w-sm mx-2">
+        <div class="relative w-full">
+          <input 
+            type="text" 
+            id="search-input"
+            placeholder="Tìm nhanh: 580vnx, 880btg, 570, bao da..." 
+            class="w-full bg-slate-100/80 hover:bg-slate-100 focus:bg-white text-xs rounded-xl pl-9 pr-4 py-2 border border-slate-200 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100 transition"
+          />
+          <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+        </div>
+      </div>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden lg:flex items-center gap-5 text-xs font-semibold text-slate-600">
+        <a href="#products-section" class="hover:text-blue-600 transition">Kho Máy</a>
+        <a href="#compare-section" class="hover:text-blue-600 transition">So Sánh</a>
+        <a href="#simulator-section" class="hover:text-blue-600 transition">Test Máy</a>
+        <a href="#tips-section" class="hover:text-blue-600 transition">Mẹo Bấm Casio</a>
+        <a href="#lookup-section" class="hover:text-blue-600 transition">Tra Đơn Hàng</a>
+      </nav>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-2">
+        <a 
+          href="https://www.tiktok.com/@anh3tunhien" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-semibold transition"
+          title="TikTok @anh3tunhien"
+        >
+          <i class="fa-brands fa-tiktok"></i>
+          <span>TikTok</span>
+        </a>
+
+        <a 
+          href="https://www.facebook.com/anh3tunhien/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-xl text-xs font-semibold transition border border-blue-200/70"
+          title="Fanpage Facebook"
+        >
+          <i class="fa-brands fa-facebook"></i>
+          <span>Facebook</span>
+        </a>
+
+        <button 
+          onclick="openCartDrawer()" 
+          class="relative px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-sm"
+          title="Xem giỏ hàng"
+        >
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="hidden sm:inline">Giỏ Hàng</span>
+          <span class="cart-count hidden bg-amber-400 text-slate-950 text-[10px] font-extrabold px-1.5 py-0.5 rounded-full leading-none">
+            0
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Search Strip -->
+    <div class="md:hidden px-4 pb-2.5 pt-0.5">
+      <div class="relative w-full">
+        <input 
+          type="text" 
+          id="search-input-mobile"
+          placeholder="Tìm máy tính: fx-580VN X, fx-880BTG, dưới 300k..." 
+          class="w-full bg-slate-100 text-xs rounded-xl pl-9 pr-4 py-2 border border-slate-200 focus:bg-white focus:border-blue-500 focus:outline-none"
+        />
+        <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- CLEAN MODERN HERO SECTION -->
+  <section class="bg-math-grid border-b border-slate-200/80 py-10 sm:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        
+        <!-- Left Copy -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200 shadow-sm text-xs font-semibold text-slate-700">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span>Kho máy tuyển chọn bởi <strong>Anh Ba Tự Nhiên</strong> (TikTok &amp; Facebook)</span>
+          </div>
+
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-[1.18]">
+            Máy tính Casio cũ chính hãng <br class="hidden sm:block"/>
+            <span class="text-blue-600">Tiết kiệm đến 50% cho học sinh</span>
+          </h1>
+
+          <p class="text-slate-600 text-sm sm:text-base leading-relaxed max-w-2xl">
+            Không cần bỏ 750k–900k mua máy mới tinh. Tại kho Anh Ba, mỗi chiếc <strong>fx-580VN X, fx-880BTG, fx-570VN Plus</strong> đều được test kỹ 40 bước, thay pin Nhật mới, bao bấm thử <code class="bg-slate-200/70 text-slate-900 px-1.5 py-0.5 rounded font-mono text-xs font-bold">SHIFT 7 ON</code> kiểm tra main zin rồi mới trả tiền.
+          </p>
+
+          <!-- Clean CTAs -->
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
+            <a 
+              href="#products-section" 
+              class="px-6 py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-sm shadow-md shadow-blue-600/20 transition flex items-center justify-center gap-2"
+            >
+              <i class="fa-solid fa-store"></i> Xem Bảng Giá Máy Ngay
+            </a>
+            <a 
+              href="#simulator-section" 
+              class="px-6 py-3.5 bg-white hover:bg-slate-100 text-slate-800 border border-slate-300 rounded-xl font-bold text-sm transition flex items-center justify-center gap-2"
+            >
+              <i class="fa-solid fa-microchip text-blue-600"></i> Thử Test Máy Online
+            </a>
+          </div>
+
+          <!-- 4 Clean Trust Pills -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-slate-200/80 text-xs">
+            <div class="flex items-center gap-2 text-slate-700 font-semibold">
+              <i class="fa-solid fa-shield-check text-emerald-600 text-base"></i>
+              <span>100% Main Zin Bitex</span>
+            </div>
+            <div class="flex items-center gap-2 text-slate-700 font-semibold">
+              <i class="fa-solid fa-arrows-rotate text-blue-600 text-base"></i>
+              <span>1 Đổi 1 Trong 12T</span>
+            </div>
+            <div class="flex items-center gap-2 text-slate-700 font-semibold">
+              <i class="fa-solid fa-box-open text-amber-600 text-base"></i>
+              <span>Đồng Kiểm COD</span>
+            </div>
+            <div class="flex items-center gap-2 text-slate-700 font-semibold">
+              <i class="fa-solid fa-book-open text-indigo-600 text-base"></i>
+              <span>Tặng Ebook Mẹo 9+</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Clean Product Spotlight Card -->
+        <div class="lg:col-span-5">
+          <div class="bg-white rounded-3xl border border-slate-200 p-5 shadow-xl shadow-slate-200/60 max-w-md mx-auto">
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2.5 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-lg text-[11px] font-bold">
+                💎 Hạng S • Like New 99%
+              </span>
+              <span class="text-xs font-bold text-slate-500">Đã bán 1.420+ chiếc</span>
+            </div>
+
+            <div class="relative rounded-2xl bg-slate-100 overflow-hidden aspect-[4/3] mb-4">
+              <img 
+                src="assets/images/products/casio-580vnx.svg" 
+                alt="Casio fx-580VN X Like New" 
+                class="w-full h-full object-cover"
+              />
+              <div class="absolute bottom-3 left-3 bg-slate-900/85 backdrop-blur text-white text-[11px] font-semibold px-3 py-1 rounded-lg">
+                Tiết kiệm ngay 290.000đ so với máy mới
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between gap-4">
+              <div>
+                <h2 class="font-bold text-slate-900 text-base">Casio fx-580VN X (99%)</h2>
+                <div class="flex items-baseline gap-2 mt-0.5">
+                  <span class="text-xl font-extrabold text-blue-600">460.000đ</span>
+                  <span class="text-xs text-slate-400 line-through">750.000đ</span>
+                </div>
+              </div>
+              <button 
+                onclick="addToCart('fx-580vnx-99', true)"
+                class="px-4 py-2.5 bg-slate-900 hover:bg-blue-600 text-white rounded-xl text-xs font-bold transition shrink-0 shadow-sm"
+              >
+                Đặt Ngay <i class="fa-solid fa-arrow-right ml-1"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- STUDENT NEEDS SHORTCUTS (Dễ tiếp cận cho học sinh từng cấp) -->
+  <section class="py-10 bg-white border-b border-slate-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-5 gap-2">
+        <h2 class="text-lg font-extrabold text-slate-900">Chọn nhanh theo nhu cầu học tập của bạn</h2>
+        <span class="text-xs text-slate-500">Bấm vào mục phù hợp để lọc máy chuẩn nhất</span>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        <button onclick="filterByNeed('cap2')" class="text-left p-4 rounded-2xl bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition group">
+          <div class="w-9 h-9 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center mb-2.5 text-sm">
+            <i class="fa-solid fa-backpack"></i>
+          </div>
+          <div class="font-bold text-slate-900 text-sm group-hover:text-blue-700">Học sinh Cấp 2 (Lớp 6–9)</div>
+          <p class="text-xs text-slate-500 mt-0.5">Bền bỉ, dễ bấm • Chỉ từ <strong class="text-slate-800">220k</strong></p>
+        </button>
+
+        <button onclick="filterByNeed('thpt')" class="text-left p-4 rounded-2xl bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition group">
+          <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center mb-2.5 text-sm">
+            <i class="fa-solid fa-pen-to-square"></i>
+          </div>
+          <div class="font-bold text-slate-900 text-sm group-hover:text-blue-700">Ôn Thi THPTQG &amp; ĐGNL</div>
+          <p class="text-xs text-slate-500 mt-0.5">fx-580VN X tốc độ cao • Từ <strong class="text-slate-800">399k</strong></p>
+        </button>
+
+        <button onclick="filterByNeed('sgkmoi')" class="text-left p-4 rounded-2xl bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition group">
+          <div class="w-9 h-9 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center mb-2.5 text-sm">
+            <i class="fa-solid fa-qrcode"></i>
+          </div>
+          <div class="font-bold text-slate-900 text-sm group-hover:text-blue-700">SGK Mới &amp; Công Nghệ</div>
+          <p class="text-xs text-slate-500 mt-0.5">fx-880BTG QR &amp; Thống kê • Từ <strong class="text-slate-800">530k</strong></p>
+        </button>
+
+        <button onclick="filterByNeed('phukien')" class="text-left p-4 rounded-2xl bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition group">
+          <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center mb-2.5 text-sm">
+            <i class="fa-solid fa-toolbox"></i>
+          </div>
+          <div class="font-bold text-slate-900 text-sm group-hover:text-blue-700">Phụ Kiện &amp; Quà Sĩ Tử</div>
+          <p class="text-xs text-slate-500 mt-0.5">Bao da, Pin Nhật, Bút • Chỉ <strong class="text-slate-800">65k</strong></p>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS CATALOG SECTION -->
+  <section id="products-section" class="py-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
+      <div>
+        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Kho Máy Tuyển Chọn</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">
+          Bảng Giá Máy Tính Casio Cũ Chính Hãng
+        </h2>
+        <p class="text-slate-600 text-sm mt-1">
+          Công khai minh bạch độ mới vỏ máy. Toàn bộ 100% mainboard zin chưa qua sửa chữa.
+        </p>
+      </div>
+      <div id="product-count-badge" class="text-xs font-semibold text-slate-500 bg-white px-3 py-1.5 rounded-lg border border-slate-200 self-start md:self-auto">
+        Đang tải danh sách...
+      </div>
+    </div>
+
+    <!-- Transparent Condition Guide (Phân hạng minh bạch cho sinh viên dễ hiểu) -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6 text-xs">
+      <div class="bg-white rounded-xl p-3.5 border border-emerald-200/80 flex items-start gap-3">
+        <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 font-bold rounded shrink-0">99%</span>
+        <div>
+          <strong class="text-slate-900 block">Hạng S — Like New (Như Mới)</strong>
+          <span class="text-slate-500">Ngoại hình đẹp keng không trầy, nắp trượt khít, nguyên tem Bitex 3D.</span>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl p-3.5 border border-blue-200/80 flex items-start gap-3">
+        <span class="px-2 py-0.5 bg-blue-100 text-blue-800 font-bold rounded shrink-0">95%</span>
+        <div>
+          <strong class="text-slate-900 block">Hạng A — Đẹp Keng (Kinh Tế)</strong>
+          <span class="text-slate-500">Xước dăm nhẹ mặt lưng/vỏ. Màn hình trong veo, phím nảy êm như mới.</span>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl p-3.5 border border-slate-200 flex items-start gap-3">
+        <span class="px-2 py-0.5 bg-slate-100 text-slate-800 font-bold rounded shrink-0">100%</span>
+        <div>
+          <strong class="text-slate-900 block">Cam Kết Kỹ Thuật Chung</strong>
+          <span class="text-slate-500">Đều đã vệ sinh sạch sẽ, thay pin Maxell mới &amp; test đủ 40 bước trước khi ship.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter & Sort Bar (Mobile scrollable) -->
+    <div class="bg-white rounded-2xl p-3.5 sm:p-4 border border-slate-200 shadow-sm mb-8 space-y-3">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        
+        <!-- Category Pills -->
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 sm:pb-0">
+          <button onclick="filterCategory('all', this)" class="cat-btn whitespace-nowrap px-3.5 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold transition shadow-sm">
+            Tất Cả
+          </button>
+          <button onclick="filterCategory('580', this)" class="cat-btn whitespace-nowrap px-3.5 py-2 bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-xl text-xs font-semibold transition">
+            Casio fx-580VN X
+          </button>
+          <button onclick="filterCategory('880', this)" class="cat-btn whitespace-nowrap px-3.5 py-2 bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-xl text-xs font-semibold transition">
+            Casio fx-880BTG
+          </button>
+          <button onclick="filterCategory('570', this)" class="cat-btn whitespace-nowrap px-3.5 py-2 bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-xl text-xs font-semibold transition">
+            Casio fx-570 (Cấp 2)
+          </button>
+          <button onclick="filterCategory('phukien', this)" class="cat-btn whitespace-nowrap px-3.5 py-2 bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-xl text-xs font-semibold transition">
+            Phụ Kiện &amp; Pin
+          </button>
+        </div>
+
+        <!-- Sort + Grade -->
+        <div class="flex items-center justify-between sm:justify-end gap-2 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100">
+          <div class="flex items-center gap-1.5 text-xs">
+            <button onclick="filterGrade('all', this)" class="grade-btn px-2.5 py-1.5 rounded-lg border border-blue-600 bg-blue-50 text-blue-700 font-bold transition">Mọi độ mới</button>
+            <button onclick="filterGrade('99%', this)" class="grade-btn px-2.5 py-1.5 rounded-lg border border-slate-200 text-slate-600 font-semibold transition">99%</button>
+            <button onclick="filterGrade('95%', this)" class="grade-btn px-2.5 py-1.5 rounded-lg border border-slate-200 text-slate-600 font-semibold transition">95%</button>
+          </div>
+          <select 
+            onchange="sortProducts(this.value)" 
+            class="bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="best-seller">Bán chạy nhất</option>
+            <option value="price-asc">Giá thấp ➔ cao</option>
+            <option value="price-desc">Giá cao ➔ thấp</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Products Grid -->
+    <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+      <!-- Populated by app.js -->
+    </div>
+
+  </section>
+
+  <!-- CALCULATOR COMPARISON & 10-SECOND FINDER QUIZ -->
+  <section id="compare-section" class="py-14 bg-white border-y border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="max-w-2xl mb-8">
+        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Tư Vấn Chọn Máy</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">
+          Phân vân giữa fx-580VN X và fx-880BTG?
+        </h2>
+        <p class="text-slate-600 text-sm mt-1">
+          Bảng so sánh nhanh giúp học sinh – sinh viên chọn đúng chiếc máy hợp chương trình học và ví tiền.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Comparison Table -->
+        <div class="lg:col-span-7 bg-slate-50 rounded-2xl border border-slate-200 overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-900 text-white font-bold">
+                <tr>
+                  <th class="p-4">Tiêu chí so sánh</th>
+                  <th class="p-4 text-blue-300">Casio fx-580VN X</th>
+                  <th class="p-4 text-emerald-300">Casio fx-880BTG</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200 text-slate-700">
+                <tr class="bg-white">
+                  <td class="p-4 font-bold text-slate-900">Giá máy cũ tại Anh Ba</td>
+                  <td class="p-4 font-extrabold text-blue-600">399.000đ – 460.000đ</td>
+                  <td class="p-4 font-extrabold text-blue-600">530.000đ – 590.000đ</td>
+                </tr>
+                <tr>
+                  <td class="p-4 font-bold text-slate-900">Thao tác &amp; Tốc độ</td>
+                  <td class="p-4">Phím bấm quen thuộc truyền thống, giải đề tốc độ cực nhanh</td>
+                  <td class="p-4">Menu biểu tượng trực quan, phím tròn êm chống mỏi tay</td>
+                </tr>
+                <tr class="bg-white">
+                  <td class="p-4 font-bold text-slate-900">Thế mạnh nổi bật</td>
+                  <td class="p-4">521 tính năng, giải BPT bậc 4, cực trị bậc 3, Vector Oxyz rất gọn</td>
+                  <td class="p-4">Bảng tính Spreadsheet, Thống kê &amp; Xác suất Bayes mới, Quét QR đồ thị</td>
+                </tr>
+                <tr>
+                  <td class="p-4 font-bold text-slate-900">Ai nên chọn?</td>
+                  <td class="p-4">Sĩ tử ôn thi THPTQG &amp; ĐGNL cần tối ưu tốc độ cày đề</td>
+                  <td class="p-4">Học sinh lớp 10–12 theo SGK mới hoặc muốn dùng lâu dài lên ĐH</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 10-Second Finder Quiz -->
+        <div class="lg:col-span-5 bg-slate-900 text-white rounded-2xl p-6 shadow-lg">
+          <div class="text-xs font-bold text-amber-400 uppercase tracking-wider mb-1">
+            <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> Gợi Ý Trong 10 Giây
+          </div>
+          <h3 class="text-lg font-extrabold mb-4">Tìm máy chuẩn nhất cho bạn</h3>
+
+          <div class="space-y-3 text-xs">
+            <div>
+              <label class="block text-slate-300 font-medium mb-1">1. Bạn đang học lớp / trình độ nào?</label>
+              <select id="quiz-grade" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option value="thpt">Lớp 11 – 12 (Ôn thi THPTQG / ĐGNL)</option>
+                <option value="lop10">Lớp 10 (Chương trình SGK mới)</option>
+                <option value="thcs">Cấp 2 (Lớp 6 – 9 ôn thi vào 10)</option>
+                <option value="dh">Sinh viên Đại học</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-slate-300 font-medium mb-1">2. Ngân sách dự kiến của bạn?</label>
+              <select id="quiz-budget" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option value="mid">Tầm trung tiết kiệm (350k – 470k)</option>
+                <option value="high">Đầu tư bản cao / Combo đầy đủ (500k – 650k)</option>
+                <option value="low">Kinh tế siêu mềm (Dưới 300k)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-slate-300 font-medium mb-1">3. Ưu tiên khi sử dụng?</label>
+              <select id="quiz-style" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option value="speed">Bấm quen tay, tốc độ giải đề thi nhanh</option>
+                <option value="modern">Màn hình nét, quét mã QR vẽ đồ thị &amp; bảng tính</option>
+              </select>
+            </div>
+
+            <button 
+              onclick="runCalculatorQuiz()" 
+              class="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl transition flex items-center justify-center gap-2 mt-2"
+            >
+              <i class="fa-solid fa-bullseye"></i> Xem Gợi Ý Máy Phù Hợp
+            </button>
+          </div>
+
+          <div id="quiz-result" class="mt-4 hidden"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE CASIO DIAGNOSTIC & DEMO SIMULATOR -->
+  <section id="simulator-section" class="py-14 bg-slate-900 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="max-w-2xl mb-10">
+        <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Hướng Dẫn Kiểm Tra Hàng</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold mt-1">
+          Phòng Test Máy Trực Tuyến (SHIFT + 7 + ON)
+        </h2>
+        <p class="text-slate-300 text-sm mt-2">
+          Khi nhận máy từ shipper, bạn chỉ cần bấm đúng 3 phím <strong class="text-amber-300">SHIFT ➔ 7 ➔ ON</strong> để kiểm tra màn hình và mainboard chính hãng. Hãy bấm thử ngay trên máy giả lập dưới đây!
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Virtual Calculator -->
+        <div class="lg:col-span-6 bg-slate-800 border border-slate-700 rounded-3xl p-5 sm:p-6 shadow-2xl">
+          <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-700 text-xs">
+            <span class="font-bold text-slate-200 tracking-wide">CASIO fx-580VN X SIMULATOR</span>
+            <span id="sim-status-text" class="text-emerald-400 font-mono text-[11px]">Sẵn sàng bấm phím</span>
+          </div>
+
+          <!-- LCD Display -->
+          <div id="casio-sim-screen" class="casio-lcd w-full h-36 rounded-xl border-4 border-slate-950 overflow-hidden mb-4">
+            <!-- Rendered by app.js -->
+          </div>
+
+          <!-- Pressed Keys History -->
+          <div class="bg-slate-950/60 px-3 py-2 rounded-xl border border-slate-700/60 text-xs font-mono mb-4 flex items-center justify-between">
+            <span class="text-slate-400">Phím vừa bấm:</span>
+            <span id="sim-key-sequence" class="text-amber-400 font-bold">Chưa bấm</span>
+          </div>
+
+          <!-- Keypad -->
+          <div class="space-y-2.5">
+            <div class="grid grid-cols-5 gap-2">
+              <button onclick="simPressKey('SHIFT')" class="calc-key py-2.5 bg-amber-600 hover:bg-amber-500 text-white rounded-lg text-xs font-bold">SHIFT</button>
+              <button onclick="simPressKey('OPTN')" class="calc-key py-2.5 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-xs font-bold">OPTN</button>
+              <button onclick="simPressKey('MENU')" class="calc-key py-2.5 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-xs font-bold">MENU</button>
+              <button onclick="simPressKey('AC')" class="calc-key py-2.5 bg-rose-600 hover:bg-rose-500 text-white rounded-lg text-xs font-bold">AC</button>
+              <button onclick="simPressKey('ON')" class="calc-key py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-bold">ON</button>
+            </div>
+
+            <div class="grid grid-cols-4 gap-2">
+              <button onclick="simPressKey('7')" class="calc-key py-2.5 bg-slate-900 hover:bg-slate-950 text-white rounded-lg text-sm font-bold border border-slate-700">7</button>
+              <button onclick="simPressKey('8')" class="calc-key py-2.5 bg-slate-900 hover:bg-slate-950 text-white rounded-lg text-sm font-bold border border-slate-700">8</button>
+              <button onclick="simPressKey('9')" class="calc-key py-2.5 bg-slate-900 hover:bg-slate-950 text-white rounded-lg text-sm font-bold border border-slate-700">9</button>
+              <button onclick="simPressKey('DEL')" class="calc-key py-2.5 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-xs font-bold">DEL</button>
+
+              <button onclick="simPressKey('4')" class="calc-key py-2.5 bg-slate-900 hover:bg-slate-950 text-white rounded-lg text-sm font-bold border border-slate-700">4</button>
+              <button onclick="simPressKey('5')" class="calc-key py-2.5 bg-slate-900 hover:bg-slate-950 text-white rounded-lg text-sm font-bold border border-slate-700">5</button>
+              <button onclick="simPressKey('6')" class="calc-key py-2.5 bg-slate-900 hover:bg-slate-950 text-white rounded-lg text-sm font-bold border border-slate-700">6</button>
+              <button onclick="simPressKey('x')" class="calc-key py-2.5 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-sm font-bold">×</button>
+
+              <button onclick="simPressKey('1')" class="calc-key py-2.5 bg-slate-900 hover:bg-slate-950 text-white rounded-lg text-sm font-bold border border-slate-700">1</button>
+              <button onclick="simPressKey('2')" class="calc-key py-2.5 bg-slate-900 hover:bg-slate-950 text-white rounded-lg text-sm font-bold border border-slate-700">2</button>
+              <button onclick="simPressKey('3')" class="calc-key py-2.5 bg-slate-900 hover:bg-slate-950 text-white rounded-lg text-sm font-bold border border-slate-700">3</button>
+              <button onclick="simPressKey('+')" class="calc-key py-2.5 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-sm font-bold">+</button>
+            </div>
+
+            <!-- 1-Click Test & Trick Demos -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-2">
+              <button onclick="simPressKey('TEST')" class="py-2.5 px-2 bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-bold rounded-xl transition flex items-center justify-center gap-1.5">
+                <i class="fa-solid fa-shield-check"></i> Test SHIFT 7 ON
+              </button>
+              <button onclick="simDemoTrick('cuctri')" class="py-2.5 px-2 bg-blue-600 hover:bg-blue-500 text-white text-[11px] font-bold rounded-xl transition flex items-center justify-center gap-1.5">
+                <i class="fa-solid fa-bolt"></i> Demo Cực Trị (580)
+              </button>
+              <button onclick="simDemoTrick('thongke')" class="py-2.5 px-2 bg-indigo-600 hover:bg-indigo-500 text-white text-[11px] font-bold rounded-xl transition flex items-center justify-center gap-1.5">
+                <i class="fa-solid fa-chart-simple"></i> Demo Thống Kê (880)
+              </button>
+            </div>
+          </div>
+
+          <div id="diagnostic-alert" class="mt-4"></div>
+        </div>
+
+        <!-- 4 Checkpoints When Receiving COD -->
+        <div class="lg:col-span-6 space-y-3 text-xs">
+          <h3 class="text-lg font-bold text-white mb-2">
+            4 Bước Đồng Kiểm Khi Nhận Hàng Tại Nhà:
+          </h3>
+
+          <div class="bg-slate-800/70 border border-slate-700 rounded-2xl p-4 flex items-start gap-3">
+            <span class="w-7 h-7 rounded-lg bg-amber-500/20 text-amber-400 font-bold flex items-center justify-center shrink-0">1</span>
+            <div>
+              <strong class="text-white text-sm">Bấm test tổ hợp SHIFT + 7 + ON</strong>
+              <p class="text-slate-300 mt-1 leading-relaxed">Màn hình hiện Checksum ROM chuẩn Casio, sáng đều từng điểm ảnh và test đủ từng phím bấm trước mặt shipper.</p>
+            </div>
+          </div>
+
+          <div class="bg-slate-800/70 border border-slate-700 rounded-2xl p-4 flex items-start gap-3">
+            <span class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 font-bold flex items-center justify-center shrink-0">2</span>
+            <div>
+              <strong class="text-white text-sm">Kiểm tra tem Bitex phản quang 3D</strong>
+              <p class="text-slate-300 mt-1 leading-relaxed">Nghiêng máy dưới ánh sáng thấy hiệu ứng cầu vồng sắc nét và chữ nổi BITEX. Hàng nhái chỉ in bệt màu.</p>
+            </div>
+          </div>
+
+          <div class="bg-slate-800/70 border border-slate-700 rounded-2xl p-4 flex items-start gap-3">
+            <span class="w-7 h-7 rounded-lg bg-blue-500/20 text-blue-400 font-bold flex items-center justify-center shrink-0">3</span>
+            <div>
+              <strong class="text-white text-sm">Cảm nhận độ nảy phím &amp; góc nhìn màn hình</strong>
+              <p class="text-slate-300 mt-1 leading-relaxed">Phím máy zin nảy êm, chữ in rõ nét, màn hình nhìn nghiêng 45° vẫn sắc nét không bị bóng mờ.</p>
+            </div>
+          </div>
+
+          <div class="bg-slate-800/70 border border-slate-700 rounded-2xl p-4 flex items-start gap-3">
+            <span class="w-7 h-7 rounded-lg bg-rose-500/20 text-rose-400 font-bold flex items-center justify-center shrink-0">4</span>
+            <div>
+              <strong class="text-white text-sm">Kiểm tra tem bảo hành 1 đổi 1 của Anh Ba</strong>
+              <p class="text-slate-300 mt-1 leading-relaxed">Nếu phát hiện bất kỳ lỗi nhỏ nào hoặc không đúng mô tả độ mới, bạn có quyền từ chối nhận mà không mất 1đ phí ship.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE CASIO TRICK LIBRARY -->
+  <section id="tips-section" class="py-14 bg-slate-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
+        <div>
+          <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Học Thông Minh Kiểu Mới</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">
+            Kho Tuyệt Chiêu Bấm Máy Giải Đề Siêu Tốc
+          </h2>
+          <p class="text-slate-600 text-sm mt-1">
+            Học hỏi phương pháp bấm nhanh thực chiến giúp tiết kiệm 3–5 phút mỗi câu khó trong đề thi thử.
+          </p>
+        </div>
+      </div>
+
+      <!-- Trick Filter Pills -->
+      <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2 mb-6">
+        <button onclick="filterTricks('all', this)" class="trick-filter-btn whitespace-nowrap px-3.5 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold shadow-sm transition">
+          Tất Cả Mẹo
+        </button>
+        <button onclick="filterTricks('fx-580VN X', this)" class="trick-filter-btn whitespace-nowrap px-3.5 py-2 bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 rounded-xl text-xs font-semibold transition">
+          Casio fx-580VN X
+        </button>
+        <button onclick="filterTricks('fx-880BTG', this)" class="trick-filter-btn whitespace-nowrap px-3.5 py-2 bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 rounded-xl text-xs font-semibold transition">
+          Casio fx-880BTG
+        </button>
+        <button onclick="filterTricks('Hàm số', this)" class="trick-filter-btn whitespace-nowrap px-3.5 py-2 bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 rounded-xl text-xs font-semibold transition">
+          Hàm Số &amp; Cực Trị
+        </button>
+        <button onclick="filterTricks('Tích phân', this)" class="trick-filter-btn whitespace-nowrap px-3.5 py-2 bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 rounded-xl text-xs font-semibold transition">
+          Nguyên Hàm - Tích Phân
+        </button>
+        <button onclick="filterTricks('Xác suất & Oxyz', this)" class="trick-filter-btn whitespace-nowrap px-3.5 py-2 bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 rounded-xl text-xs font-semibold transition">
+          Xác Suất &amp; Oxyz
+        </button>
+      </div>
+
+      <!-- Tricks Grid -->
+      <div id="tricks-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Populated by app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- TIKTOK & FACEBOOK COMMUNITY + STUDENT REVIEWS -->
+  <section id="tiktok-section" class="py-14 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+        <div>
+          <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Cộng Đồng Mạng Xã Hội</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">
+            Video Thực Tế &amp; Phản Hồi Từ Học Sinh
+          </h2>
+          <p class="text-slate-600 text-sm mt-1">
+            Xem clip bóc máy, test phím và mẹo thi cử hàng ngày tại kênh chính chủ của Anh Ba.
+          </p>
+        </div>
+        <div class="flex items-center gap-2.5">
+          <a href="https://www.tiktok.com/@anh3tunhien" target="_blank" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5">
+            <i class="fa-brands fa-tiktok"></i> @anh3tunhien
+          </a>
+          <a href="https://www.facebook.com/anh3tunhien/" target="_blank" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5">
+            <i class="fa-brands fa-facebook"></i> Fanpage
+          </a>
+        </div>
+      </div>
+
+      <!-- TikTok Video Cards -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+        <a href="https://www.tiktok.com/@anh3tunhien" target="_blank" class="group rounded-2xl overflow-hidden border border-slate-200 bg-slate-900 relative aspect-[9/13]">
+          <img src="assets/images/products/casio-580vnx.svg" alt="TikTok 1" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition duration-500"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+          <span class="absolute top-3 left-3 bg-black/70 text-white text-[10px] font-bold px-2.5 py-1 rounded-full"><i class="fa-brands fa-tiktok mr-1"></i>@anh3tunhien</span>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <span class="w-11 h-11 rounded-full bg-white/25 backdrop-blur flex items-center justify-center text-white group-hover:scale-110 transition"><i class="fa-solid fa-play ml-0.5"></i></span>
+          </div>
+          <div class="absolute bottom-3 inset-x-3 text-white text-xs">
+            <div class="font-bold line-clamp-2">Cảnh báo 3 dấu hiệu Casio 580 giả: Đừng để mất điểm phòng thi!</div>
+            <div class="text-[10px] text-slate-300 mt-1.5 flex justify-between"><span>342K xem</span><span>❤️ 28.4K</span></div>
+          </div>
+        </a>
+
+        <a href="https://www.tiktok.com/@anh3tunhien" target="_blank" class="group rounded-2xl overflow-hidden border border-slate-200 bg-slate-900 relative aspect-[9/13]">
+          <img src="assets/images/products/casio-880btg.jpg" alt="TikTok 2" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition duration-500"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+          <span class="absolute top-3 left-3 bg-black/70 text-white text-[10px] font-bold px-2.5 py-1 rounded-full"><i class="fa-brands fa-tiktok mr-1"></i>@anh3tunhien</span>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <span class="w-11 h-11 rounded-full bg-white/25 backdrop-blur flex items-center justify-center text-white group-hover:scale-110 transition"><i class="fa-solid fa-play ml-0.5"></i></span>
+          </div>
+          <div class="absolute bottom-3 inset-x-3 text-white text-xs">
+            <div class="font-bold line-clamp-2">So sánh Casio 580VN X và 880BTG: Học sinh nên mua máy nào?</div>
+            <div class="text-[10px] text-slate-300 mt-1.5 flex justify-between"><span>512K xem</span><span>❤️ 49.2K</span></div>
+          </div>
+        </a>
+
+        <a href="https://www.tiktok.com/@anh3tunhien" target="_blank" class="group rounded-2xl overflow-hidden border border-slate-200 bg-slate-900 relative aspect-[9/13]">
+          <img src="assets/images/products/casio-570vnplus.svg" alt="TikTok 3" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition duration-500"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+          <span class="absolute top-3 left-3 bg-black/70 text-white text-[10px] font-bold px-2.5 py-1 rounded-full"><i class="fa-brands fa-tiktok mr-1"></i>@anh3tunhien</span>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <span class="w-11 h-11 rounded-full bg-white/25 backdrop-blur flex items-center justify-center text-white group-hover:scale-110 transition"><i class="fa-solid fa-play ml-0.5"></i></span>
+          </div>
+          <div class="absolute bottom-3 inset-x-3 text-white text-xs">
+            <div class="font-bold line-clamp-2">Quy trình vệ sinh, thay pin Maxell &amp; test 40 bước tại kho Anh Ba</div>
+            <div class="text-[10px] text-slate-300 mt-1.5 flex justify-between"><span>185K xem</span><span>❤️ 15.6K</span></div>
+          </div>
+        </a>
+
+        <a href="https://www.tiktok.com/@anh3tunhien" target="_blank" class="group rounded-2xl overflow-hidden border border-slate-200 bg-slate-900 relative aspect-[9/13]">
+          <img src="assets/images/products/combo-accessories.svg" alt="TikTok 4" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition duration-500"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+          <span class="absolute top-3 left-3 bg-black/70 text-white text-[10px] font-bold px-2.5 py-1 rounded-full"><i class="fa-brands fa-tiktok mr-1"></i>@anh3tunhien</span>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <span class="w-11 h-11 rounded-full bg-white/25 backdrop-blur flex items-center justify-center text-white group-hover:scale-110 transition"><i class="fa-solid fa-play ml-0.5"></i></span>
+          </div>
+          <div class="absolute bottom-3 inset-x-3 text-white text-xs">
+            <div class="font-bold line-clamp-2">Đóng gói combo bao da chống sốc + tài liệu Casio gửi về 63 tỉnh</div>
+            <div class="text-[10px] text-slate-300 mt-1.5 flex justify-between"><span>260K xem</span><span>❤️ 22.1K</span></div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Clean Student Reviews -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-3">
+          <div class="flex items-center justify-between text-xs">
+            <span class="text-amber-500">★★★★★</span>
+            <span class="text-emerald-700 font-bold bg-emerald-100 px-2 py-0.5 rounded">Đã xác thực</span>
+          </div>
+          <p class="text-xs text-slate-700 leading-relaxed">
+            "Em mua bản 580VN X 95% mà nhận máy đẹp gần như mới luôn. Shipper cho bấm SHIFT 7 ON test pixel tại chỗ rồi mới trả tiền. Em vừa thi thử Toán được 9.2 cảm ơn Anh Ba!"
+          </p>
+          <div class="text-xs pt-2 border-t border-slate-200">
+            <strong class="text-slate-900">Hoàng Nam (2k7)</strong>
+            <span class="text-slate-500 block text-[11px]">THPT Chu Văn An, Hà Nội</span>
+          </div>
+        </div>
+
+        <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-3">
+          <div class="flex items-center justify-between text-xs">
+            <span class="text-amber-500">★★★★★</span>
+            <span class="text-emerald-700 font-bold bg-emerald-100 px-2 py-0.5 rounded">Đã xác thực</span>
+          </div>
+          <p class="text-xs text-slate-700 leading-relaxed">
+            "Ban đầu sợ mua máy cũ dính main dựng, nhưng xem clip soi tem Bitex của Anh Ba nên đặt thử cây 880BTG. Quét QR đồ thị mượt mà, còn được tặng thêm bao da với bảng công thức."
+          </p>
+          <div class="text-xs pt-2 border-t border-slate-200">
+            <strong class="text-slate-900">Thanh Mai (2k8)</strong>
+            <span class="text-slate-500 block text-[11px]">THPT Chuyên Lê Hồng Phong, TP.HCM</span>
+          </div>
+        </div>
+
+        <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-3">
+          <div class="flex items-center justify-between text-xs">
+            <span class="text-amber-500">★★★★★</span>
+            <span class="text-emerald-700 font-bold bg-emerald-100 px-2 py-0.5 rounded">Đã xác thực</span>
+          </div>
+          <p class="text-xs text-slate-700 leading-relaxed">
+            "Đặt cho con học lớp 10 chiếc fx-580VN X Like New 99% tiết kiệm được gần 300k so với mua ở nhà sách. Đóng gói chống sốc rất cẩn thận, shop tư vấn nhiệt tình."
+          </p>
+          <div class="text-xs pt-2 border-t border-slate-200">
+            <strong class="text-slate-900">Chị Hương (Phụ huynh)</strong>
+            <span class="text-slate-500 block text-[11px]">Đà Nẵng</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ORDER LOOKUP & FAQ SECTION -->
+  <section id="lookup-section" class="py-14 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Left: Order & Warranty Lookup -->
+        <div class="lg:col-span-5 bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+          <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Minh Bạch Sau Bán Hàng</span>
+          <h3 class="text-xl font-extrabold text-slate-900 mt-1">Tra Cứu Đơn Hàng &amp; Bảo Hành</h3>
+          <p class="text-xs text-slate-500 mt-1 mb-4">
+            Nhập Số điện thoại đặt hàng hoặc Mã đơn (VD: <code class="font-mono bg-slate-100 px-1 rounded">ABTN-...</code>) để kiểm tra tình trạng giao hàng &amp; thời hạn bảo hành.
+          </p>
+
+          <form onsubmit="lookupOrder(event)" class="flex gap-2">
+            <input 
+              type="text" 
+              id="lookup-input"
+              placeholder="Nhập SĐT hoặc Mã đơn hàng..." 
+              required
+              class="flex-1 px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <button type="submit" class="px-4 py-2.5 bg-slate-900 hover:bg-blue-600 text-white text-xs font-bold rounded-xl transition shrink-0">
+              Tra Cứu
+            </button>
+          </form>
+
+          <div id="lookup-result" class="mt-4"></div>
+        </div>
+
+        <!-- Right: Clean FAQ Accordion -->
+        <div id="warranty-section" class="lg:col-span-7 bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+          <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Hỏi Đáp Nhanh</span>
+          <h3 class="text-xl font-extrabold text-slate-900 mt-1 mb-4">Câu Hỏi Học Sinh Thường Gặp</h3>
+
+          <div class="divide-y divide-slate-100 text-xs">
+            <details class="py-3 group" open>
+              <summary class="font-bold text-slate-900 cursor-pointer flex items-center justify-between list-none">
+                <span>1. Máy tính Casio cũ tại shop có được mang vào phòng thi THPT không?</span>
+                <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition"></i>
+              </summary>
+              <p class="text-slate-600 mt-2 leading-relaxed">
+                100% được phép. Tất cả các dòng máy fx-570ES Plus, fx-570VN Plus, fx-580VN X và fx-880BTG đều nằm trong danh mục máy tính cầm tay không có chức năng soạn thảo văn bản được Bộ GD&amp;ĐT cho phép mang vào phòng thi.
+              </p>
+            </details>
+
+            <details class="py-3 group">
+              <summary class="font-bold text-slate-900 cursor-pointer flex items-center justify-between list-none">
+                <span>2. Máy cũ dùng có nhanh hết pin hoặc bị liệt phím giữa chừng không?</span>
+                <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition"></i>
+              </summary>
+              <p class="text-slate-600 mt-2 leading-relaxed">
+                Toàn bộ máy trước khi gửi đều được vệ sinh vỉ mạch, kiểm tra độ nảy từng phím và thay sẵn pin Maxell Made in Japan mới 100%, sử dụng ổn định liên tục 1.5 – 2 năm. Ngoài ra bạn có gói bảo hành 1 đổi 1 trong 6–12 tháng nên hoàn toàn an tâm.
+              </p>
+            </details>
+
+            <details class="py-3 group">
+              <summary class="font-bold text-slate-900 cursor-pointer flex items-center justify-between list-none">
+                <span>3. Chính sách bảo hành 1 đổi 1 và đồng kiểm hoạt động thế nào?</span>
+                <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition"></i>
+              </summary>
+              <p class="text-slate-600 mt-2 leading-relaxed">
+                Khi nhận hàng, bạn được mở hộp bật máy, bấm SHIFT + 7 + ON test màn hình và từng phím rồi mới thanh toán tiền. Trong thời gian bảo hành (6–12 tháng), nếu máy gặp lỗi phần cứng từ nhà sản xuất, Anh Ba hỗ trợ đổi ngay máy khác tận nơi.
+              </p>
+            </details>
+
+            <details class="py-3 group">
+              <summary class="font-bold text-slate-900 cursor-pointer flex items-center justify-between list-none">
+                <span>4. Đặt hàng bao lâu thì nhận được? Phí ship bao nhiêu?</span>
+                <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition"></i>
+              </summary>
+              <p class="text-slate-600 mt-2 leading-relaxed">
+                Nội thành Hà Nội &amp; TP.HCM giao trong ngày hoặc 24h; các tỉnh thành khác 2–3 ngày. Đơn hàng đặt trực tiếp trên website đang được hỗ trợ Miễn Phí Vận Chuyển toàn quốc.
+              </p>
+            </details>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CLEAN FOOTER -->
+  <footer class="bg-slate-900 text-slate-400 text-xs py-12 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+        
+        <div class="space-y-3">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center">
+              <i class="fa-solid fa-calculator"></i>
+            </div>
+            <span class="text-white font-extrabold text-base">ANH BA TỰ NHIÊN</span>
+          </div>
+          <p class="leading-relaxed">
+            Kho máy tính Casio cũ tuyển chọn chuẩn chính hãng dành cho học sinh, sinh viên &amp; sĩ tử trên toàn quốc.
+          </p>
+        </div>
+
+        <div class="space-y-2">
+          <h4 class="text-white font-bold text-sm">Danh Mục Máy</h4>
+          <ul class="space-y-1.5">
+            <li><a href="#products-section" class="hover:text-white transition">Casio fx-580VN X (95% – 99%)</a></li>
+            <li><a href="#products-section" class="hover:text-white transition">Casio fx-880BTG Thế Hệ Mới</a></li>
+            <li><a href="#products-section" class="hover:text-white transition">Casio fx-570VN Plus / ES Plus</a></li>
+            <li><a href="#products-section" class="hover:text-white transition">Combo Bao Da &amp; Pin Nhật</a></li>
+          </ul>
+        </div>
+
+        <div class="space-y-2">
+          <h4 class="text-white font-bold text-sm">Tiện Ích Học Sinh</h4>
+          <ul class="space-y-1.5">
+            <li><a href="#compare-section" class="hover:text-white transition">Trắc nghiệm chọn máy 10 giây</a></li>
+            <li><a href="#simulator-section" class="hover:text-white transition">Test máy online (SHIFT 7 ON)</a></li>
+            <li><a href="#tips-section" class="hover:text-white transition">Kho mẹo bấm máy giải nhanh</a></li>
+            <li><a href="#lookup-section" class="hover:text-white transition">Tra cứu đơn hàng &amp; bảo hành</a></li>
+          </ul>
+        </div>
+
+        <div class="space-y-2">
+          <h4 class="text-white font-bold text-sm">Kết Nối Với Anh Ba</h4>
+          <p><i class="fa-solid fa-phone mr-1.5 text-blue-400"></i> Hotline/Zalo: <strong class="hotline-display text-white">0987.xxx.xxx</strong></p>
+          <p><i class="fa-brands fa-facebook mr-1.5 text-blue-400"></i> <a href="https://www.facebook.com/anh3tunhien/" target="_blank" class="hover:text-white underline">fb.com/anh3tunhien</a></p>
+          <p><i class="fa-brands fa-tiktok mr-1.5 text-white"></i> <a href="https://www.tiktok.com/@anh3tunhien" target="_blank" class="hover:text-white underline">tiktok.com/@anh3tunhien</a></p>
+        </div>
+
+      </div>
+
+      <div class="pt-6 border-t border-slate-800 text-center text-slate-500 text-[11px]">
+        © 2026 Anh Ba Tự Nhiên • Đồng hành cùng học sinh – sinh viên Việt Nam.
+      </div>
+    </div>
+  </footer>
+
+  <!-- MOBILE STICKY BOTTOM NAVIGATION (Dễ thao tác 1 tay trên điện thoại) -->
+  <div class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/90 px-3 py-2 flex items-center justify-around text-[11px] font-semibold text-slate-600 shadow-lg mobile-bottom-nav">
+    <a href="#products-section" class="flex flex-col items-center gap-0.5 hover:text-blue-600">
+      <i class="fa-solid fa-store text-base text-blue-600"></i>
+      <span>Kho Máy</span>
+    </a>
+    <a href="#simulator-section" class="flex flex-col items-center gap-0.5 hover:text-blue-600">
+      <i class="fa-solid fa-microchip text-base text-emerald-600"></i>
+      <span>Test Máy</span>
+    </a>
+    <a href="https://zalo.me" target="_blank" class="zalo-direct-link flex flex-col items-center gap-0.5 hover:text-blue-600">
+      <i class="fa-solid fa-comment-dots text-base text-sky-500"></i>
+      <span>Zalo Tư Vấn</span>
+    </a>
+    <button onclick="openCartDrawer()" class="relative flex flex-col items-center gap-0.5 hover:text-blue-600">
+      <i class="fa-solid fa-bag-shopping text-base text-slate-800"></i>
+      <span>Giỏ Hàng</span>
+      <span class="cart-count hidden absolute -top-1 right-0 bg-blue-600 text-white text-[9px] font-extrabold px-1.5 rounded-full">0</span>
+    </button>
+  </div>
+
+  <!-- DESKTOP FLOATING CONTACT PILL -->
+  <div class="hidden md:flex fixed bottom-6 left-6 z-40 flex-col gap-2">
+    <a href="https://zalo.me" target="_blank" class="zalo-direct-link w-11 h-11 bg-blue-500 hover:bg-blue-600 text-white rounded-full flex items-center justify-center text-lg shadow-lg hover:scale-105 transition" title="Chat Zalo Với Anh Ba">
+      <i class="fa-solid fa-comment-dots"></i>
+    </a>
+    <a href="https://www.facebook.com/anh3tunhien/" target="_blank" class="w-11 h-11 bg-blue-700 hover:bg-blue-800 text-white rounded-full flex items-center justify-center text-lg shadow-lg hover:scale-105 transition" title="Nhắn Fanpage Facebook">
+      <i class="fa-brands fa-facebook-messenger"></i>
+    </a>
+  </div>
+
+  <!-- CART DRAWER -->
+  <div id="cart-backdrop" onclick="closeCartDrawer()" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+
+  <div id="cart-drawer" class="fixed top-0 right-0 bottom-0 w-full max-w-md bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
+    <div class="p-4 border-b border-slate-200 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-bag-shopping text-blue-600"></i>
+        <h3 class="font-bold text-slate-900 text-sm">Giỏ Hàng Của Bạn</h3>
+        <span class="cart-count bg-blue-100 text-blue-800 text-xs px-2 py-0.5 rounded-full font-bold">0</span>
+      </div>
+      <button onclick="closeCartDrawer()" class="p-1.5 text-slate-400 hover:text-slate-600 text-base">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div id="cart-items-container" class="flex-1 overflow-y-auto p-4 space-y-3"></div>
+
+    <div class="p-4 bg-slate-50 border-t border-slate-200 space-y-3">
+      <div class="flex gap-2">
+        <input type="text" id="voucher-input" placeholder="Nhập mã giảm (ANHBA20K, SITU2026)" class="flex-1 px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs uppercase focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+        <button onclick="applyVoucherCode()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl transition">Áp Dụng</button>
+      </div>
+
+      <div class="flex items-center gap-2 text-[11px] text-slate-500">
+        <span>Mã sĩ tử:</span>
+        <button onclick="document.getElementById('voucher-input').value='ANHBA20K'; applyVoucherCode();" class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded font-bold hover:bg-blue-100">ANHBA20K (-20k)</button>
+        <button onclick="document.getElementById('voucher-input').value='SITU2026'; applyVoucherCode();" class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded font-bold hover:bg-blue-100">SITU2026 (-30k)</button>
+      </div>
+
+      <div class="space-y-1.5 text-xs text-slate-600 pt-2 border-t border-slate-200">
+        <div class="flex justify-between">
+          <span>Tạm tính:</span>
+          <span id="drawer-subtotal" class="font-bold text-slate-900">0đ</span>
+        </div>
+        <div id="drawer-discount-row" class="hidden flex justify-between text-emerald-600 font-semibold">
+          <span>Giảm giá sĩ tử:</span>
+          <span id="drawer-discount">-0đ</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Vận chuyển:</span>
+          <span class="text-emerald-600 font-semibold">Miễn Phí (Đồng Kiểm COD)</span>
+        </div>
+        <div class="flex justify-between text-base font-extrabold text-blue-600 pt-2 border-t border-slate-200">
+          <span>Tổng thanh toán:</span>
+          <span id="drawer-total">0đ</span>
+        </div>
+      </div>
+
+      <button onclick="openCheckoutModal()" class="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs shadow-md transition flex items-center justify-center gap-2">
+        <i class="fa-solid fa-check-circle"></i> Đặt Hàng Ngay (Kiểm Tra Mới Trả Tiền)
+      </button>
+    </div>
+  </div>
+
+  <!-- QUICK VIEW MODAL -->
+  <div id="quickview-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-2xl w-full p-6 relative max-h-[90vh] overflow-y-auto shadow-2xl">
+      <button onclick="closeQuickView()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-lg">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div id="quickview-content"></div>
+    </div>
+  </div>
+
+  <!-- CHECKOUT MODAL -->
+  <div id="checkout-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 relative max-h-[90vh] overflow-y-auto shadow-2xl">
+      <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-lg">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="text-center pb-4 mb-4 border-b border-slate-100">
+        <span class="text-[10px] uppercase font-bold tracking-wider text-blue-700 bg-blue-50 px-2.5 py-1 rounded-full">Đặt Hàng Nhanh</span>
+        <h3 class="text-xl font-extrabold text-slate-900 mt-2">Thông Tin Nhận Máy Casio</h3>
+        <p class="text-xs text-slate-500 mt-1">Được mở hộp bấm thử SHIFT 7 ON trước khi thanh toán</p>
+      </div>
+
+      <form onsubmit="submitOrder(event)" class="space-y-3.5">
+        <div id="checkout-order-summary" class="bg-slate-50 p-3.5 rounded-2xl border border-slate-200"></div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Họ và tên người nhận *</label>
+          <input type="text" name="fullName" required placeholder="Ví dụ: Nguyễn Minh Anh" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Số điện thoại / Zalo nhận hàng *</label>
+          <input type="tel" name="phone" required placeholder="Để bưu tá gọi giao máy &amp; kích hoạt bảo hành..." class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Địa chỉ chi tiết *</label>
+            <input type="text" name="address" required placeholder="Số nhà, đường, xã/phường..." class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Tỉnh / Thành phố *</label>
+            <input type="text" name="province" required placeholder="Hà Nội, TP.HCM, Nghệ An..." class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Chọn quà tặng kèm miễn phí:</label>
+          <select name="freeGift" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="Bao da chống sốc cao cấp">🎁 Bao da chống sốc bảo vệ máy</option>
+            <option value="2 Pin Maxell chính hãng Nhật">🎁 2 Viên Pin Maxell Made in Japan</option>
+            <option value="Bảng 100 công thức bấm máy Casio">🎁 Bảng 100 Công thức bấm máy Toán</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Hình thức thanh toán:</label>
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <label class="flex items-center gap-2 p-3 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer hover:border-blue-500">
+              <input type="radio" name="paymentMethod" value="cod" checked class="text-blue-600"/>
+              <div>
+                <strong class="block text-slate-900">COD Đồng Kiểm</strong>
+                <span class="text-[10px] text-slate-500">Test máy ok mới trả tiền</span>
+              </div>
+            </label>
+            <label class="flex items-center gap-2 p-3 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer hover:border-blue-500">
+              <input type="radio" name="paymentMethod" value="banking" class="text-blue-600"/>
+              <div>
+                <strong class="block text-slate-900">Chuyển Khoản QR</strong>
+                <span class="text-[10px] text-slate-500">Ngân hàng / MoMo</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Ghi chú thêm (nếu có):</label>
+          <input type="text" name="notes" placeholder="VD: Giao ngoài giờ học, ưu tiên màu đen..." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+        </div>
+
+        <button type="submit" id="submit-order-btn" class="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs shadow-md transition flex items-center justify-center gap-2">
+          <i class="fa-solid fa-check-circle"></i> Hoàn Tất Đặt Hàng
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ORDER SUCCESS MODAL -->
+  <div id="order-success-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 relative shadow-2xl">
+      <button onclick="closeOrderSuccessModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-lg">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div id="order-success-details"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

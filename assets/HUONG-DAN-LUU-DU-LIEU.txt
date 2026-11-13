@@ -1,0 +1,24 @@
+HƯỚNG DẪN LƯU TRỮ DỮ LIỆU MEDIA & TÀI LIỆU WEBSITE ANH BA TỰ NHIÊN
+=====================================================================
+
+Toàn bộ dữ liệu hình ảnh, video, tài liệu dùng để xây dựng và cập nhật web
+được tổ chức trong các thư mục sau:
+
+1. assets\images\products\
+   -> Chứa ảnh chụp thật các máy tính Casio (fx-580VN X, fx-880BTG, fx-570VN Plus, phụ kiện...)
+   -> Sau khi bỏ ảnh vào đây (ví dụ: fx580-99.jpg), bạn chỉ cần đổi đường dẫn
+      "image": "assets/images/products/fx580-99.jpg" trong file data\products.json.
+
+2. assets\images\tiktok\
+   -> Chứa ảnh bìa (thumbnail) hoặc video clip tải về từ kênh TikTok @anh3tunhien.
+
+3. assets\images\feedback\
+   -> Chứa ảnh chụp màn hình tin nhắn, đánh giá thực tế từ học sinh & phụ huynh.
+
+4. assets\docs\
+   -> Chứa tài liệu PDF / Ebook "Bí Kíp Bấm Máy Casio" tặng kèm cho sĩ tử.
+
+5. data\
+   -> shop-config.json : Lưu SĐT Hotline, Zalo, Facebook, TikTok, mã giảm giá.
+   -> products.json    : Danh mục sản phẩm, giá gốc, giá sale, độ mới, bảo hành.
+   -> orders.json      : Tự động lưu toàn bộ đơn hàng khách đặt qua web.
