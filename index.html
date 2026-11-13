@@ -913,29 +913,84 @@
       <!-- ========================================== -->
       <div id="study-tab-docs" class="study-tab-content space-y-6">
         
-        <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <!-- Filters -->
-          <div class="flex items-center gap-2 flex-wrap">
-            <span class="text-xs font-bold text-slate-700 mr-1"><i class="fa-solid fa-filter text-blue-600 mr-1"></i> Môn:</span>
-            <button onclick="filterStudyDocSubject('all', this)" class="doc-subj-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-blue-600 text-white transition">Tất Cả</button>
-            <button onclick="filterStudyDocSubject('Toán', this)" class="doc-subj-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition">Toán</button>
-            <button onclick="filterStudyDocSubject('Vật Lý', this)" class="doc-subj-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition">Vật Lý</button>
-            <button onclick="filterStudyDocSubject('Hóa Học', this)" class="doc-subj-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition">Hóa Học</button>
-            <button onclick="filterStudyDocSubject('Đại Học', this)" class="doc-subj-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition">Đại Học</button>
+        <!-- Technical Limits & Policy Notice (2 tầng rõ ràng) -->
+        <div class="p-4 bg-amber-50 border border-amber-200/90 rounded-2xl text-xs text-amber-950 flex flex-col md:flex-row md:items-center justify-between gap-3 shadow-sm">
+          <div class="flex items-start gap-2.5">
+            <div class="w-8 h-8 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center shrink-0 text-base">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div class="leading-relaxed">
+              <strong class="text-amber-900 block font-extrabold text-xs">Lưu ý kỹ thuật quan trọng về tài liệu:</strong>
+              Web đang chạy dạng tĩnh trên GitHub Pages (chưa có server backend riêng), do đó tài liệu bạn tải lên chưa thể tự động hiển thị cho mọi người khác xem ngay.
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2 text-[11px] text-amber-900">
+                <div class="bg-white/80 p-2 rounded-xl border border-amber-200/60">
+                  <strong>1. Dùng cho riêng bạn:</strong> Lưu vào máy (IndexedDB), xem lại &amp; tải về bất kỳ lúc nào, riêng tư 100%.
+                </div>
+                <div class="bg-white/80 p-2 rounded-xl border border-amber-200/60">
+                  <strong>2. Đóng góp cho cộng đồng:</strong> Lưu vào "Chờ duyệt", gửi shop qua Zalo/Threads để shop kiểm duyệt và duyệt đăng.
+                </div>
+              </div>
+            </div>
+          </div>
+          <button onclick="openUploadDocModal('contrib')" class="py-2.5 px-4 bg-amber-500 hover:bg-amber-600 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 shrink-0 shadow-sm self-start md:self-auto">
+            <i class="fa-solid fa-hand-holding-heart"></i>
+            <span>Đóng Góp Tài Liệu</span>
+          </button>
+        </div>
+
+        <!-- Document Categories Switcher & Upload CTA -->
+        <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm space-y-3.5">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+            <!-- Document Sub-categories -->
+            <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1 sm:pb-0">
+              <button id="btn-doc-cat-lib" onclick="switchDocCategory('library', this)" class="doc-cat-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-blue-600 text-white shadow-sm transition whitespace-nowrap">
+                <i class="fa-solid fa-book-bookmark mr-1"></i> Sách Mẫu
+              </button>
+              <button id="btn-doc-cat-community" onclick="switchDocCategory('community', this)" class="doc-cat-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition whitespace-nowrap">
+                <i class="fa-solid fa-users text-indigo-600 mr-1"></i> Tài Liệu Đóng Góp (Đã duyệt)
+              </button>
+              <button id="btn-doc-cat-my" onclick="switchDocCategory('my_docs', this)" class="doc-cat-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition whitespace-nowrap flex items-center gap-1.5">
+                <i class="fa-solid fa-folder-user text-emerald-600"></i>
+                <span>Tài Liệu Của Tôi</span>
+                <span id="my-docs-count-badge" class="hidden px-1.5 py-0.2 rounded-full bg-emerald-600 text-white text-[10px] font-bold">0</span>
+              </button>
+              <button id="btn-doc-cat-pending" onclick="switchDocCategory('pending', this)" class="doc-cat-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition whitespace-nowrap flex items-center gap-1.5">
+                <i class="fa-solid fa-hourglass-half text-amber-500"></i>
+                <span>Chờ Duyệt</span>
+                <span id="pending-docs-count-badge" class="hidden px-1.5 py-0.2 rounded-full bg-amber-500 text-white text-[10px] font-bold">0</span>
+              </button>
+            </div>
+
+            <!-- Upload / Contribute Button -->
+            <button onclick="openUploadDocModal('private')" class="py-2 px-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 shadow-sm whitespace-nowrap self-start sm:self-auto">
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+              <span>+ Tải Lên / Đóng Góp File</span>
+            </button>
           </div>
 
-          <!-- Level Filter & Search -->
-          <div class="flex items-center gap-2 flex-wrap">
-            <select id="doc-level-select" onchange="filterStudyDocLevel(this.value)" class="bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-              <option value="all">Mọi cấp học (THCS, THPT, ĐH)</option>
-              <option value="THCS">Cấp 2 (THCS Lớp 6–9)</option>
-              <option value="THPT">Cấp 3 (THPT Lớp 10–12)</option>
-              <option value="Đại Học">Sinh viên Đại học</option>
-            </select>
+          <!-- Secondary Filters (Subject, Level & Search) -->
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 pt-1">
+            <div class="flex items-center gap-1.5 flex-wrap">
+              <span class="text-xs font-bold text-slate-700 mr-1"><i class="fa-solid fa-filter text-blue-600 mr-1"></i> Môn:</span>
+              <button onclick="filterStudyDocSubject('all', this)" class="doc-subj-btn px-2.5 py-1 rounded-lg text-xs font-bold bg-blue-600 text-white transition">Tất Cả</button>
+              <button onclick="filterStudyDocSubject('Toán', this)" class="doc-subj-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition">Toán</button>
+              <button onclick="filterStudyDocSubject('Vật Lý', this)" class="doc-subj-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition">Vật Lý</button>
+              <button onclick="filterStudyDocSubject('Hóa Học', this)" class="doc-subj-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition">Hóa Học</button>
+              <button onclick="filterStudyDocSubject('Đại Học', this)" class="doc-subj-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition">Đại Học</button>
+            </div>
 
-            <div class="relative">
-              <input type="text" id="doc-search-input" oninput="searchStudyDocs(this.value)" placeholder="Tìm tài liệu..." class="bg-slate-50 border border-slate-200 rounded-xl pl-8 pr-3 py-1.5 text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 w-36 sm:w-44"/>
-              <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-2 text-slate-400 text-xs"></i>
+            <div class="flex items-center gap-2 flex-wrap">
+              <select id="doc-level-select" onchange="filterStudyDocLevel(this.value)" class="bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option value="all">Mọi cấp học (THCS, THPT, ĐH)</option>
+                <option value="THCS">Cấp 2 (THCS Lớp 6–9)</option>
+                <option value="THPT">Cấp 3 (THPT Lớp 10–12)</option>
+                <option value="Đại Học">Sinh viên Đại học</option>
+              </select>
+
+              <div class="relative">
+                <input type="text" id="doc-search-input" oninput="searchStudyDocs(this.value)" placeholder="Tìm tài liệu..." class="bg-slate-50 border border-slate-200 rounded-xl pl-8 pr-3 py-1.5 text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 w-36 sm:w-44"/>
+                <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-2 text-slate-400 text-xs"></i>
+              </div>
             </div>
           </div>
         </div>
@@ -948,9 +1003,9 @@
         <div class="p-3.5 bg-blue-50/70 border border-blue-200 rounded-2xl text-xs text-blue-900 flex items-center justify-between gap-3">
           <div class="flex items-center gap-2">
             <i class="fa-solid fa-circle-info text-blue-600 text-base shrink-0"></i>
-            <span>Các tài liệu trên hiện là <strong>khung mẫu</strong>. Cơ và Anh Ba đang biên soạn các bộ file PDF chính thức để cập nhật trong thời gian sớm nhất!</span>
+            <span>Tài liệu trong Thư viện Sách mẫu và Tài liệu đóng góp cộng đồng đều được chọn lọc kỹ càng, phục vụ mục đích học tập phi thương mại.</span>
           </div>
-          <span class="text-[11px] font-bold text-blue-700 bg-white px-2.5 py-1 rounded-lg border border-blue-200 shrink-0">Mẫu — sẽ thay bằng tài liệu thật</span>
+          <span class="text-[11px] font-bold text-blue-700 bg-white px-2.5 py-1 rounded-lg border border-blue-200 shrink-0">Mẫu đã duyệt</span>
         </div>
       </div>
 
@@ -1723,5 +1778,154 @@
   </div>
 
   <script src="app.js"></script>
+
+  <!-- UPLOAD & CONTRIBUTE DOCUMENT MODAL -->
+  <div id="upload-doc-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 relative shadow-2xl max-h-[90vh] overflow-y-auto">
+      <button onclick="closeUploadDocModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-lg">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="text-center pb-3 mb-4 border-b border-slate-100">
+        <span class="text-[10px] uppercase font-bold tracking-wider text-blue-700 bg-blue-50 px-2.5 py-1 rounded-full">Khu Tài Liệu Học Sinh</span>
+        <h3 class="text-xl font-extrabold text-slate-900 mt-1.5">Tải Lên / Đóng Góp Tài Liệu</h3>
+        <p class="text-xs text-slate-500 mt-1">Chọn chế độ lưu riêng tư hoặc đóng góp cho cộng đồng</p>
+      </div>
+
+      <form id="upload-doc-form" onsubmit="handleDocUploadSubmit(event)" class="space-y-4">
+        
+        <!-- Mode Selector -->
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1.5">Mục đích tải lên *</label>
+          <div class="grid grid-cols-2 gap-2.5">
+            <label class="p-3 bg-slate-50 border border-slate-200 rounded-2xl cursor-pointer hover:bg-blue-50/50 transition flex items-start gap-2.5">
+              <input type="radio" name="upload_mode" id="upload-mode-private" value="private" checked onchange="toggleUploadMode('private')" class="mt-0.5 text-blue-600"/>
+              <div>
+                <strong class="text-xs font-bold text-slate-900 block">Dùng Cho Riêng Tôi</strong>
+                <span class="text-[10px] text-slate-500 block leading-tight mt-0.5">Lưu trên máy bạn (IndexedDB), xem lại &amp; tải về bất kỳ lúc nào</span>
+              </div>
+            </label>
+
+            <label class="p-3 bg-slate-50 border border-slate-200 rounded-2xl cursor-pointer hover:bg-amber-50/50 transition flex items-start gap-2.5">
+              <input type="radio" name="upload_mode" id="upload-mode-contrib" value="contrib" onchange="toggleUploadMode('contrib')" class="mt-0.5 text-amber-600"/>
+              <div>
+                <strong class="text-xs font-bold text-slate-900 block">Đóng Góp Cho Shop</strong>
+                <span class="text-[10px] text-slate-500 block leading-tight mt-0.5">Lưu chờ duyệt &amp; gửi shop qua Zalo/Threads để duyệt đăng</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Notices -->
+        <div id="upload-notice-private" class="p-2.5 bg-emerald-50 border border-emerald-200 rounded-xl text-[11px] text-emerald-900 flex items-center gap-2">
+          <i class="fa-solid fa-shield-halved text-emerald-600 shrink-0"></i>
+          <span>File này chỉ lưu trong trình duyệt của bạn, hoàn toàn riêng tư và không gửi ra ngoài.</span>
+        </div>
+
+        <div id="upload-notice-contrib" class="hidden p-2.5 bg-amber-50 border border-amber-200 rounded-xl text-[11px] text-amber-950 flex items-start gap-2">
+          <i class="fa-solid fa-circle-info text-amber-600 shrink-0 mt-0.5"></i>
+          <span>Tài liệu đóng góp sẽ được shop xem lại trước khi đăng, không đăng tự động. Vui lòng chỉ gửi tài liệu do bạn tự soạn hoặc được phép chia sẻ.</span>
+        </div>
+
+        <!-- Title -->
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Tiêu đề tài liệu *</label>
+          <input type="text" id="upload-doc-title" required placeholder="VD: 50 câu trắc nghiệm số phức, sơ đồ tư duy..." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+        </div>
+
+        <!-- Subject & Level -->
+        <div class="grid grid-cols-2 gap-2.5">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Môn học *</label>
+            <select id="upload-doc-subject" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium">
+              <option value="Toán">Toán</option>
+              <option value="Vật Lý">Vật Lý</option>
+              <option value="Hóa Học">Hóa Học</option>
+              <option value="Sinh Học">Sinh Học</option>
+              <option value="Đại Học">Đại Học</option>
+              <option value="Khác">Tổng hợp / Khác</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Cấp học *</label>
+            <select id="upload-doc-level" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium">
+              <option value="THPT">Cấp 3 (THPT Lớp 10–12)</option>
+              <option value="THCS">Cấp 2 (THCS Lớp 6–9)</option>
+              <option value="Đại Học">Sinh viên Đại học</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Mô tả ngắn về tài liệu</label>
+          <textarea id="upload-doc-desc" rows="2" placeholder="Tóm tắt nội dung chính hoặc mẹo bấm máy có trong tài liệu..." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+        </div>
+
+        <!-- Author (Visible only in contrib mode) -->
+        <div id="upload-author-container" class="hidden">
+          <label class="block text-xs font-bold text-slate-700 mb-1">Tên người đóng góp / Bút danh (Không bắt buộc)</label>
+          <input type="text" id="upload-doc-author" placeholder="VD: Bạn Minh Anh - Lớp 12, hoặc để trống để ẩn danh" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+        </div>
+
+        <!-- File Input -->
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Chọn file từ máy tính / điện thoại * (Tối đa 15 MB)</label>
+          <input type="file" id="upload-doc-file" required accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.webp,.txt" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer"/>
+          <span class="text-[10px] text-slate-400 block mt-1">Hỗ trợ: PDF, Word (.doc, .docx), Ảnh (.jpg, .png). Tối đa 15 MB.</span>
+        </div>
+
+        <!-- Copyright Commitment Checkbox -->
+        <div class="pt-1">
+          <label class="flex items-start gap-2 text-slate-600 text-[11px] cursor-pointer">
+            <input type="checkbox" required class="mt-0.5 rounded text-blue-600 focus:ring-blue-500"/>
+            <span>Tôi cam đoan đây là tài liệu do chính tôi biên soạn hoặc được phép chia sẻ, tuyệt đối không gửi tài liệu vi phạm bản quyền.</span>
+          </label>
+        </div>
+
+        <!-- Submit Buttons -->
+        <div class="flex items-center gap-2 pt-2">
+          <button type="submit" class="flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold transition shadow-sm flex items-center justify-center gap-1.5">
+            <i class="fa-solid fa-check"></i>
+            <span id="upload-submit-btn-text">Lưu Vào Máy Của Tôi</span>
+          </button>
+          <button type="button" onclick="closeUploadDocModal()" class="py-3 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold transition">
+            Hủy
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <!-- CONTRIBUTION SUCCESS & SEND MODAL -->
+  <div id="contrib-success-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 relative shadow-2xl">
+      <button onclick="closeContribSuccessModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-lg">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div id="contrib-success-details"></div>
+    </div>
+  </div>
+
+  <!-- IN-BROWSER DOCUMENT VIEWER MODAL -->
+  <div id="doc-file-viewer-modal" class="fixed inset-0 bg-slate-900/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white rounded-3xl max-w-4xl w-full p-4 sm:p-6 relative shadow-2xl flex flex-col max-h-[95vh]">
+      <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-100 gap-3">
+        <div class="flex items-center gap-2 min-w-0">
+          <div class="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-sm shrink-0">
+            <i class="fa-regular fa-file"></i>
+          </div>
+          <h3 id="doc-file-viewer-title" class="text-sm font-extrabold text-slate-900 truncate">Xem Tài Liệu</h3>
+        </div>
+        <button onclick="closeDocFileViewer()" class="text-slate-400 hover:text-slate-600 text-xl px-2">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div id="doc-file-viewer-container" class="flex-1 overflow-auto"></div>
+    </div>
+  </div>
+
 </body>
 </html>

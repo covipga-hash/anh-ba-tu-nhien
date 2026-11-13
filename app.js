@@ -1899,6 +1899,7 @@ let studyHubState = {
 // Main Initializer
 function initStudyHub() {
   loadStudyReminders();
+  loadUploadedDocs();
   loadStudyExams();
   loadStudyNotes();
   
@@ -1972,21 +1973,57 @@ function renderStudyDocs() {
   const container = document.getElementById('study-docs-grid');
   if (!container) return;
 
-  const filtered = DEFAULT_STUDY_DOCS.filter(doc => {
+  const cat = studyHubState.docCategory || 'library';
+  let sourceList = [];
+  let isMyDocs = false;
+  let isPending = false;
+  let isCommunity = false;
+
+  if (cat === 'library') {
+    sourceList = DEFAULT_STUDY_DOCS;
+  } else if (cat === 'community') {
+    sourceList = DEFAULT_COMMUNITY_DOCS;
+    isCommunity = true;
+  } else if (cat === 'my_docs') {
+    sourceList = studyHubState.myDocs || [];
+    isMyDocs = true;
+  } else if (cat === 'pending') {
+    sourceList = studyHubState.pendingDocs || [];
+    isPending = true;
+  }
+
+  // Filter by subject, level, search query
+  const filtered = sourceList.filter(doc => {
     const matchSubj = studyHubState.currentSubject === 'all' || doc.subject === studyHubState.currentSubject;
     const matchLevel = studyHubState.currentLevel === 'all' || doc.level === studyHubState.currentLevel;
     const matchQuery = !studyHubState.searchDocQuery || 
       doc.title.toLowerCase().includes(studyHubState.searchDocQuery) ||
-      doc.desc.toLowerCase().includes(studyHubState.searchDocQuery);
+      (doc.desc && doc.desc.toLowerCase().includes(studyHubState.searchDocQuery)) ||
+      (doc.author && doc.author.toLowerCase().includes(studyHubState.searchDocQuery));
     return matchSubj && matchLevel && matchQuery;
   });
 
   if (filtered.length === 0) {
+    let emptyMsg = "Không tìm thấy tài liệu phù hợp";
+    let emptySub = "Thử chọn môn khác hoặc đổi từ khóa tìm kiếm";
+    if (isMyDocs) {
+      emptyMsg = "Bạn chưa tải lên tài liệu cá nhân nào";
+      emptySub = "Bấm nút '+ Tải Lên / Đóng Góp File' ở trên để lưu tài liệu học tập vào máy dùng riêng.";
+    } else if (isPending) {
+      emptyMsg = "Chưa có tài liệu nào trong danh sách chờ duyệt";
+      emptySub = "Khi bạn gửi đóng góp tài liệu cho shop duyệt, thông tin sẽ hiển thị tại đây.";
+    }
+
     container.innerHTML = `
       <div class="col-span-full py-12 text-center bg-white rounded-2xl border border-slate-200">
-        <i class="fa-solid fa-folder-open text-3xl text-slate-400 mb-2"></i>
-        <h4 class="text-sm font-bold text-slate-800">Không tìm thấy tài liệu phù hợp</h4>
-        <p class="text-xs text-slate-500 mt-1">Thử chọn môn khác hoặc đổi từ khóa tìm kiếm</p>
+        <i class="fa-solid fa-folder-open text-3xl text-slate-300 mb-2"></i>
+        <h4 class="text-sm font-bold text-slate-800">${emptyMsg}</h4>
+        <p class="text-xs text-slate-500 mt-1 max-w-md mx-auto">${emptySub}</p>
+        ${(isMyDocs || isPending) ? `
+          <button onclick="openUploadDocModal('${isPending ? 'contrib' : 'private'}')" class="mt-3 py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold transition inline-flex items-center gap-1.5 shadow-sm">
+            <i class="fa-solid fa-plus"></i> ${isPending ? 'Đóng Góp Tài Liệu Mới' : 'Tải Lên File Của Bạn'}
+          </button>
+        ` : ''}
       </div>
     `;
     return;
@@ -1998,6 +2035,158 @@ function renderStudyDocs() {
     if (doc.subject === 'Hóa Học') subjColor = 'bg-purple-100 text-purple-800 border-purple-200';
     if (doc.subject === 'Đại Học') subjColor = 'bg-indigo-100 text-indigo-800 border-indigo-200';
 
+    if (isMyDocs) {
+      return `
+        <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/90 hover:border-emerald-300 shadow-sm transition flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2.5">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-md border ${subjColor}">
+                  ${doc.subject}
+                </span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-100 text-slate-700">
+                  ${doc.level}
+                </span>
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 flex items-center gap-1">
+                <i class="fa-solid fa-lock text-[9px]"></i> Trên máy bạn
+              </span>
+            </div>
+
+            <h4 class="text-sm font-extrabold text-slate-900 leading-snug mb-1.5" title="${doc.title}">
+              ${doc.title}
+            </h4>
+
+            <p class="text-xs text-slate-600 line-clamp-2 leading-relaxed mb-3">
+              ${doc.desc}
+            </p>
+
+            <div class="flex items-center gap-3 text-[11px] text-slate-400 mb-4 pb-3 border-b border-slate-100 flex-wrap">
+              <span><i class="fa-regular fa-file text-blue-500 mr-1"></i> ${doc.fileName || 'Tài liệu'}</span>
+              <span><i class="fa-solid fa-hard-drive text-emerald-500 mr-1"></i> ${doc.fileSize || 'N/A'}</span>
+              <span><i class="fa-regular fa-calendar text-slate-400 mr-1"></i> ${doc.createdAt || 'Gần đây'}</span>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 pt-1">
+            <button onclick="viewLocalUploadedDoc('my_docs', '${doc.id}')" class="flex-1 py-2 px-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5">
+              <i class="fa-regular fa-eye"></i>
+              <span>Xem Lại File</span>
+            </button>
+            <button onclick="downloadUploadedDoc('my_docs', '${doc.id}')" class="py-2 px-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1 shadow-sm" title="Tải về máy">
+              <i class="fa-solid fa-download"></i>
+            </button>
+            <button onclick="deleteUploadedDoc('my_docs', '${doc.id}')" class="py-2 px-2.5 bg-slate-100 hover:bg-rose-50 hover:text-rose-600 text-slate-500 rounded-xl text-xs font-semibold transition" title="Xóa tài liệu">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    if (isPending) {
+      return `
+        <div class="bg-white rounded-2xl p-4 sm:p-5 border border-amber-200/90 shadow-sm transition flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2.5">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-md border ${subjColor}">
+                  ${doc.subject}
+                </span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-100 text-slate-700">
+                  ${doc.level}
+                </span>
+              </div>
+              <span class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-amber-100 text-amber-800 border border-amber-200 flex items-center gap-1">
+                <i class="fa-solid fa-hourglass-half text-[9px]"></i> Đang chờ shop duyệt
+              </span>
+            </div>
+
+            <h4 class="text-sm font-extrabold text-slate-900 leading-snug mb-1.5">
+              ${doc.title}
+            </h4>
+
+            <div class="text-[11px] text-slate-500 mb-2">
+              <span>Người đóng góp: <strong>${doc.author || 'Học sinh'}</strong></span>
+            </div>
+
+            <p class="text-xs text-slate-600 line-clamp-2 leading-relaxed mb-3">
+              ${doc.desc}
+            </p>
+
+            <div class="p-2.5 bg-amber-50 rounded-xl text-[11px] text-amber-900 border border-amber-200/70 mb-3.5">
+              <i class="fa-solid fa-circle-info mr-1 text-amber-600"></i>
+              File đã lưu trên máy bạn. Hãy gửi tin nhắn qua Zalo hoặc Threads để shop duyệt đăng công khai!
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 pt-1">
+            <button onclick="resendPendingDoc('${doc.id}')" class="flex-1 py-2 px-3 bg-amber-500 hover:bg-amber-600 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 shadow-sm">
+              <i class="fa-solid fa-paper-plane"></i>
+              <span>Gửi Tin Nhắn Duyệt</span>
+            </button>
+            <button onclick="viewLocalUploadedDoc('pending_docs', '${doc.id}')" class="py-2 px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition" title="Xem trước file">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+            <button onclick="deleteUploadedDoc('pending_docs', '${doc.id}')" class="py-2 px-2.5 bg-slate-100 hover:bg-rose-50 hover:text-rose-600 text-slate-500 rounded-xl text-xs font-semibold transition" title="Hủy đóng góp">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    if (isCommunity) {
+      return `
+        <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/90 hover:border-indigo-300 shadow-sm transition flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2.5">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-md border ${subjColor}">
+                  ${doc.subject}
+                </span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-100 text-slate-700">
+                  ${doc.level}
+                </span>
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
+                <i class="fa-solid fa-circle-check text-[9px] mr-0.5"></i> ${doc.badge}
+              </span>
+            </div>
+
+            <h4 class="text-sm font-extrabold text-slate-900 leading-snug group-hover:text-indigo-600 transition mb-1.5">
+              ${doc.title}
+            </h4>
+
+            <div class="text-[11px] text-slate-500 mb-2">
+              <i class="fa-solid fa-user-pen text-indigo-500 mr-1"></i> Đóng góp bởi: <strong class="text-slate-800">${doc.author}</strong>
+            </div>
+
+            <p class="text-xs text-slate-600 line-clamp-2 leading-relaxed mb-3">
+              ${doc.desc}
+            </p>
+
+            <div class="flex items-center gap-3 text-[11px] text-slate-400 mb-4 pb-3 border-b border-slate-100">
+              <span><i class="fa-regular fa-file-pdf text-rose-500 mr-1"></i> ${doc.type}</span>
+              <span><i class="fa-solid fa-book-open text-blue-500 mr-1"></i> ${doc.pages} trang</span>
+              <span><i class="fa-solid fa-hard-drive text-emerald-500 mr-1"></i> ${doc.size}</span>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 pt-1">
+            <button onclick="openDocPreview('${doc.id}')" class="flex-1 py-2 px-3 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-700 text-slate-800 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5">
+              <i class="fa-regular fa-eye"></i>
+              <span>Xem Mục Lục</span>
+            </button>
+            <button onclick="downloadStudyDoc('${doc.id}')" class="py-2 px-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1 shadow-sm" title="Tải tài liệu">
+              <i class="fa-solid fa-download"></i>
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    // Default library sample doc card
     return `
       <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/90 hover:border-blue-300 shadow-sm hover:shadow-md transition flex flex-col justify-between group">
         <div>
@@ -2044,8 +2233,10 @@ function renderStudyDocs() {
   }).join('');
 }
 
+
 function openDocPreview(docId) {
-  const doc = DEFAULT_STUDY_DOCS.find(d => d.id === docId);
+  const allDocs = [...DEFAULT_STUDY_DOCS, ...(typeof DEFAULT_COMMUNITY_DOCS !== 'undefined' ? DEFAULT_COMMUNITY_DOCS : [])];
+  const doc = allDocs.find(d => d.id === docId);
   if (!doc) return;
 
   const modal = document.getElementById('doc-preview-modal');
@@ -2807,5 +2998,557 @@ function clearAllNotes() {
     saveStudyNotes();
     renderDailyNotes();
     showToast("Đã xóa tất cả ghi chú!", "info");
+  }
+}
+
+
+// ======================================================================
+// HỆ THỐNG UP TÀI LIỆU & ĐÓNG GÓP TÀI LIỆU (INDEXEDDB & 2 TẦNG BẢO MẬT)
+// ======================================================================
+
+const DEFAULT_COMMUNITY_DOCS = [
+  {
+    id: "contrib-toan-01",
+    title: "[Mẫu đóng góp] 50 Câu Hỏi Trắc Nghiệm Mũ & Logarit Có Hướng Dẫn Bấm Máy",
+    subject: "Toán",
+    level: "THPT",
+    author: "Bạn Minh Quân (Lớp 12 Chuyên)",
+    badge: "Mẫu đã duyệt",
+    desc: "Mẫu — tài liệu đóng góp đã duyệt. Rèn luyện kỹ năng bấm logarit và hàm số mũ bằng phím CALC và TABLE trên fx-580VN X.",
+    pages: 15,
+    size: "1.4 MB",
+    type: "PDF",
+    approvedAt: "10/11/2026",
+    outline: [
+      "Phần 1: Rút gọn biểu thức mũ - logarit bằng gán biến A, B",
+      "Phần 2: Tìm tập nghiệm bất phương trình logarit bằng TABLE",
+      "Phần 3: Bài toán thực tế lãi kép và tăng trưởng"
+    ]
+  },
+  {
+    id: "contrib-ly-01",
+    title: "[Mẫu đóng góp] Sơ Đồ Tư Duy Sóng Ánh Sáng & Giao Thoa",
+    subject: "Vật Lý",
+    level: "THPT",
+    author: "Học sinh ẩn danh (THPT Lê Hồng Phong)",
+    badge: "Mẫu đã duyệt",
+    desc: "Mẫu — tài liệu đóng góp đã duyệt. Sơ đồ tư duy trực quan công thức khoảng vân, vị trí vân sáng tối và giao thoa ánh sáng trắng.",
+    pages: 8,
+    size: "950 KB",
+    type: "PDF",
+    approvedAt: "08/11/2026",
+    outline: [
+      "Sơ đồ 1: Tán sắc ánh sáng và chiết suất",
+      "Sơ đồ 2: Giao thoa khe Y-âng và bề rộng quang phổ",
+      "Sơ đồ 3: Các dạng bài tập hay gài bẫy trong đề thi"
+    ]
+  }
+];
+
+// IndexedDB Helper
+const DOCS_DB_NAME = 'ABTN_StudyDocs_DB';
+const DOCS_DB_VERSION = 1;
+
+function openDocsDB() {
+  return new Promise((resolve, reject) => {
+    if (!('indexedDB' in window)) {
+      resolve(null);
+      return;
+    }
+    const req = indexedDB.open(DOCS_DB_NAME, DOCS_DB_VERSION);
+    req.onupgradeneeded = (e) => {
+      const db = e.target.result;
+      if (!db.objectStoreNames.contains('my_docs')) {
+        db.createObjectStore('my_docs', { keyPath: 'id' });
+      }
+      if (!db.objectStoreNames.contains('pending_docs')) {
+        db.createObjectStore('pending_docs', { keyPath: 'id' });
+      }
+    };
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => resolve(null);
+  });
+}
+
+async function idbSaveDoc(storeName, docObj) {
+  const db = await openDocsDB();
+  if (!db) {
+    // Fallback: save meta only in localStorage
+    saveDocMetaFallback(storeName, docObj);
+    return true;
+  }
+  return new Promise((resolve) => {
+    try {
+      const tx = db.transaction(storeName, 'readwrite');
+      const store = tx.objectStore(storeName);
+      store.put(docObj);
+      tx.oncomplete = () => {
+        saveDocMetaFallback(storeName, docObj);
+        resolve(true);
+      };
+      tx.onerror = () => {
+        saveDocMetaFallback(storeName, docObj);
+        resolve(false);
+      };
+    } catch (_) {
+      saveDocMetaFallback(storeName, docObj);
+      resolve(false);
+    }
+  });
+}
+
+async function idbGetDoc(storeName, id) {
+  const db = await openDocsDB();
+  if (!db) {
+    const list = getDocMetaFallback(storeName);
+    return list.find(d => d.id === id) || null;
+  }
+  return new Promise((resolve) => {
+    try {
+      const tx = db.transaction(storeName, 'readonly');
+      const store = tx.objectStore(storeName);
+      const req = store.get(id);
+      req.onsuccess = () => resolve(req.result || null);
+      req.onerror = () => resolve(null);
+    } catch (_) {
+      resolve(null);
+    }
+  });
+}
+
+async function idbGetAllDocs(storeName) {
+  const db = await openDocsDB();
+  if (!db) {
+    return getDocMetaFallback(storeName);
+  }
+  return new Promise((resolve) => {
+    try {
+      const tx = db.transaction(storeName, 'readonly');
+      const store = tx.objectStore(storeName);
+      const req = store.getAll();
+      req.onsuccess = () => {
+        const res = req.result || [];
+        if (res.length === 0) {
+          resolve(getDocMetaFallback(storeName));
+        } else {
+          resolve(res);
+        }
+      };
+      req.onerror = () => resolve(getDocMetaFallback(storeName));
+    } catch (_) {
+      resolve(getDocMetaFallback(storeName));
+    }
+  });
+}
+
+async function idbDeleteDoc(storeName, id) {
+  const db = await openDocsDB();
+  deleteDocMetaFallback(storeName, id);
+  if (!db) return true;
+  return new Promise((resolve) => {
+    try {
+      const tx = db.transaction(storeName, 'readwrite');
+      const store = tx.objectStore(storeName);
+      store.delete(id);
+      tx.oncomplete = () => resolve(true);
+      tx.onerror = () => resolve(false);
+    } catch (_) {
+      resolve(false);
+    }
+  });
+}
+
+// Fallback metadata helpers
+function getDocMetaFallback(storeName) {
+  try {
+    const raw = localStorage.getItem(`abtn_${storeName}_meta`);
+    return raw ? JSON.parse(raw) : [];
+  } catch (_) {
+    return [];
+  }
+}
+
+function saveDocMetaFallback(storeName, docObj) {
+  try {
+    const list = getDocMetaFallback(storeName);
+    const meta = {
+      id: docObj.id,
+      title: docObj.title,
+      subject: docObj.subject,
+      level: docObj.level,
+      desc: docObj.desc,
+      author: docObj.author,
+      fileName: docObj.fileName,
+      fileSize: docObj.fileSize,
+      fileType: docObj.fileType,
+      createdAt: docObj.createdAt,
+      status: docObj.status
+    };
+    const idx = list.findIndex(d => d.id === docObj.id);
+    if (idx >= 0) list[idx] = meta;
+    else list.unshift(meta);
+    localStorage.setItem(`abtn_${storeName}_meta`, JSON.stringify(list));
+  } catch (_) {}
+}
+
+function deleteDocMetaFallback(storeName, id) {
+  try {
+    const list = getDocMetaFallback(storeName).filter(d => d.id !== id);
+    localStorage.setItem(`abtn_${storeName}_meta`, JSON.stringify(list));
+  } catch (_) {}
+}
+
+// Global Category State for Docs:
+// 'library' | 'community' | 'my_docs' | 'pending'
+if (!studyHubState.docCategory) studyHubState.docCategory = 'library';
+studyHubState.myDocs = [];
+studyHubState.pendingDocs = [];
+
+async function loadUploadedDocs() {
+  studyHubState.myDocs = await idbGetAllDocs('my_docs');
+  studyHubState.pendingDocs = await idbGetAllDocs('pending_docs');
+  updateDocCategoryBadges();
+}
+
+function updateDocCategoryBadges() {
+  const myCountBadge = document.getElementById('my-docs-count-badge');
+  if (myCountBadge) {
+    myCountBadge.textContent = studyHubState.myDocs.length;
+    myCountBadge.classList.toggle('hidden', studyHubState.myDocs.length === 0);
+  }
+  const pendingCountBadge = document.getElementById('pending-docs-count-badge');
+  if (pendingCountBadge) {
+    pendingCountBadge.textContent = studyHubState.pendingDocs.length;
+    pendingCountBadge.classList.toggle('hidden', studyHubState.pendingDocs.length === 0);
+  }
+}
+
+function switchDocCategory(category, btn) {
+  studyHubState.docCategory = category;
+  document.querySelectorAll('.doc-cat-btn').forEach(b => {
+    b.classList.remove('bg-blue-600', 'text-white', 'shadow-sm');
+    b.classList.add('bg-slate-100', 'text-slate-700');
+  });
+  if (btn) {
+    btn.classList.add('bg-blue-600', 'text-white', 'shadow-sm');
+    btn.classList.remove('bg-slate-100', 'text-slate-700');
+  }
+  renderStudyDocs();
+}
+
+// Format file size
+function formatBytes(bytes) {
+  if (!bytes || bytes === 0) return '0 B';
+  const k = 1024;
+  const sizes = ['B', 'KB', 'MB', 'GB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+}
+
+// Modal controls for Upload
+function openUploadDocModal(prefillMode = 'private') {
+  const modal = document.getElementById('upload-doc-modal');
+  if (!modal) return;
+
+  const modePrivate = document.getElementById('upload-mode-private');
+  const modeContrib = document.getElementById('upload-mode-contrib');
+  if (prefillMode === 'contrib' && modeContrib) {
+    modeContrib.checked = true;
+    toggleUploadMode('contrib');
+  } else if (modePrivate) {
+    modePrivate.checked = true;
+    toggleUploadMode('private');
+  }
+
+  modal.classList.remove('hidden');
+}
+
+function closeUploadDocModal() {
+  const modal = document.getElementById('upload-doc-modal');
+  if (modal) modal.classList.add('hidden');
+  const form = document.getElementById('upload-doc-form');
+  if (form) form.reset();
+}
+
+function toggleUploadMode(mode) {
+  const authorField = document.getElementById('upload-author-container');
+  const noticePrivate = document.getElementById('upload-notice-private');
+  const noticeContrib = document.getElementById('upload-notice-contrib');
+  const submitText = document.getElementById('upload-submit-btn-text');
+
+  if (mode === 'contrib') {
+    if (authorField) authorField.classList.remove('hidden');
+    if (noticePrivate) noticePrivate.classList.add('hidden');
+    if (noticeContrib) noticeContrib.classList.remove('hidden');
+    if (submitText) submitText.textContent = "Gửi Đóng Góp (Gửi Shop Duyệt)";
+  } else {
+    if (authorField) authorField.classList.add('hidden');
+    if (noticePrivate) noticePrivate.classList.remove('hidden');
+    if (noticeContrib) noticeContrib.classList.add('hidden');
+    if (submitText) submitText.textContent = "Lưu Vào Máy Của Tôi";
+  }
+}
+
+// Submit Upload / Contribution
+async function handleDocUploadSubmit(e) {
+  e.preventDefault();
+
+  const mode = document.querySelector('input[name="upload_mode"]:checked')?.value || 'private';
+  const title = document.getElementById('upload-doc-title').value.trim();
+  const subject = document.getElementById('upload-doc-subject').value;
+  const level = document.getElementById('upload-doc-level').value;
+  const desc = document.getElementById('upload-doc-desc').value.trim();
+  const author = document.getElementById('upload-doc-author')?.value.trim() || 'Học sinh ẩn danh';
+  const fileInput = document.getElementById('upload-doc-file');
+
+  if (!fileInput.files || fileInput.files.length === 0) {
+    alert("Vui lòng chọn 1 file tài liệu để tải lên!");
+    return;
+  }
+
+  const file = fileInput.files[0];
+  const maxBytes = 15 * 1024 * 1024; // 15MB limit
+
+  if (file.size > maxBytes) {
+    alert(`File quá lớn (${formatBytes(file.size)}). Dung lượng tối đa cho phép là 15 MB!`);
+    return;
+  }
+
+  // Check valid extensions
+  const allowedExts = ['pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png', 'webp', 'txt'];
+  const ext = file.name.split('.').pop().toLowerCase();
+  if (!allowedExts.includes(ext)) {
+    alert(`Định dạng file .${ext} không được hỗ trợ. Vui lòng chọn file PDF, Word (doc, docx) hoặc ảnh (jpg, png)!`);
+    return;
+  }
+
+  // Read file data
+  const reader = new FileReader();
+  reader.onload = async (event) => {
+    const fileDataUrl = event.target.result;
+    const docId = 'doc_' + Date.now();
+
+    const docObj = {
+      id: docId,
+      title: title,
+      subject: subject,
+      level: level,
+      desc: desc || "Tài liệu học tập do người dùng tải lên.",
+      author: mode === 'contrib' ? author : 'Chính bạn (Riêng tư)',
+      fileName: file.name,
+      fileSize: formatBytes(file.size),
+      fileType: file.type || ext.toUpperCase(),
+      fileData: fileDataUrl, // base64 DataURL for offline preview & download
+      createdAt: new Date().toLocaleDateString('vi-VN'),
+      status: mode === 'contrib' ? 'pending' : 'private'
+    };
+
+    if (mode === 'private') {
+      await idbSaveDoc('my_docs', docObj);
+      await loadUploadedDocs();
+      closeUploadDocModal();
+      
+      // Switch view to my_docs
+      const myDocsBtn = document.getElementById('btn-doc-cat-my');
+      if (myDocsBtn) switchDocCategory('my_docs', myDocsBtn);
+      
+      showToast("Đã lưu tài liệu vào máy của bạn! (100% riêng tư)", "success");
+    } else {
+      // Contribution mode
+      await idbSaveDoc('pending_docs', docObj);
+      await loadUploadedDocs();
+      closeUploadDocModal();
+
+      // Open Contribution Success Modal with prefilled messages
+      openContribSuccessModal(docObj);
+
+      // Switch view to pending
+      const pendingBtn = document.getElementById('btn-doc-cat-pending');
+      if (pendingBtn) switchDocCategory('pending', pendingBtn);
+      
+      showToast("Đã lưu vào danh sách chờ duyệt!", "success");
+    }
+  };
+
+  reader.onerror = () => {
+    alert("Có lỗi khi đọc file từ máy. Vui lòng thử lại!");
+  };
+
+  reader.readAsDataURL(file);
+}
+
+// Contribution Success Modal
+let currentContribDoc = null;
+
+function openContribSuccessModal(docObj) {
+  currentContribDoc = docObj;
+  const modal = document.getElementById('contrib-success-modal');
+  const details = document.getElementById('contrib-success-details');
+  if (!modal || !details) return;
+
+  const msgText = `Chào Anh Ba Tự Nhiên (@_hgtuditto),\nEm muốn đóng góp tài liệu học tập lên web:\n- Tên: ${docObj.title}\n- Môn: ${docObj.subject} | Cấp: ${docObj.level}\n- Người gửi: ${docObj.author}\n- Tệp: ${docObj.fileName} (${docObj.fileSize})\nNhờ shop xem xét kiểm duyệt và đăng cho các bạn cùng học nhé!`;
+
+  details.innerHTML = `
+    <div class="text-center pb-3 mb-3 border-b border-slate-100">
+      <div class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-2 text-xl">
+        <i class="fa-solid fa-paper-plane"></i>
+      </div>
+      <h3 class="text-base font-extrabold text-slate-900">Đã Tạo Bản Đóng Góp Thành Công!</h3>
+      <p class="text-xs text-slate-500 mt-1">Bản ghi đã lưu vào mục <strong>"Chờ duyệt"</strong> trên máy bạn.</p>
+    </div>
+
+    <div class="p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-950 mb-3.5 leading-relaxed">
+      <strong>⚠️ Bước tiếp theo:</strong> Do web chạy tĩnh trên GitHub Pages, để tài liệu xuất hiện cho toàn bộ học sinh khác xem, bạn hãy gửi thông tin hoặc file này về shop qua <strong>Zalo</strong> hoặc <strong>Threads @_hgtuditto</strong>. Shop sẽ kiểm tra bản quyền và duyệt đăng ngay!
+    </div>
+
+    <div class="bg-slate-50 rounded-xl p-3 border border-slate-200 mb-3.5">
+      <div class="flex items-center justify-between mb-1.5">
+        <span class="text-[11px] font-bold text-slate-600">Nội dung tin nhắn tạo sẵn:</span>
+        <button onclick="copyContribMessage()" class="text-[11px] text-blue-600 hover:text-blue-800 font-bold flex items-center gap-1">
+          <i class="fa-regular fa-copy"></i> Sao chép
+        </button>
+      </div>
+      <textarea id="contrib-msg-textarea" readonly rows="4" class="w-full text-xs font-mono bg-white p-2 border border-slate-200 rounded-lg text-slate-700 focus:outline-none">${msgText}</textarea>
+    </div>
+
+    <div class="grid grid-cols-2 gap-2 mb-2">
+      <a 
+        href="https://zalo.me/${(state.config && state.config.zaloPhone) || '0339591280'}" 
+        target="_blank" 
+        class="py-2.5 px-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 shadow-sm text-center"
+      >
+        <i class="fa-solid fa-comment-dots"></i>
+        <span>Gửi Qua Zalo Shop</span>
+      </a>
+
+      <a 
+        href="https://www.threads.com/@_hgtuditto" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="py-2.5 px-3 bg-slate-900 hover:bg-black text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 shadow-sm text-center"
+      >
+        <i class="fa-brands fa-threads"></i>
+        <span>Nhắn Threads @_hgtuditto</span>
+      </a>
+    </div>
+
+    <button onclick="closeContribSuccessModal()" class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold transition">
+      Đã Hiểu, Quay Lại Khu Tài Liệu
+    </button>
+  `;
+
+  modal.classList.remove('hidden');
+}
+
+function copyContribMessage() {
+  const ta = document.getElementById('contrib-msg-textarea');
+  if (ta) {
+    ta.select();
+    navigator.clipboard.writeText(ta.value).then(() => {
+      showToast("Đã sao chép tin nhắn vào clipboard!", "success");
+    }).catch(() => {
+      document.execCommand('copy');
+      showToast("Đã sao chép tin nhắn!", "success");
+    });
+  }
+}
+
+function closeContribSuccessModal() {
+  const modal = document.getElementById('contrib-success-modal');
+  if (modal) modal.classList.add('hidden');
+}
+
+// In-Browser Document Viewer
+async function viewLocalUploadedDoc(storeName, docId) {
+  const doc = await idbGetDoc(storeName, docId);
+  if (!doc) {
+    showToast("Không tìm thấy dữ liệu file trên máy!", "error");
+    return;
+  }
+
+  const modal = document.getElementById('doc-file-viewer-modal');
+  const container = document.getElementById('doc-file-viewer-container');
+  const titleEl = document.getElementById('doc-file-viewer-title');
+  if (!modal || !container) return;
+
+  if (titleEl) titleEl.textContent = doc.title;
+
+  const isPdf = doc.fileName.toLowerCase().endsWith('.pdf') || (doc.fileType && doc.fileType.includes('pdf'));
+  const isImage = (doc.fileType && doc.fileType.startsWith('image/')) || /\.(jpg|jpeg|png|webp|gif)$/i.test(doc.fileName);
+
+  if (isPdf && doc.fileData) {
+    container.innerHTML = `
+      <div class="w-full h-[70vh] rounded-2xl overflow-hidden border border-slate-200">
+        <iframe src="${doc.fileData}" class="w-full h-full border-0"></iframe>
+      </div>
+    `;
+  } else if (isImage && doc.fileData) {
+    container.innerHTML = `
+      <div class="max-h-[70vh] flex items-center justify-center p-2 bg-slate-100 rounded-2xl overflow-auto border border-slate-200">
+        <img src="${doc.fileData}" alt="${doc.title}" class="max-w-full max-h-[65vh] object-contain rounded-xl shadow-sm"/>
+      </div>
+    `;
+  } else {
+    // Word or other binary file: display nice card with download action
+    container.innerHTML = `
+      <div class="py-14 text-center bg-slate-50 rounded-2xl border border-slate-200 p-6">
+        <div class="w-16 h-16 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center mx-auto mb-3 text-2xl">
+          <i class="fa-solid fa-file-word"></i>
+        </div>
+        <h4 class="text-base font-bold text-slate-900">${doc.fileName}</h4>
+        <p class="text-xs text-slate-500 mt-1 mb-4">Định dạng file Word / Tài liệu (${doc.fileSize}). Hãy tải về máy để mở bằng Word hoặc Docs.</p>
+        <button onclick="downloadUploadedDoc('${storeName}', '${doc.id}')" class="py-2.5 px-5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold transition inline-flex items-center gap-2 shadow-sm">
+          <i class="fa-solid fa-download"></i> Tải Về Máy Ngay
+        </button>
+      </div>
+    `;
+  }
+
+  modal.classList.remove('hidden');
+}
+
+function closeDocFileViewer() {
+  const modal = document.getElementById('doc-file-viewer-modal');
+  if (modal) modal.classList.add('hidden');
+  const container = document.getElementById('doc-file-viewer-container');
+  if (container) container.innerHTML = '';
+}
+
+// Download local uploaded document
+async function downloadUploadedDoc(storeName, docId) {
+  const doc = await idbGetDoc(storeName, docId);
+  if (!doc || !doc.fileData) {
+    showToast("Không tìm thấy tệp để tải về!", "error");
+    return;
+  }
+  const a = document.createElement('a');
+  a.href = doc.fileData;
+  a.download = doc.fileName || (doc.title + '.pdf');
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  showToast("Đang tải file về máy...", "success");
+}
+
+// Delete document from my_docs or pending_docs
+async function deleteUploadedDoc(storeName, docId) {
+  const isPending = storeName === 'pending_docs';
+  const confirmMsg = isPending 
+    ? "Bạn có chắc chắn muốn hủy bản đóng góp này khỏi danh sách chờ duyệt?" 
+    : "Bạn có chắc chắn muốn xóa tài liệu này khỏi trình duyệt máy bạn?";
+  
+  if (!confirm(confirmMsg)) return;
+
+  await idbDeleteDoc(storeName, docId);
+  await loadUploadedDocs();
+  renderStudyDocs();
+  showToast("Đã xóa tài liệu!", "info");
+}
+
+// Re-send contribution to shop
+async function resendPendingDoc(docId) {
+  const doc = await idbGetDoc('pending_docs', docId);
+  if (doc) {
+    openContribSuccessModal(doc);
   }
 }
