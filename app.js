@@ -11,6 +11,8 @@ const DEFAULT_CONFIG = {
   "facebookUrl": "https://www.facebook.com/anh3tunhien/",
   "tiktokUrl": "https://www.tiktok.com/@anh3tunhien",
   "tiktokHandle": "@anh3tunhien",
+  "threadsUrl": "https://www.threads.com/@_hgtuditto",
+  "threadsHandle": "@_hgtuditto",
   "promoBanner": "Tặng Bảng 100 Công Thức Bấm Máy Casio + Pin Nhật Zin + Miễn Phí Giao Hàng Toàn Quốc!",
   "vouchers": {
     "ANHBA20K": {
@@ -369,6 +371,9 @@ function applyShopConfigToDOM() {
   document.querySelectorAll('.zalo-direct-link').forEach(el => {
     el.href = `https://zalo.me/${state.config.zaloPhone || DEFAULT_CONFIG.zaloPhone}`;
   });
+  document.querySelectorAll('.threads-direct-link').forEach(el => {
+    el.href = state.config.threadsUrl || DEFAULT_CONFIG.threadsUrl;
+  });
 }
 
 async function loadProducts() {
@@ -483,7 +488,7 @@ function renderProducts() {
               </span>
             </div>
 
-            <div class="grid grid-cols-5 gap-2">
+            <div class="grid grid-cols-5 gap-2 mb-2">
               <button 
                 onclick="addToCart('${product.id}', true)" 
                 class="col-span-3 py-2.5 px-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold transition shadow-sm flex items-center justify-center gap-1"
@@ -498,6 +503,17 @@ function renderProducts() {
                 <i class="fa-solid fa-cart-plus"></i> Giỏ
               </button>
             </div>
+
+            <a 
+              href="https://www.threads.com/@_hgtuditto" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="w-full py-2 px-3 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 shadow-sm"
+              title="Nhắn shop trên Threads @_hgtuditto"
+            >
+              <i class="fa-brands fa-threads text-sm"></i>
+              <span>Nhắn shop (Threads @_hgtuditto)</span>
+            </a>
           </div>
         </div>
       </article>
@@ -831,7 +847,7 @@ function openQuickView(productId) {
           `).join('')}
         </ul>
 
-        <div class="mt-auto grid grid-cols-2 gap-3 pt-4 border-t border-slate-100">
+        <div class="mt-auto grid grid-cols-2 gap-3 pt-4 border-t border-slate-100 mb-2">
           <button onclick="addToCart('${product.id}', true); closeQuickView();" class="py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs transition">
             Đặt Mua Ngay (COD)
           </button>
@@ -839,6 +855,15 @@ function openQuickView(productId) {
             Thêm Vào Giỏ
           </button>
         </div>
+        <a 
+          href="https://www.threads.com/@_hgtuditto" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="w-full py-2.5 bg-slate-900 hover:bg-black text-white rounded-xl font-bold text-xs transition flex items-center justify-center gap-2 shadow-sm"
+        >
+          <i class="fa-brands fa-threads text-sm"></i>
+          <span>Nhắn shop trên Threads @_hgtuditto</span>
+        </a>
       </div>
     </div>
   `;
@@ -881,6 +906,9 @@ function openCheckoutModal() {
         <div class="flex justify-between text-slate-500"><span>Vận chuyển:</span><span class="text-emerald-600 font-semibold">Miễn Phí (Đồng kiểm)</span></div>
         <div class="flex justify-between text-sm font-extrabold text-blue-600 pt-2 border-t border-slate-200">
           <span>Tổng thanh toán:</span><span>${formatMoney(total)}</span>
+        </div>
+        <div class="bg-blue-50 text-blue-800 text-[11px] font-bold p-2 rounded-lg text-center mt-2 border border-blue-200">
+          Ship COD không cọc — Kiểm tra trước khi thanh toán — Bao test
         </div>
       </div>
     `;
