@@ -1,5 +1,10 @@
 /* Anh Ba Tự Nhiên - Professional Student Tech Store Stylesheet */
 
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 :root {
   --brand-primary: #2563eb;
   --brand-primary-dark: #1d4ed8;
