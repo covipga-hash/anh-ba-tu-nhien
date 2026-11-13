@@ -436,10 +436,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 // Shared JSON loader with API -> local file -> embedded fallback
 async function fetchDataWithFallback(apiUrl, fileUrl, fallbackData) {
-  try {
-    const res = await fetch(apiUrl);
-    if (res.ok) return await res.json();
-  } catch (_) {}
+  const isStaticHost = window.location.hostname.includes('github.io') || window.location.protocol === 'file:';
+  if (!isStaticHost && apiUrl) {
+    try {
+      const res = await fetch(apiUrl);
+      if (res.ok) return await res.json();
+    } catch (_) {}
+  }
   try {
     const resLocal = await fetch(fileUrl);
     if (resLocal.ok) return await resLocal.json();
