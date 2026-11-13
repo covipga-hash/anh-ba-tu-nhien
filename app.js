@@ -53,7 +53,16 @@ const DEFAULT_PRODUCTS = [
     ],
     "gift": "Tặng Bảng 100 Công Thức + Pin Maxell Nhật Mới",
     "image": "assets/images/products/casio-580vnx.svg",
-    "tags": ["fx-580", "likenew", "hot", "thpt"]
+    "tags": [
+      "fx-580",
+      "likenew",
+      "hot",
+      "thpt"
+    ],
+    "condition_percent": 99,
+    "lid": null,
+    "seals": null,
+    "classification": null
   },
   {
     "id": "fx-580vnx-95",
@@ -77,7 +86,15 @@ const DEFAULT_PRODUCTS = [
     ],
     "gift": "Tặng Pin Nhật Mới + Ebook Mẹo Bấm Casio 9+",
     "image": "assets/images/products/casio-580vnx.svg",
-    "tags": ["fx-580", "tietkiem", "thpt"]
+    "tags": [
+      "fx-580",
+      "tietkiem",
+      "thpt"
+    ],
+    "condition_percent": 95,
+    "lid": true,
+    "seals": null,
+    "classification": null
   },
   {
     "id": "fx-880btg-99",
@@ -101,7 +118,16 @@ const DEFAULT_PRODUCTS = [
     ],
     "gift": "Tặng Bao Da Chống Sốc + Tài Liệu 880BTG",
     "image": "assets/images/products/casio-880btg.jpg",
-    "tags": ["fx-880", "caocap", "dgnl", "sgkmoi"]
+    "tags": [
+      "fx-880",
+      "caocap",
+      "dgnl",
+      "sgkmoi"
+    ],
+    "condition_percent": 99,
+    "lid": null,
+    "seals": null,
+    "classification": null
   },
   {
     "id": "fx-880btg-95",
@@ -125,7 +151,16 @@ const DEFAULT_PRODUCTS = [
     ],
     "gift": "Tặng Ebook Hướng Dẫn 880BTG + Pin Dự Phòng",
     "image": "assets/images/products/casio-880btg.jpg",
-    "tags": ["fx-880", "tietkiem", "thpt", "sgkmoi"]
+    "tags": [
+      "fx-880",
+      "tietkiem",
+      "thpt",
+      "sgkmoi"
+    ],
+    "condition_percent": 95,
+    "lid": null,
+    "seals": null,
+    "classification": null
   },
   {
     "id": "fx-570vnplus-99",
@@ -149,7 +184,15 @@ const DEFAULT_PRODUCTS = [
     ],
     "gift": "Tặng Pin Maxell Zin + Bảng Công Thức Cấp 2",
     "image": "assets/images/products/casio-570vnplus.svg",
-    "tags": ["fx-570", "giare", "cap2"]
+    "tags": [
+      "fx-570",
+      "giare",
+      "cap2"
+    ],
+    "condition_percent": 99,
+    "lid": null,
+    "seals": null,
+    "classification": null
   },
   {
     "id": "fx-570esplus-95",
@@ -173,7 +216,16 @@ const DEFAULT_PRODUCTS = [
     ],
     "gift": "Tặng Pin Mới Thay Sẵn Trong Máy",
     "image": "assets/images/products/casio-570vnplus.svg",
-    "tags": ["fx-570", "giare", "sinhvien", "cap2"]
+    "tags": [
+      "fx-570",
+      "giare",
+      "sinhvien",
+      "cap2"
+    ],
+    "condition_percent": 95,
+    "lid": null,
+    "seals": null,
+    "classification": null
   },
   {
     "id": "combo-phu-kien-vip",
@@ -197,7 +249,15 @@ const DEFAULT_PRODUCTS = [
     ],
     "gift": "Miễn phí ship khi mua kèm máy tính Casio",
     "image": "assets/images/products/combo-accessories.svg",
-    "tags": ["phukien", "combo", "baoda"]
+    "tags": [
+      "phukien",
+      "combo",
+      "baoda"
+    ],
+    "condition_percent": 100,
+    "lid": null,
+    "seals": null,
+    "classification": "Phụ kiện"
   },
   {
     "id": "combo-luoi-hoc-chinh-phuc-9",
@@ -221,7 +281,18 @@ const DEFAULT_PRODUCTS = [
     ],
     "gift": "Miễn Phí Ship + Tặng Thước Parabol & Bút Chì 2B",
     "image": "assets/images/products/casio-880btg.jpg",
-    "tags": ["fx-880", "combo", "likenew", "thpt", "dgnl", "sgkmoi"]
+    "tags": [
+      "fx-880",
+      "combo",
+      "likenew",
+      "thpt",
+      "dgnl",
+      "sgkmoi"
+    ],
+    "condition_percent": 99,
+    "lid": null,
+    "seals": null,
+    "classification": null
   }
 ];
 
@@ -320,12 +391,33 @@ const state = {
   filteredTricks: [],
   cart: JSON.parse(localStorage.getItem('abtn_cart') || '[]'),
   currentCategory: 'all',
+  currentClassification: 'all',
   currentGrade: 'all',
   currentTag: null,
   searchQuery: '',
   appliedVoucher: null,
   simKeysPressed: []
 };
+
+// Helper: Phân loại máy theo chuẩn quy định
+function getProductClassification(product) {
+  if (product.classification) return product.classification;
+  if (product.series === 'Phụ Kiện') return 'Phụ kiện';
+  
+  if (product.lid === true && product.seals === 2 && (product.condition_percent >= 99 || product.grade === '99%')) {
+    return 'Like new (2 tem, có nắp)';
+  }
+  if (product.lid === true && product.seals === 2) {
+    return 'Có nắp 2 tem';
+  }
+  if (product.lid === true && product.seals === 1) {
+    return 'Có nắp 1 tem';
+  }
+  if (product.lid === false && (product.seals === 0 || product.seals === null)) {
+    return 'Không nắp không tem';
+  }
+  return 'Chờ Cơ xác nhận';
+}
 
 let VOUCHERS = { ...DEFAULT_CONFIG.vouchers };
 
@@ -413,11 +505,21 @@ function renderProducts() {
   }
 
   container.innerHTML = state.filteredProducts.map(product => {
-    const gradeStyle = product.grade === '99%'
-      ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
-      : product.grade === '95%'
-        ? 'bg-blue-50 text-blue-700 border-blue-200'
-        : 'bg-slate-100 text-slate-700 border-slate-200';
+    const classification = getProductClassification(product);
+    const percentDisplay = product.condition_percent ? `${product.condition_percent}%` : (product.grade || '100%');
+    
+    // Badge style for classification
+    const classBadgeStyle = classification === 'Like new (2 tem, có nắp)'
+      ? 'bg-emerald-600 text-white'
+      : classification === 'Có nắp 2 tem'
+        ? 'bg-blue-600 text-white'
+        : classification === 'Có nắp 1 tem'
+          ? 'bg-indigo-600 text-white'
+          : classification === 'Không nắp không tem'
+            ? 'bg-amber-600 text-white'
+            : classification === 'Phụ kiện'
+              ? 'bg-slate-800 text-white'
+              : 'bg-amber-100 text-amber-800 border border-amber-300';
 
     return `
       <article class="bg-white rounded-2xl border border-slate-200/90 hover:border-blue-300 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col overflow-hidden group">
@@ -431,8 +533,8 @@ function renderProducts() {
           />
 
           <div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
-            <span class="px-2 py-0.5 text-[11px] font-bold rounded-md border ${gradeStyle} shadow-sm">
-              Độ mới ${product.grade}
+            <span class="px-2 py-0.5 text-[11px] font-bold rounded-md ${classBadgeStyle} shadow-sm">
+              ${classification}
             </span>
             ${product.badge ? `
               <span class="px-2 py-0.5 text-[11px] font-bold rounded-md bg-slate-900/85 text-white shadow-sm">
@@ -463,6 +565,26 @@ function renderProducts() {
           <h3 class="font-bold text-slate-900 text-sm leading-snug line-clamp-2 min-h-[2.5rem] mb-2" title="${product.name}">
             ${product.name}
           </h3>
+
+          <!-- SPEC BAR: Có nắp hay không, mấy tem, độ mới bao nhiêu % -->
+          <div class="grid grid-cols-3 gap-1 p-2 bg-slate-50 rounded-xl border border-slate-200/80 text-center mb-3">
+            <div class="flex flex-col">
+              <span class="text-[9px] text-slate-400 font-semibold uppercase">Độ mới</span>
+              <span class="font-extrabold text-blue-700 text-xs">${percentDisplay}</span>
+            </div>
+            <div class="flex flex-col border-x border-slate-200/80">
+              <span class="text-[9px] text-slate-400 font-semibold uppercase">Nắp máy</span>
+              <span class="font-bold text-xs ${product.lid === true ? 'text-emerald-600' : product.lid === false ? 'text-slate-600' : 'text-amber-600'}">
+                ${product.lid === true ? '<i class=\"fa-solid fa-check text-[10px]\"></i> Có nắp' : product.lid === false ? '<i class=\"fa-solid fa-xmark text-[10px]\"></i> K.nắp' : 'Chờ xác nhận'}
+              </span>
+            </div>
+            <div class="flex flex-col">
+              <span class="text-[9px] text-slate-400 font-semibold uppercase">Tem Bitex</span>
+              <span class="font-bold text-xs ${product.seals === 2 ? 'text-blue-600' : product.seals === 1 ? 'text-indigo-600' : product.seals === 0 ? 'text-slate-600' : 'text-amber-600'}">
+                ${product.seals === 2 ? '2 tem' : product.seals === 1 ? '1 tem' : product.seals === 0 ? '0 tem' : 'Chờ xác nhận'}
+              </span>
+            </div>
+          </div>
 
           <ul class="space-y-1 text-[11px] text-slate-600 mb-3">
             ${product.features.slice(0, 2).map(f => `
@@ -532,9 +654,16 @@ function applyFilters() {
       else if (state.currentCategory === 'phukien') matchCat = p.series.includes('Phụ Kiện');
     }
 
+    let matchClass = true;
+    if (state.currentClassification !== 'all') {
+      const cls = getProductClassification(p);
+      matchClass = cls === state.currentClassification || p.classification === state.currentClassification;
+    }
+
     let matchGrade = true;
     if (state.currentGrade !== 'all') {
-      matchGrade = p.grade === state.currentGrade;
+      const targetPercent = parseInt(state.currentGrade.replace('%', ''));
+      matchGrade = p.grade === state.currentGrade || p.condition_percent === targetPercent;
     }
 
     let matchTag = true;
@@ -545,16 +674,31 @@ function applyFilters() {
     let matchSearch = true;
     if (state.searchQuery) {
       const q = state.searchQuery.toLowerCase().trim();
+      const cls = getProductClassification(p).toLowerCase();
       matchSearch = p.name.toLowerCase().includes(q) ||
         p.series.toLowerCase().includes(q) ||
+        cls.includes(q) ||
         (p.tags && p.tags.some(t => t.includes(q))) ||
         (p.features && p.features.some(f => f.toLowerCase().includes(q)));
     }
 
-    return matchCat && matchGrade && matchTag && matchSearch;
+    return matchCat && matchClass && matchGrade && matchTag && matchSearch;
   });
 
   renderProducts();
+}
+
+function filterClassification(classType, btn) {
+  state.currentClassification = classType;
+  document.querySelectorAll('.class-btn').forEach(b => {
+    b.classList.remove('bg-blue-600', 'text-white', 'shadow-sm', 'font-bold');
+    b.classList.add('bg-slate-100', 'text-slate-700', 'font-semibold');
+  });
+  if (btn) {
+    btn.classList.add('bg-blue-600', 'text-white', 'shadow-sm', 'font-bold');
+    btn.classList.remove('bg-slate-100', 'text-slate-700', 'font-semibold');
+  }
+  applyFilters();
 }
 
 function filterByNeed(tag) {
@@ -607,6 +751,29 @@ function sortProducts(order) {
 }
 
 function resetFilters(shouldRender = true) {
+  state.currentCategory = 'all';
+  state.currentClassification = 'all';
+  state.currentGrade = 'all';
+  state.currentTag = null;
+  state.searchQuery = '';
+  document.querySelectorAll('.cat-btn').forEach((b, i) => {
+    if (i === 0) { b.classList.add('bg-blue-600', 'text-white', 'shadow-sm', 'font-bold'); b.classList.remove('bg-slate-100', 'text-slate-700', 'font-semibold'); }
+    else { b.classList.remove('bg-blue-600', 'text-white', 'shadow-sm', 'font-bold'); b.classList.add('bg-slate-100', 'text-slate-700', 'font-semibold'); }
+  });
+  document.querySelectorAll('.class-btn').forEach((b, i) => {
+    if (i === 0) { b.classList.add('bg-blue-600', 'text-white', 'shadow-sm', 'font-bold'); b.classList.remove('bg-slate-100', 'text-slate-700', 'font-semibold'); }
+    else { b.classList.remove('bg-blue-600', 'text-white', 'shadow-sm', 'font-bold'); b.classList.add('bg-slate-100', 'text-slate-700', 'font-semibold'); }
+  });
+  document.querySelectorAll('.grade-btn').forEach((b, i) => {
+    if (i === 0) { b.classList.add('border-blue-600', 'text-blue-700', 'bg-blue-50', 'font-bold'); b.classList.remove('border-slate-200', 'text-slate-600', 'font-semibold'); }
+    else { b.classList.remove('border-blue-600', 'text-blue-700', 'bg-blue-50', 'font-bold'); b.classList.add('border-slate-200', 'text-slate-600', 'font-semibold'); }
+  });
+  const searchInput = document.getElementById('search-input');
+  if (searchInput) searchInput.value = '';
+  const searchInputMobile = document.getElementById('search-input-mobile');
+  if (searchInputMobile) searchInputMobile.value = '';
+  if (shouldRender) applyFilters();
+}
   state.currentCategory = 'all';
   state.currentGrade = 'all';
   state.currentTag = null;
@@ -833,6 +1000,25 @@ function openQuickView(productId) {
         </div>
 
         <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 mb-4 space-y-1.5 text-xs text-slate-700">
+          <div><strong>Phân loại máy:</strong> <span class="font-bold text-blue-700">${getProductClassification(product)}</span></div>
+          <div class="grid grid-cols-3 gap-2 py-1.5 border-y border-slate-200/80 my-1.5 text-[11px] text-center">
+            <div>
+              <span class="block text-[10px] text-slate-400 font-semibold uppercase">Độ mới</span>
+              <span class="font-extrabold text-blue-700">${product.condition_percent ? product.condition_percent + '%' : (product.grade || '100%')}</span>
+            </div>
+            <div class="border-x border-slate-200">
+              <span class="block text-[10px] text-slate-400 font-semibold uppercase">Nắp máy</span>
+              <span class="font-bold ${product.lid === true ? 'text-emerald-600' : product.lid === false ? 'text-slate-600' : 'text-amber-600'}">
+                ${product.lid === true ? 'Có nắp zin' : product.lid === false ? 'Không kèm nắp' : 'Chờ xác nhận'}
+              </span>
+            </div>
+            <div>
+              <span class="block text-[10px] text-slate-400 font-semibold uppercase">Tem Bitex</span>
+              <span class="font-bold ${product.seals === 2 ? 'text-blue-600' : product.seals === 1 ? 'text-indigo-600' : product.seals === 0 ? 'text-slate-600' : 'text-amber-600'}">
+                ${product.seals === 2 ? '2 tem zin' : product.seals === 1 ? '1 tem zin' : product.seals === 0 ? '0 tem' : 'Chờ xác nhận'}
+              </span>
+            </div>
+          </div>
           <div><strong>Bảo hành:</strong> ${product.warranty}</div>
           <div><strong>Màu sắc:</strong> ${product.color}</div>
           <div><strong>Quà tặng kèm:</strong> <span class="text-blue-700 font-semibold">${product.gift}</span></div>
