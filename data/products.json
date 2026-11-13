@@ -21,7 +21,16 @@
     ],
     "gift": "Tặng Bảng 100 Công Thức + Pin Maxell Nhật Mới",
     "image": "assets/images/products/casio-580vnx.svg",
-    "tags": ["fx-580", "likenew", "hot", "thpt"]
+    "tags": [
+      "fx-580",
+      "likenew",
+      "hot",
+      "thpt"
+    ],
+    "condition_percent": 99,
+    "lid": null,
+    "seals": null,
+    "classification": null
   },
   {
     "id": "fx-580vnx-95",
@@ -45,7 +54,15 @@
     ],
     "gift": "Tặng Pin Nhật Mới + Ebook Mẹo Bấm Casio 9+",
     "image": "assets/images/products/casio-580vnx.svg",
-    "tags": ["fx-580", "tietkiem", "thpt"]
+    "tags": [
+      "fx-580",
+      "tietkiem",
+      "thpt"
+    ],
+    "condition_percent": 95,
+    "lid": true,
+    "seals": null,
+    "classification": null
   },
   {
     "id": "fx-880btg-99",
@@ -69,7 +86,16 @@
     ],
     "gift": "Tặng Bao Da Chống Sốc + Tài Liệu 880BTG",
     "image": "assets/images/products/casio-880btg.jpg",
-    "tags": ["fx-880", "caocap", "dgnl", "sgkmoi"]
+    "tags": [
+      "fx-880",
+      "caocap",
+      "dgnl",
+      "sgkmoi"
+    ],
+    "condition_percent": 99,
+    "lid": null,
+    "seals": null,
+    "classification": null
   },
   {
     "id": "fx-880btg-95",
@@ -93,7 +119,16 @@
     ],
     "gift": "Tặng Ebook Hướng Dẫn 880BTG + Pin Dự Phòng",
     "image": "assets/images/products/casio-880btg.jpg",
-    "tags": ["fx-880", "tietkiem", "thpt", "sgkmoi"]
+    "tags": [
+      "fx-880",
+      "tietkiem",
+      "thpt",
+      "sgkmoi"
+    ],
+    "condition_percent": 95,
+    "lid": null,
+    "seals": null,
+    "classification": null
   },
   {
     "id": "fx-570vnplus-99",
@@ -117,7 +152,15 @@
     ],
     "gift": "Tặng Pin Maxell Zin + Bảng Công Thức Cấp 2",
     "image": "assets/images/products/casio-570vnplus.svg",
-    "tags": ["fx-570", "giare", "cap2"]
+    "tags": [
+      "fx-570",
+      "giare",
+      "cap2"
+    ],
+    "condition_percent": 99,
+    "lid": null,
+    "seals": null,
+    "classification": null
   },
   {
     "id": "fx-570esplus-95",
@@ -141,7 +184,16 @@
     ],
     "gift": "Tặng Pin Mới Thay Sẵn Trong Máy",
     "image": "assets/images/products/casio-570vnplus.svg",
-    "tags": ["fx-570", "giare", "sinhvien", "cap2"]
+    "tags": [
+      "fx-570",
+      "giare",
+      "sinhvien",
+      "cap2"
+    ],
+    "condition_percent": 95,
+    "lid": null,
+    "seals": null,
+    "classification": null
   },
   {
     "id": "combo-phu-kien-vip",
@@ -165,7 +217,15 @@
     ],
     "gift": "Miễn phí ship khi mua kèm máy tính Casio",
     "image": "assets/images/products/combo-accessories.svg",
-    "tags": ["phukien", "combo", "baoda"]
+    "tags": [
+      "phukien",
+      "combo",
+      "baoda"
+    ],
+    "condition_percent": 100,
+    "lid": null,
+    "seals": null,
+    "classification": "Phụ kiện"
   },
   {
     "id": "combo-luoi-hoc-chinh-phuc-9",
@@ -189,6 +249,17 @@
     ],
     "gift": "Miễn Phí Ship + Tặng Thước Parabol & Bút Chì 2B",
     "image": "assets/images/products/casio-880btg.jpg",
-    "tags": ["fx-880", "combo", "likenew", "thpt", "dgnl", "sgkmoi"]
+    "tags": [
+      "fx-880",
+      "combo",
+      "likenew",
+      "thpt",
+      "dgnl",
+      "sgkmoi"
+    ],
+    "condition_percent": 99,
+    "lid": null,
+    "seals": null,
+    "classification": null
   }
 ]
