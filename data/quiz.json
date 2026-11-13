@@ -1,0 +1,108 @@
+{
+  "testId": "casio-math-01",
+  "title": "Bài Kiểm Tra Kỹ Năng Bấm Máy Tính Casio & Toán Trọng Tâm",
+  "subject": "Môn Toán & Kỹ năng Casio (fx-580VN X, fx-880BTG)",
+  "grade": "Khối 10 – 12 & Ôn Thi Tốt Nghiệp THPT",
+  "durationMinutes": 15,
+  "badge": "Bài kiểm tra mẫu",
+  "description": "Đề luyện tập tổng hợp các kỹ thuật bấm máy giải nhanh phương trình, số phức, hình học Oxyz, bảng tính thống kê và đạo hàm / tích phân. Đề tự động xáo trộn câu hỏi và các đáp án A/B/C/D mỗi lần làm lại.",
+  "note": "Đây là bài kiểm tra mẫu dành cho học sinh rèn luyện kỹ năng bấm máy Casio. Dữ liệu câu hỏi được lưu trong file data/quiz.json, dễ dàng bổ sung đề thi mới mà không cần sửa code web.",
+  "questions": [
+    {
+      "id": "q1",
+      "topic": "Phương trình bậc 3",
+      "question": "[Câu mẫu] Sử dụng máy tính Casio fx-580VN X, tìm nghiệm lớn nhất của phương trình: 2x³ - 5x² + x + 2 = 0",
+      "options": [
+        { "id": "q1_opt1", "text": "x = 2", "isCorrect": true },
+        { "id": "q1_opt2", "text": "x = 1", "isCorrect": false },
+        { "id": "q1_opt3", "text": "x = -0.5", "isCorrect": false },
+        { "id": "q1_opt4", "text": "x = 3", "isCorrect": false }
+      ],
+      "explain": "Thao tác trên fx-580VN X: Bấm [MENU] -> [9] (Equation/Func) -> [2] (Polynomial) -> [3] (Bậc 3). Nhập hệ số: [2] [=] [-5] [=] [1] [=] [2] [=]. Máy hiển thị lần lượt 3 nghiệm thực: x₁ = 2, x₂ = 1, x₃ = -0.5. Nghiệm lớn nhất là x = 2."
+    },
+    {
+      "id": "q2",
+      "topic": "Số Phức",
+      "question": "[Câu mẫu] Cho số phức z = (3 - 2i)(1 + 4i). Số phức liên hợp z̄ có giá trị bằng:",
+      "options": [
+        { "id": "q2_opt1", "text": "11 - 10i", "isCorrect": true },
+        { "id": "q2_opt2", "text": "11 + 10i", "isCorrect": false },
+        { "id": "q2_opt3", "text": "-11 + 10i", "isCorrect": false },
+        { "id": "q2_opt4", "text": "11 + 2i", "isCorrect": false }
+      ],
+      "explain": "Thao tác trên fx-580VN X: Vào chế độ số phức: [MENU] -> [2] (Complex). Nhập: (3 - 2i)(1 + 4i) [=], máy cho kết quả z = 11 + 10i. Số phức liên hợp z̄ đổi dấu phần ảo thành 11 - 10i (hoặc bấm [OPTN] -> [2] (Conjg) để máy tính trực tiếp)."
+    },
+    {
+      "id": "q3",
+      "topic": "Bảng tính fx-880BTG",
+      "question": "[Câu mẫu] Bảng tính (Spreadsheet) trên dòng máy Casio fx-880BTG có thể lưu trữ tối đa bao nhiêu dòng và cột dữ liệu?",
+      "options": [
+        { "id": "q3_opt1", "text": "45 dòng và 5 cột (từ cột A đến E, 225 ô)", "isCorrect": true },
+        { "id": "q3_opt2", "text": "30 dòng và 4 cột (từ cột A đến D, 120 ô)", "isCorrect": false },
+        { "id": "q3_opt3", "text": "50 dòng và 6 cột (từ cột A đến F, 300 ô)", "isCorrect": false },
+        { "id": "q3_opt4", "text": "25 dòng và 3 cột (từ cột A đến C, 75 ô)", "isCorrect": false }
+      ],
+      "explain": "Tính năng Bảng tính Spreadsheet trên dòng máy Casio fx-880BTG hỗ trợ ma trận dữ liệu tối đa 45 dòng (hàng 1 đến 45) và 5 cột (cột A đến E), đủ để tính toán thống kê, lãi suất kép và dãy số truy hồi."
+    },
+    {
+      "id": "q4",
+      "topic": "Hình học Oxyz & Vector",
+      "question": "[Câu mẫu] Trong không gian Oxyz, cho hai vectơ u = (1, 2, -1) và v = (2, 0, 1). Tọa độ của vectơ tích có hướng [u, v] là:",
+      "options": [
+        { "id": "q4_opt1", "text": "(2, -3, -4)", "isCorrect": true },
+        { "id": "q4_opt2", "text": "(-2, 3, 4)", "isCorrect": false },
+        { "id": "q4_opt3", "text": "(2, 3, -4)", "isCorrect": false },
+        { "id": "q4_opt4", "text": "(1, -2, 3)", "isCorrect": false }
+      ],
+      "explain": "Thao tác trên fx-580VN X: [MENU] -> [5] (Vector) -> Định nghĩa VctA kích thước 3 nhập (1, 2, -1) -> [OPTN] -> [1] định nghĩa VctB kích thước 3 nhập (2, 0, 1). Bấm [AC] -> [OPTN] [3] (VctA) [×] [OPTN] [4] (VctB) [=], kết quả hiển thị (2, -3, -4)."
+    },
+    {
+      "id": "q5",
+      "topic": "Đạo hàm tại 1 điểm",
+      "question": "[Câu mẫu] Cho hàm số f(x) = (2x - 1) / (x + 1). Sử dụng máy tính Casio, giá trị đạo hàm f'(1) bằng:",
+      "options": [
+        { "id": "q5_opt1", "text": "0.75 (hoặc 3/4)", "isCorrect": true },
+        { "id": "q5_opt2", "text": "0.5 (hoặc 1/2)", "isCorrect": false },
+        { "id": "q5_opt3", "text": "1.25 (hoặc 5/4)", "isCorrect": false },
+        { "id": "q5_opt4", "text": "-0.75 (hoặc -3/4)", "isCorrect": false }
+      ],
+      "explain": "Thao tác trên fx-580VN X: Bấm [SHIFT] [∫] để gọi hàm tính đạo hàm d/dx. Nhập biểu thức: (2x - 1)/(x + 1), nhập vị trí x = 1, bấm [=]. Máy hiển thị ngay kết quả 0.75 = 3/4."
+    },
+    {
+      "id": "q6",
+      "topic": "Bất phương trình bậc 2",
+      "question": "[Câu mẫu] Tập nghiệm của bất phương trình -x² + 5x - 6 > 0 là khoảng nào sau đây?",
+      "options": [
+        { "id": "q6_opt1", "text": "(2; 3)", "isCorrect": true },
+        { "id": "q6_opt2", "text": "(-∞; 2) ∪ (3; +∞)", "isCorrect": false },
+        { "id": "q6_opt3", "text": "[-3; -2]", "isCorrect": false },
+        { "id": "q6_opt4", "text": "(1; 6)", "isCorrect": false }
+      ],
+      "explain": "Thao tác trên fx-580VN X: Bấm [MENU] -> [A] (Inequality) -> [2] (Bậc 2) -> Chọn dạng [1] (ax² + bx + c > 0). Nhập hệ số [-1] [=] [5] [=] [-6] [=]. Máy hiển thị ngay tập nghiệm: 2 < x < 3, tức khoảng (2; 3)."
+    },
+    {
+      "id": "q7",
+      "topic": "Giá trị lớn nhất (TABLE)",
+      "question": "[Câu mẫu] Sử dụng chức năng Table (Bảng giá trị) trên Casio, giá trị lớn nhất M của hàm số y = -x³ + 3x + 1 trên đoạn [0; 2] bằng:",
+      "options": [
+        { "id": "q7_opt1", "text": "M = 3", "isCorrect": true },
+        { "id": "q7_opt2", "text": "M = 1", "isCorrect": false },
+        { "id": "q7_opt3", "text": "M = 5", "isCorrect": false },
+        { "id": "q7_opt4", "text": "M = -1", "isCorrect": false }
+      ],
+      "explain": "Thao tác trên fx-580VN X: [MENU] -> [8] (Table). Nhập hàm f(x) = -x³ + 3x + 1 -> Bấm [=]. Start: [0], End: [2], Step: [0.2]. Cuộn xem cột f(x), giá trị lớn nhất đạt được là 3 tại x = 1."
+    },
+    {
+      "id": "q8",
+      "topic": "Tích phân xác định",
+      "question": "[Câu mẫu] Tính giá trị của tích phân I = ∫₁² (2x + 1/x) dx bằng máy tính Casio fx-580VN X:",
+      "options": [
+        { "id": "q8_opt1", "text": "≈ 3.693 (chính xác là 3 + ln 2)", "isCorrect": true },
+        { "id": "q8_opt2", "text": "≈ 2.386 (chính xác là 2 + ln 2)", "isCorrect": false },
+        { "id": "q8_opt3", "text": "≈ 4.693 (chính xác là 4 + ln 2)", "isCorrect": false },
+        { "id": "q8_opt4", "text": "≈ 3.000", "isCorrect": false }
+      ],
+      "explain": "Thao tác trên fx-580VN X: Bấm phím [∫] -> Nhập biểu thức (2x + 1/x) -> Nhập cận dưới 1, cận trên 2 -> Bấm [=]. Máy tính trả về kết quả số thập phân 3.693147181... (nguyên hàm là x² + ln|x|, thay cận 2 và 1 được 3 + ln 2)."
+    }
+  ]
+}

@@ -1773,60 +1773,116 @@ const DEFAULT_STUDY_DOCS = [
   }
 ];
 
-const DEFAULT_STUDY_QUIZ = [
-  {
-    id: "q1",
-    topic: "Phương trình & Hệ PT",
-    question: "[Câu mẫu] Sử dụng máy tính Casio, nghiệm lớn nhất của phương trình 2x³ - 5x² + x + 2 = 0 là:",
-    options: [
-      "x = 2",
-      "x = 1",
-      "x = -0.5",
-      "x = 3"
-    ],
-    correct: 0,
-    explain: "Thao tác trên fx-580VN X: Bấm [MENU] -> [9] (Phương trình) -> [2] (Đa thức) -> [3] (Bậc 3). Nhập các hệ số: [2] [=] [-5] [=] [1] [=] [2] [=]. Máy cho 3 nghiệm: x₁ = 2, x₂ = 1, x₃ = -0.5. Nghiệm lớn nhất là x = 2."
-  },
-  {
-    id: "q2",
-    topic: "Số Phức",
-    question: "[Câu mẫu] Cho số phức z = (3 - 2i)(1 + 4i). Số phức liên hợp z̄ có giá trị bằng:",
-    options: [
-      "11 + 10i",
-      "11 - 10i",
-      "-11 + 10i",
-      "11 + 2i"
-    ],
-    correct: 1,
-    explain: "Thao tác: Vào chế độ số phức: [MENU] -> [2] (Complex). Nhập biểu thức: (3 - 2i)(1 + 4i) [=], máy hiển thị 11 + 10i. Số phức liên hợp z̄ đổi dấu phần ảo thành 11 - 10i (hoặc bấm [OPTN] -> [2] (Conjg) để máy tự lấy liên hợp)."
-  },
-  {
-    id: "q3",
-    topic: "Thống kê SGK Mới",
-    question: "[Câu mẫu] Bảng tính Spreadsheet trên dòng máy Casio fx-880BTG có thể lưu trữ tối đa bao nhiêu dòng và cột?",
-    options: [
-      "45 dòng và 5 cột (A đến E)",
-      "30 dòng và 4 cột (A đến D)",
-      "50 dòng và 6 cột (A đến F)",
-      "25 dòng và 3 cột (A đến C)"
-    ],
-    correct: 0,
-    explain: "Tính năng Spreadsheet trên fx-880BTG hỗ trợ ma trận dữ liệu tối đa 45 dòng (hàng 1 đến 45) và 5 cột (từ cột A đến cột E), đủ để giải quyết toàn bộ bài toán bảng tính thống kê, dãy số và lãi kép."
-  },
-  {
-    id: "q4",
-    topic: "Vector Oxyz",
-    question: "[Câu mẫu] Trong không gian Oxyz, cho hai vectơ u = (1, 2, -1) và v = (2, 0, 1). Tọa độ tích có hướng [u, v] là:",
-    options: [
-      "(2, -3, -4)",
-      "(-2, 3, 4)",
-      "(2, 3, -4)",
-      "(1, -2, 3)"
-    ],
-    correct: 0,
-    explain: "Thao tác: [MENU] -> [5] (Vector) -> Tạo VctA kích thước 3 nhập (1, 2, -1) -> [OPTN] -> [1] tạo VctB nhập (2, 0, 1). Bấm [AC] -> [OPTN] [3] (VctA) [×] [OPTN] [4] (VctB) [=], kết quả trả về vectơ (2, -3, -4)."
-  }
-];
+const DEFAULT_QUIZ_DATA = {
+  testId: "casio-math-01",
+  title: "Bài Kiểm Tra Kỹ Năng Bấm Máy Tính Casio & Toán Trọng Tâm",
+  subject: "Môn Toán & Kỹ năng Casio (fx-580VN X, fx-880BTG)",
+  grade: "Khối 10 – 12 & Ôn Thi Tốt Nghiệp THPT",
+  durationMinutes: 15,
+  badge: "Bài kiểm tra mẫu",
+  description: "Đề luyện tập tổng hợp các kỹ thuật bấm máy giải nhanh phương trình, số phức, hình học Oxyz, bảng tính thống kê và đạo hàm / tích phân. Đề tự động xáo trộn câu hỏi và các đáp án A/B/C/D mỗi lần làm lại.",
+  note: "Đây là bài kiểm tra mẫu dành cho học sinh rèn luyện kỹ năng bấm máy Casio. Dữ liệu câu hỏi được lưu trong file data/quiz.json, dễ dàng bổ sung đề thi mới mà không cần sửa code web.",
+  questions: [
+    {
+      id: "q1",
+      topic: "Phương trình bậc 3",
+      question: "[Câu mẫu] Sử dụng máy tính Casio fx-580VN X, tìm nghiệm lớn nhất của phương trình: 2x³ - 5x² + x + 2 = 0",
+      options: [
+        { id: "q1_opt1", text: "x = 2", isCorrect: true },
+        { id: "q1_opt2", text: "x = 1", isCorrect: false },
+        { id: "q1_opt3", text: "x = -0.5", isCorrect: false },
+        { id: "q1_opt4", text: "x = 3", isCorrect: false }
+      ],
+      explain: "Thao tác trên fx-580VN X: Bấm [MENU] -> [9] (Equation/Func) -> [2] (Polynomial) -> [3] (Bậc 3). Nhập hệ số: [2] [=] [-5] [=] [1] [=] [2] [=]. Máy hiển thị lần lượt 3 nghiệm thực: x₁ = 2, x₂ = 1, x₃ = -0.5. Nghiệm lớn nhất là x = 2."
+    },
+    {
+      id: "q2",
+      topic: "Số Phức",
+      question: "[Câu mẫu] Cho số phức z = (3 - 2i)(1 + 4i). Số phức liên hợp z̄ có giá trị bằng:",
+      options: [
+        { id: "q2_opt1", text: "11 - 10i", isCorrect: true },
+        { id: "q2_opt2", text: "11 + 10i", isCorrect: false },
+        { id: "q2_opt3", text: "-11 + 10i", isCorrect: false },
+        { id: "q2_opt4", text: "11 + 2i", isCorrect: false }
+      ],
+      explain: "Thao tác trên fx-580VN X: Vào chế độ số phức: [MENU] -> [2] (Complex). Nhập: (3 - 2i)(1 + 4i) [=], máy cho kết quả z = 11 + 10i. Số phức liên hợp z̄ đổi dấu phần ảo thành 11 - 10i (hoặc bấm [OPTN] -> [2] (Conjg) để máy tính trực tiếp)."
+    },
+    {
+      id: "q3",
+      topic: "Bảng tính fx-880BTG",
+      question: "[Câu mẫu] Bảng tính (Spreadsheet) trên dòng máy Casio fx-880BTG có thể lưu trữ tối đa bao nhiêu dòng và cột dữ liệu?",
+      options: [
+        { id: "q3_opt1", text: "45 dòng và 5 cột (từ cột A đến E, 225 ô)", isCorrect: true },
+        { id: "q3_opt2", text: "30 dòng và 4 cột (từ cột A đến D, 120 ô)", isCorrect: false },
+        { id: "q3_opt3", text: "50 dòng và 6 cột (từ cột A đến F, 300 ô)", isCorrect: false },
+        { id: "q3_opt4", text: "25 dòng và 3 cột (từ cột A đến C, 75 ô)", isCorrect: false }
+      ],
+      explain: "Tính năng Bảng tính Spreadsheet trên dòng máy Casio fx-880BTG hỗ trợ ma trận dữ liệu tối đa 45 dòng (hàng 1 đến 45) và 5 cột (cột A đến E), đủ để tính toán thống kê, lãi suất kép và dãy số truy hồi."
+    },
+    {
+      id: "q4",
+      topic: "Hình học Oxyz & Vector",
+      question: "[Câu mẫu] Trong không gian Oxyz, cho hai vectơ u = (1, 2, -1) và v = (2, 0, 1). Tọa độ của vectơ tích có hướng [u, v] là:",
+      options: [
+        { id: "q4_opt1", text: "(2, -3, -4)", isCorrect: true },
+        { id: "q4_opt2", text: "(-2, 3, 4)", isCorrect: false },
+        { id: "q4_opt3", text: "(2, 3, -4)", isCorrect: false },
+        { id: "q4_opt4", text: "(1, -2, 3)", isCorrect: false }
+      ],
+      explain: "Thao tác trên fx-580VN X: [MENU] -> [5] (Vector) -> Định nghĩa VctA kích thước 3 nhập (1, 2, -1) -> [OPTN] -> [1] định nghĩa VctB kích thước 3 nhập (2, 0, 1). Bấm [AC] -> [OPTN] [3] (VctA) [×] [OPTN] [4] (VctB) [=], kết quả hiển thị (2, -3, -4)."
+    },
+    {
+      id: "q5",
+      topic: "Đạo hàm tại 1 điểm",
+      question: "[Câu mẫu] Cho hàm số f(x) = (2x - 1) / (x + 1). Sử dụng máy tính Casio, giá trị đạo hàm f'(1) bằng:",
+      options: [
+        { id: "q5_opt1", text: "0.75 (hoặc 3/4)", isCorrect: true },
+        { id: "q5_opt2", text: "0.5 (hoặc 1/2)", isCorrect: false },
+        { id: "q5_opt3", text: "1.25 (hoặc 5/4)", isCorrect: false },
+        { id: "q5_opt4", text: "-0.75 (hoặc -3/4)", isCorrect: false }
+      ],
+      explain: "Thao tác trên fx-580VN X: Bấm [SHIFT] [∫] để gọi hàm tính đạo hàm d/dx. Nhập biểu thức: (2x - 1)/(x + 1), nhập vị trí x = 1, bấm [=]. Máy hiển thị ngay kết quả 0.75 = 3/4."
+    },
+    {
+      id: "q6",
+      topic: "Bất phương trình bậc 2",
+      question: "[Câu mẫu] Tập nghiệm của bất phương trình -x² + 5x - 6 > 0 là khoảng nào sau đây?",
+      options: [
+        { id: "q6_opt1", text: "(2; 3)", isCorrect: true },
+        { id: "q6_opt2", text: "(-∞; 2) ∪ (3; +∞)", isCorrect: false },
+        { id: "q6_opt3", text: "[-3; -2]", isCorrect: false },
+        { id: "q6_opt4", text: "(1; 6)", isCorrect: false }
+      ],
+      explain: "Thao tác trên fx-580VN X: Bấm [MENU] -> [A] (Inequality) -> [2] (Bậc 2) -> Chọn dạng [1] (ax² + bx + c > 0). Nhập hệ số [-1] [=] [5] [=] [-6] [=]. Máy hiển thị ngay tập nghiệm: 2 < x < 3, tức khoảng (2; 3)."
+    },
+    {
+      id: "q7",
+      topic: "Giá trị lớn nhất (TABLE)",
+      question: "[Câu mẫu] Sử dụng chức năng Table (Bảng giá trị) trên Casio, giá trị lớn nhất M của hàm số y = -x³ + 3x + 1 trên đoạn [0; 2] bằng:",
+      options: [
+        { id: "q7_opt1", text: "M = 3", isCorrect: true },
+        { id: "q7_opt2", text: "M = 1", isCorrect: false },
+        { id: "q7_opt3", text: "M = 5", isCorrect: false },
+        { id: "q7_opt4", text: "M = -1", isCorrect: false }
+      ],
+      explain: "Thao tác trên fx-580VN X: [MENU] -> [8] (Table). Nhập hàm f(x) = -x³ + 3x + 1 -> Bấm [=]. Start: [0], End: [2], Step: [0.2]. Cuộn xem cột f(x), giá trị lớn nhất đạt được là 3 tại x = 1."
+    },
+    {
+      id: "q8",
+      topic: "Tích phân xác định",
+      question: "[Câu mẫu] Tính giá trị của tích phân I = ∫₁² (2x + 1/x) dx bằng máy tính Casio fx-580VN X:",
+      options: [
+        { id: "q8_opt1", text: "≈ 3.693 (chính xác là 3 + ln 2)", isCorrect: true },
+        { id: "q8_opt2", text: "≈ 2.386 (chính xác là 2 + ln 2)", isCorrect: false },
+        { id: "q8_opt3", text: "≈ 4.693 (chính xác là 4 + ln 2)", isCorrect: false },
+        { id: "q8_opt4", text: "≈ 3.000", isCorrect: false }
+      ],
+      explain: "Thao tác trên fx-580VN X: Bấm phím [∫] -> Nhập biểu thức (2x + 1/x) -> Nhập cận dưới 1, cận trên 2 -> Bấm [=]. Máy tính trả về kết quả số thập phân 3.693147181... (nguyên hàm là x² + ln|x|, thay cận 2 và 1 được 3 + ln 2)."
+    }
+  ]
+};
+
+const DEFAULT_STUDY_QUIZ = DEFAULT_QUIZ_DATA.questions;
 
 const DEFAULT_SAMPLE_REMINDERS = [
   {
@@ -2303,84 +2359,335 @@ function downloadStudyDoc(docId) {
 }
 
 // ----------------------------------------------------
-// 2. BÀI TẬP ÔN TẬP BẤM MÁY
+// 2. BÀI TẬP ÔN TẬP BẤM MÁY & BÀI KIỂM TRA (EXAM ENGINE)
 // ----------------------------------------------------
-function renderStudyQuiz() {
+
+let examState = {
+  meta: { ...DEFAULT_QUIZ_DATA },
+  rawQuestions: [...DEFAULT_QUIZ_DATA.questions],
+  currentQuestions: [],
+  answers: {},
+  submitted: false,
+  score10: "0.0",
+  correctCount: 0,
+  totalCount: 0,
+  timeRemainingSec: 15 * 60,
+  timerInterval: null,
+  history: []
+};
+
+// Utility: Fisher-Yates shuffle
+function shuffleArray(array) {
+  const arr = [...array];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+// Format seconds into MM:SS
+function formatExamTime(sec) {
+  const m = Math.floor(sec / 60).toString().padStart(2, '0');
+  const s = (sec % 60).toString().padStart(2, '0');
+  return `${m}:${s}`;
+}
+
+// Load exam data from API / data/quiz.json / fallback
+async function loadExamData() {
+  try {
+    const res = await fetch('/api/quiz');
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.questions && data.questions.length > 0) {
+        examState.meta = data;
+        examState.rawQuestions = data.questions;
+      }
+    } else {
+      const resStatic = await fetch('data/quiz.json');
+      if (resStatic.ok) {
+        const dataStatic = await resStatic.json();
+        if (dataStatic && dataStatic.questions && dataStatic.questions.length > 0) {
+          examState.meta = dataStatic;
+          examState.rawQuestions = dataStatic.questions;
+        }
+      }
+    }
+  } catch (err) {
+    console.warn("Could not fetch quiz.json, using DEFAULT_QUIZ_DATA fallback", err);
+  }
+
+  loadExamHistory();
+  initExamSession(true); // default shuffle questions & options
+}
+
+// Load & Save History in localStorage
+function loadExamHistory() {
+  try {
+    const raw = localStorage.getItem('abtn_quiz_history');
+    examState.history = raw ? JSON.parse(raw) : [];
+  } catch (_) {
+    examState.history = [];
+  }
+  updateExamHistoryBadge();
+}
+
+function saveExamHistory() {
+  try {
+    localStorage.setItem('abtn_quiz_history', JSON.stringify(examState.history));
+  } catch (_) {}
+  updateExamHistoryBadge();
+}
+
+function updateExamHistoryBadge() {
+  const badge = document.getElementById('exam-history-count-badge');
+  if (badge) {
+    badge.textContent = examState.history.length;
+  }
+}
+
+// Initialize Exam Session
+function initExamSession(shouldShuffle = true) {
+  // Clear any existing timer
+  if (examState.timerInterval) {
+    clearInterval(examState.timerInterval);
+    examState.timerInterval = null;
+  }
+
+  // Deep clone and shuffle
+  if (shouldShuffle) {
+    examState.currentQuestions = shuffleArray(examState.rawQuestions).map(q => ({
+      ...q,
+      options: shuffleArray(q.options)
+    }));
+  } else {
+    examState.currentQuestions = examState.rawQuestions.map(q => ({
+      ...q,
+      options: [...q.options]
+    }));
+  }
+
+  examState.answers = {};
+  examState.submitted = false;
+  examState.score10 = "0.0";
+  examState.correctCount = 0;
+  examState.totalCount = examState.currentQuestions.length;
+
+  const durationMin = (examState.meta && examState.meta.durationMinutes) || 15;
+  examState.timeRemainingSec = durationMin * 60;
+
+  startExamTimer();
+
+  renderExamHeader();
+  renderExamProgress();
+  renderExamQuestions();
+
+  const resultBanner = document.getElementById('exam-result-banner');
+  if (resultBanner) resultBanner.classList.add('hidden');
+}
+
+// Timer Functions
+function startExamTimer() {
+  if (examState.timerInterval) clearInterval(examState.timerInterval);
+  updateTimerDisplay();
+
+  examState.timerInterval = setInterval(() => {
+    if (examState.submitted) {
+      clearInterval(examState.timerInterval);
+      return;
+    }
+
+    examState.timeRemainingSec--;
+    updateTimerDisplay();
+
+    if (examState.timeRemainingSec <= 0) {
+      clearInterval(examState.timerInterval);
+      submitExam(true); // Auto-submit when time is up!
+    }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const display = document.getElementById('exam-timer-display');
+  const timerBox = document.getElementById('exam-timer-box');
+  if (!display) return;
+
+  display.textContent = formatExamTime(Math.max(0, examState.timeRemainingSec));
+
+  if (examState.timeRemainingSec <= 120 && examState.timeRemainingSec > 0) {
+    display.classList.remove('text-amber-300');
+    display.classList.add('text-rose-400');
+    if (timerBox) timerBox.classList.add('border-rose-500/80', 'animate-pulse');
+  } else {
+    display.classList.remove('text-rose-400');
+    display.classList.add('text-amber-300');
+    if (timerBox) timerBox.classList.remove('border-rose-500/80', 'animate-pulse');
+  }
+}
+
+// Render Header Info
+function renderExamHeader() {
+  const titleEl = document.getElementById('exam-title-text');
+  const descEl = document.getElementById('exam-desc-text');
+  const subjEl = document.getElementById('exam-subject-badge');
+  const gradeEl = document.getElementById('exam-grade-badge');
+  const badgeEl = document.getElementById('exam-badge-tag');
+
+  if (titleEl && examState.meta && examState.meta.title) titleEl.textContent = examState.meta.title;
+  if (descEl && examState.meta && examState.meta.description) descEl.textContent = examState.meta.description;
+  if (subjEl && examState.meta && examState.meta.subject) subjEl.textContent = examState.meta.subject;
+  if (gradeEl && examState.meta && examState.meta.grade) gradeEl.textContent = examState.meta.grade;
+  if (badgeEl && examState.meta && examState.meta.badge) badgeEl.textContent = examState.meta.badge;
+}
+
+// Render Progress and Fast Navigation Jump Pills
+function renderExamProgress() {
+  const total = examState.currentQuestions.length;
+  const answeredCount = Object.keys(examState.answers).length;
+  const percent = total > 0 ? Math.round((answeredCount / total) * 100) : 0;
+
+  const bar = document.getElementById('exam-progress-bar');
+  const text = document.getElementById('exam-progress-text');
+  if (bar) bar.style.width = `${percent}%`;
+  if (text) text.textContent = `${answeredCount}/${total} câu (${percent}%)`;
+
+  const pillsContainer = document.getElementById('exam-nav-pills');
+  if (!pillsContainer) return;
+
+  pillsContainer.innerHTML = examState.currentQuestions.map((q, idx) => {
+    const isAnswered = examState.answers[q.id] !== undefined;
+    let pillStyle = "bg-slate-100 text-slate-600 hover:bg-slate-200";
+
+    if (examState.submitted) {
+      const userOptId = examState.answers[q.id];
+      const userOpt = q.options.find(o => o.id === userOptId);
+      const isCorrect = userOpt && userOpt.isCorrect === true;
+      pillStyle = isCorrect ? "bg-emerald-600 text-white font-black" : "bg-rose-500 text-white font-black";
+    } else if (isAnswered) {
+      pillStyle = "bg-blue-600 text-white font-black shadow-sm";
+    }
+
+    return `
+      <button 
+        type="button" 
+        onclick="scrollToExamQuestion(${idx})"
+        class="w-7 h-7 rounded-xl text-xs flex items-center justify-center transition active:scale-95 ${pillStyle}"
+        title="Câu ${idx + 1}: ${isAnswered ? 'Đã chọn' : 'Chưa làm'}"
+      >
+        ${idx + 1}
+      </button>
+    `;
+  }).join('');
+}
+
+function scrollToExamQuestion(idx) {
+  const el = document.getElementById(`exam-q-${idx}`);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    el.classList.add('ring-2', 'ring-blue-500');
+    setTimeout(() => el.classList.remove('ring-2', 'ring-blue-500'), 1200);
+  }
+}
+
+// Render Questions List
+function renderExamQuestions() {
   const container = document.getElementById('study-quiz-list');
   if (!container) return;
 
-  container.innerHTML = DEFAULT_STUDY_QUIZ.map((q, qIdx) => {
-    const selected = studyHubState.quizAnswers[qIdx];
-    const isAnswered = selected !== undefined;
-    const isCorrect = selected === q.correct;
+  const letters = ['A', 'B', 'C', 'D', 'E'];
+
+  container.innerHTML = examState.currentQuestions.map((q, qIdx) => {
+    const selectedOptId = examState.answers[q.id];
+    const isAnswered = selectedOptId !== undefined;
+    const isSubmitted = examState.submitted;
+
+    let isCorrectAnswer = false;
+    if (isSubmitted) {
+      const userOpt = q.options.find(o => o.id === selectedOptId);
+      isCorrectAnswer = userOpt && userOpt.isCorrect === true;
+    }
 
     return `
-      <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/90 shadow-sm transition">
-        <div class="flex items-center justify-between gap-2 mb-2">
-          <div class="flex items-center gap-2">
-            <span class="w-6 h-6 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center text-xs font-extrabold">
+      <div id="exam-q-${qIdx}" class="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200/90 shadow-sm transition">
+        <!-- Question Header -->
+        <div class="flex items-center justify-between gap-3 mb-3">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="w-7 h-7 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center text-xs font-black shrink-0">
               ${qIdx + 1}
             </span>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-700">
-              ${q.topic}
+            <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-lg bg-slate-100 text-slate-700">
+              ${q.topic || 'Toán học'}
             </span>
             <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-50 text-amber-700 border border-amber-200">
               Câu mẫu
             </span>
           </div>
 
-          ${isAnswered ? `
-            <span class="text-xs font-bold ${isCorrect ? 'text-emerald-600' : 'text-rose-600'} flex items-center gap-1">
-              <i class="fa-solid ${isCorrect ? 'fa-circle-check' : 'fa-circle-xmark'}"></i>
-              ${isCorrect ? 'Chính xác' : 'Chưa đúng'}
+          ${isSubmitted ? `
+            <span class="text-xs font-bold ${isCorrectAnswer ? 'text-emerald-600 bg-emerald-50 border border-emerald-200' : 'text-rose-600 bg-rose-50 border border-rose-200'} px-2.5 py-1 rounded-xl flex items-center gap-1.5 shrink-0">
+              <i class="fa-solid ${isCorrectAnswer ? 'fa-circle-check' : 'fa-circle-xmark'}"></i>
+              <span>${isCorrectAnswer ? 'Đúng (+1.25đ)' : 'Chưa đúng'}</span>
             </span>
-          ` : ''}
+          ` : `
+            <span class="text-[11px] font-bold ${isAnswered ? 'text-blue-600' : 'text-slate-400'} flex items-center gap-1">
+              <i class="fa-solid ${isAnswered ? 'fa-circle-check' : 'fa-circle-dot'}"></i>
+              <span class="hidden sm:inline">${isAnswered ? 'Đã chọn' : 'Chưa chọn'}</span>
+            </span>
+          `}
         </div>
 
-        <h4 class="text-sm font-bold text-slate-900 mb-3 leading-snug">
+        <!-- Question Prompt -->
+        <h4 class="text-sm sm:text-base font-extrabold text-slate-900 mb-4 leading-relaxed">
           ${q.question}
         </h4>
 
-        <!-- Options -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
+        <!-- Options Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-4">
           ${q.options.map((opt, optIdx) => {
-            const isThisSelected = selected === optIdx;
-            let optClass = 'bg-slate-50 hover:bg-blue-50/70 border-slate-200 text-slate-700';
-            
-            if (isAnswered) {
-              if (optIdx === q.correct) {
-                optClass = 'bg-emerald-50 border-emerald-400 text-emerald-900 font-bold';
-              } else if (isThisSelected) {
-                optClass = 'bg-rose-50 border-rose-300 text-rose-800 font-bold line-through';
+            const isThisSelected = selectedOptId === opt.id;
+            const letter = letters[optIdx] || '?';
+
+            let btnStyle = "bg-slate-50 hover:bg-blue-50/70 border-slate-200 text-slate-800";
+            let letterStyle = isThisSelected ? "bg-blue-600 text-white font-bold" : "bg-white text-slate-600 border border-slate-200";
+
+            if (isSubmitted) {
+              if (opt.isCorrect) {
+                btnStyle = "bg-emerald-50 border-emerald-500 text-emerald-950 font-bold ring-1 ring-emerald-500";
+                letterStyle = "bg-emerald-600 text-white font-bold";
+              } else if (isThisSelected && !opt.isCorrect) {
+                btnStyle = "bg-rose-50 border-rose-400 text-rose-900 font-bold line-through";
+                letterStyle = "bg-rose-600 text-white font-bold";
               } else {
-                optClass = 'bg-slate-50 border-slate-200 text-slate-400 opacity-60';
+                btnStyle = "bg-slate-50 border-slate-200 text-slate-400 opacity-60";
+                letterStyle = "bg-slate-100 text-slate-400 border border-slate-200";
               }
+            } else if (isThisSelected) {
+              btnStyle = "bg-blue-50 border-blue-600 text-blue-950 font-bold shadow-sm ring-1 ring-blue-600";
             }
 
-            const prefix = ['A', 'B', 'C', 'D'][optIdx];
-
             return `
-              <button 
-                type="button" 
-                onclick="selectQuizOption(${qIdx}, ${optIdx})"
-                class="text-left p-2.5 rounded-xl border text-xs transition flex items-center gap-2.5 ${optClass}"
+              <button
+                type="button"
+                onclick="selectExamAnswer('${q.id}', '${opt.id}')"
+                class="text-left p-3.5 rounded-2xl border text-xs sm:text-sm transition flex items-center gap-3 active:scale-[0.99] ${btnStyle}"
               >
-                <span class="w-5 h-5 rounded-md ${isThisSelected ? 'bg-blue-600 text-white font-bold' : 'bg-white text-slate-600 border border-slate-200'} flex items-center justify-center text-[10px] shrink-0">
-                  ${prefix}
+                <span class="w-6 h-6 rounded-lg ${letterStyle} flex items-center justify-center text-xs shrink-0 transition">
+                  ${letter}
                 </span>
-                <span>${opt}</span>
+                <span class="leading-snug">${opt.text}</span>
               </button>
             `;
           }).join('')}
         </div>
 
-        <!-- Explanation (Shown once user answers) -->
-        ${isAnswered ? `
-          <div class="p-3 bg-blue-50/70 border border-blue-200 rounded-xl text-xs text-blue-950 leading-relaxed animate-fadeIn">
-            <strong class="font-bold text-blue-800 flex items-center gap-1 mb-1">
-              <i class="fa-solid fa-lightbulb text-amber-500"></i> Hướng dẫn bấm máy chi tiết:
-            </strong>
-            <p>${q.explain}</p>
+        <!-- Explanation (Shown after submit) -->
+        ${isSubmitted ? `
+          <div class="p-4 bg-blue-50/80 border border-blue-200 rounded-2xl text-xs text-blue-950 leading-relaxed animate-fadeIn">
+            <div class="font-extrabold text-blue-900 flex items-center gap-1.5 mb-1.5">
+              <i class="fa-solid fa-lightbulb text-amber-500 text-sm"></i>
+              <span>Hướng Dẫn Bấm Máy Tính Casio Chi Tiết:</span>
+            </div>
+            <p class="text-blue-900 font-medium">${q.explain}</p>
           </div>
         ` : ''}
       </div>
@@ -2388,62 +2695,255 @@ function renderStudyQuiz() {
   }).join('');
 }
 
-function selectQuizOption(qIdx, optIdx) {
-  studyHubState.quizAnswers[qIdx] = optIdx;
-  renderStudyQuiz();
+// Select Answer for a Question
+function selectExamAnswer(qId, optId) {
+  if (examState.submitted) return; // Locked once submitted
+
+  examState.answers[qId] = optId;
+  renderExamProgress();
+  renderExamQuestions();
 }
 
-function calculateQuizScore() {
-  const total = DEFAULT_STUDY_QUIZ.length;
-  let correctCount = 0;
-  let answeredCount = 0;
+// Shuffle & Restart Exam
+function shuffleAndRestartExam() {
+  initExamSession(true);
+  showToast("Đã xáo trộn thứ tự câu hỏi và đáp án A/B/C/D! Thời gian được đếm lại từ đầu.", "success");
+}
 
-  DEFAULT_STUDY_QUIZ.forEach((q, idx) => {
-    if (studyHubState.quizAnswers[idx] !== undefined) {
-      answeredCount++;
-      if (studyHubState.quizAnswers[idx] === q.correct) {
-        correctCount++;
+// Reset Current Exam Answers
+function resetCurrentExamAnswers() {
+  examState.answers = {};
+  examState.submitted = false;
+  
+  const durationMin = (examState.meta && examState.meta.durationMinutes) || 15;
+  examState.timeRemainingSec = durationMin * 60;
+  startExamTimer();
+
+  renderExamProgress();
+  renderExamQuestions();
+
+  const banner = document.getElementById('exam-result-banner');
+  if (banner) banner.classList.add('hidden');
+
+  showToast("Đã xóa các câu trả lời để làm lại đề này!", "info");
+}
+
+// Submit Exam & Grade
+function submitExam(isAuto = false) {
+  if (examState.submitted) return;
+
+  if (examState.timerInterval) {
+    clearInterval(examState.timerInterval);
+    examState.timerInterval = null;
+  }
+
+  examState.submitted = true;
+  const total = examState.currentQuestions.length;
+  let correct = 0;
+  let answered = 0;
+
+  examState.currentQuestions.forEach(q => {
+    const userOptId = examState.answers[q.id];
+    if (userOptId !== undefined) {
+      answered++;
+      const userOpt = q.options.find(o => o.id === userOptId);
+      if (userOpt && userOpt.isCorrect === true) {
+        correct++;
       }
     }
   });
 
-  const banner = document.getElementById('quiz-score-banner');
+  examState.correctCount = correct;
+  examState.totalCount = total;
+  const score = total > 0 ? ((correct / total) * 10).toFixed(1) : "0.0";
+  examState.score10 = score;
+
+  const durationMin = (examState.meta && examState.meta.durationMinutes) || 15;
+  const timeTakenSec = Math.max(0, (durationMin * 60) - examState.timeRemainingSec);
+  const timeTakenFormatted = formatExamTime(timeTakenSec);
+
+  // Save to History
+  const historyEntry = {
+    id: 'att_' + Date.now(),
+    title: (examState.meta && examState.meta.title) || "Bài Kiểm Tra Bấm Máy Casio",
+    subject: (examState.meta && examState.meta.subject) || "Toán Casio",
+    timestamp: new Date().toLocaleString('vi-VN', { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: 'numeric' }),
+    score10: score,
+    correctCount: correct,
+    totalCount: total,
+    answeredCount: answered,
+    timeTaken: timeTakenFormatted,
+    isAutoSubmitted: isAuto
+  };
+
+  examState.history.unshift(historyEntry);
+  if (examState.history.length > 25) examState.history = examState.history.slice(0, 25);
+  saveExamHistory();
+
+  // Render Result Banner & Questions
+  renderExamResultBanner(score, correct, total, answered, timeTakenFormatted, isAuto);
+  renderExamProgress();
+  renderExamQuestions();
+
+  const banner = document.getElementById('exam-result-banner');
+  if (banner) {
+    banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  if (isAuto) {
+    showToast(`Hết giờ làm bài! Hệ thống đã tự động thu bài. Điểm: ${score}/10đ`, "warning");
+  } else {
+    showToast(`Đã nộp bài thành công! Điểm của bạn: ${score}/10đ`, "success");
+  }
+}
+
+// Render Result Banner
+function renderExamResultBanner(score, correct, total, answered, timeTaken, isAuto) {
+  const banner = document.getElementById('exam-result-banner');
   if (!banner) return;
 
-  const score10 = ((correctCount / total) * 10).toFixed(1);
-  let feedback = "Hãy luyện tập thêm các mẹo bấm máy để tối ưu tốc độ cày đề nhé!";
-  if (correctCount === total) feedback = "Xuất sắc! Thao tác bấm máy và nắm kiến thức cực kỳ chuẩn xác!";
-  else if (correctCount >= total / 2) feedback = "Khá tốt! Bạn đã nắm vững các tính năng cơ bản của Casio.";
+  const numScore = parseFloat(score);
+  let badgeColor = "bg-emerald-600 text-white";
+  let evaluation = "Thao tác bấm máy xuất sắc! Bạn đã thuần thục các kỹ năng giải nhanh bằng Casio.";
+
+  if (numScore >= 8) {
+    badgeColor = "bg-emerald-600 text-white";
+    evaluation = "Rất tốt! Bạn nắm vững hầu hết các phím tắt và thao tác Casio trọng tâm.";
+  } else if (numScore >= 5) {
+    badgeColor = "bg-blue-600 text-white";
+    evaluation = "Khá ổn! Hãy xem kỹ phần hướng dẫn bấm máy bên dưới để củng cố các câu chưa đúng nhé.";
+  } else {
+    badgeColor = "bg-amber-600 text-white";
+    evaluation = "Cần luyện tập thêm! Hãy kéo xuống xem kỹ hướng dẫn từng bước bấm máy và bấm 'Xáo trộn đề' để luyện lại.";
+  }
 
   banner.innerHTML = `
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-      <div class="flex items-center gap-3">
-        <div class="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex flex-col items-center justify-center font-extrabold text-base shrink-0 shadow-sm">
-          <span>${score10}</span>
-          <span class="text-[9px] font-normal leading-none opacity-80">/10đ</span>
+    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+      <div class="flex items-center gap-4">
+        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl ${badgeColor} flex flex-col items-center justify-center font-black shadow-lg shrink-0">
+          <span class="text-2xl sm:text-3xl leading-none">${score}</span>
+          <span class="text-[10px] uppercase font-bold opacity-80 mt-0.5">/10 Điểm</span>
         </div>
         <div>
-          <h4 class="text-sm font-extrabold text-slate-900">
-            Kết quả: ${correctCount}/${total} câu đúng (${answeredCount}/${total} đã làm)
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full ${isAuto ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'}">
+              ${isAuto ? 'Hết giờ tự thu bài' : 'Đã nộp bài thành công'}
+            </span>
+            <span class="text-xs text-slate-500 font-medium">Thời gian: ${timeTaken}</span>
+          </div>
+          <h4 class="text-base sm:text-lg font-black text-slate-900 mt-1">
+            Đúng ${correct}/${total} câu • Hoàn thành ${answered}/${total} câu
           </h4>
-          <p class="text-xs text-slate-600 mt-0.5">${feedback}</p>
+          <p class="text-xs text-slate-600 mt-0.5 max-w-xl leading-relaxed">${evaluation}</p>
         </div>
       </div>
-      <button onclick="resetStudyQuiz()" class="py-2 px-3 bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 rounded-xl text-xs font-bold transition shrink-0">
-        Làm Lại Toàn Bộ
-      </button>
+
+      <!-- Action Buttons in Banner -->
+      <div class="flex items-center gap-2.5 flex-wrap shrink-0">
+        <button type="button" onclick="shuffleAndRestartExam()" class="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl text-xs font-black transition shadow-sm flex items-center gap-1.5 active:scale-95">
+          <i class="fa-solid fa-shuffle"></i>
+          <span>Xáo Trộn Đề &amp; Làm Lại</span>
+        </button>
+        <button type="button" onclick="openExamHistoryModal()" class="px-3.5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-2xl text-xs font-bold transition flex items-center gap-1.5 active:scale-95">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <span>Xem Lịch Sử Điểm</span>
+        </button>
+      </div>
     </div>
   `;
+
   banner.classList.remove('hidden');
-  banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// History Modal
+function openExamHistoryModal() {
+  renderExamHistory();
+  const modal = document.getElementById('exam-history-modal');
+  if (modal) modal.classList.remove('hidden');
+}
+
+function closeExamHistoryModal() {
+  const modal = document.getElementById('exam-history-modal');
+  if (modal) modal.classList.add('hidden');
+}
+
+function renderExamHistory() {
+  const container = document.getElementById('exam-history-list');
+  if (!container) return;
+
+  if (examState.history.length === 0) {
+    container.innerHTML = `
+      <div class="text-center py-8 text-slate-400">
+        <i class="fa-solid fa-graduation-cap text-3xl mb-2 text-slate-300"></i>
+        <p class="text-xs font-medium">Bạn chưa nộp bài kiểm tra nào.</p>
+        <p class="text-[11px] text-slate-400 mt-0.5">Làm bài và bấm "Nộp Bài" để lưu kết quả vào đây nhé!</p>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = examState.history.map((h, idx) => {
+    const numScore = parseFloat(h.score10);
+    const scoreColor = numScore >= 8 ? "bg-emerald-100 text-emerald-800" : (numScore >= 5 ? "bg-blue-100 text-blue-800" : "bg-amber-100 text-amber-800");
+
+    return `
+      <div class="p-3.5 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200/80 flex items-center justify-between gap-3 transition">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl ${scoreColor} font-black flex flex-col items-center justify-center text-sm shrink-0">
+            <span>${h.score10}</span>
+            <span class="text-[8px] opacity-75 font-normal leading-none">/10đ</span>
+          </div>
+          <div>
+            <div class="text-xs font-bold text-slate-900 line-clamp-1">${h.title}</div>
+            <div class="text-[11px] text-slate-500 flex items-center gap-2 mt-0.5">
+              <span><i class="fa-regular fa-calendar text-[10px]"></i> ${h.timestamp}</span>
+              <span>•</span>
+              <span>Đúng ${h.correctCount}/${h.totalCount} câu</span>
+              <span>•</span>
+              <span>${h.timeTaken}</span>
+            </div>
+          </div>
+        </div>
+        ${h.isAutoSubmitted ? `
+          <span class="text-[10px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200 shrink-0">Hết giờ</span>
+        ` : ''}
+      </div>
+    `;
+  }).join('');
+}
+
+function clearExamHistory() {
+  if (confirm("Bạn có chắc chắn muốn xóa toàn bộ lịch sử điểm thi trên máy này?")) {
+    examState.history = [];
+    saveExamHistory();
+    renderExamHistory();
+    showToast("Đã xóa sạch lịch sử làm bài kiểm tra!", "info");
+  }
+}
+
+// Backward Compatibility Stubs
+function renderStudyQuiz() {
+  if (!examState.currentQuestions || examState.currentQuestions.length === 0) {
+    loadExamData();
+  } else {
+    renderExamQuestions();
+    renderExamProgress();
+  }
+}
+
+function selectQuizOption(qIdx, optIdx) {
+  const q = examState.currentQuestions[qIdx];
+  if (q && q.options[optIdx]) {
+    selectExamAnswer(q.id, q.options[optIdx].id);
+  }
+}
+
+function calculateQuizScore() {
+  submitExam(false);
 }
 
 function resetStudyQuiz() {
-  studyHubState.quizAnswers = {};
-  const banner = document.getElementById('quiz-score-banner');
-  if (banner) banner.classList.add('hidden');
-  renderStudyQuiz();
-  showToast("Đã đặt lại bài tập luyện bấm máy!", "info");
+  shuffleAndRestartExam();
 }
 
 // ----------------------------------------------------
