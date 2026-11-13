@@ -429,6 +429,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   updateCartUI();
   setupEventListeners();
   initDiagnosticSimulator();
+  initStudyHub();
 
   // Async refresh from server or static JSON
   await loadShopConfig();
@@ -1659,4 +1660,1152 @@ function formatMoney(amount) {
   const num = Math.round(Number(amount));
   const formatted = Math.abs(num).toLocaleString('vi-VN');
   return num < 0 ? `-~${formatted}đ` : `~${formatted}đ`;
+}
+
+
+
+// ======================================================================
+// KHU HỌC TẬP SĨ TỬ & SINH VIÊN (STUDY HUB - 100% LOCALSTORAGE & STATIC)
+// ======================================================================
+
+const DEFAULT_STUDY_DOCS = [
+  {
+    id: "doc-toan-thpt-01",
+    title: "[Mẫu] 100 Công Thức Toán Giải Nhanh Bằng Casio fx-580VN X",
+    subject: "Toán",
+    level: "THPT",
+    pages: 24,
+    size: "1.8 MB",
+    type: "PDF",
+    badge: "Hot Sĩ Tử",
+    desc: "Mẫu — sẽ thay bằng tài liệu thật do shop biên soạn. Tổng hợp mẹo bấm phương trình, hệ 4 ẩn, cực trị và ma trận.",
+    outline: [
+      "Chuyên đề 1: Giải phương trình & Bất phương trình bậc 4",
+      "Chuyên đề 2: Kỹ thuật CALC 1000 & 0.001 cô lập tham số m",
+      "Chuyên đề 3: Bấm tích phân & Số phức liên hợp",
+      "Chuyên đề 4: Tọa độ Vector Oxyz trong 15 giây"
+    ]
+  },
+  {
+    id: "doc-toan-cap2-01",
+    title: "[Mẫu] Hướng Dẫn Bấm Máy Cơ Bản Cho Học Sinh Lớp 6–9",
+    subject: "Toán",
+    level: "THCS",
+    pages: 16,
+    size: "1.2 MB",
+    type: "PDF",
+    badge: "Cấp 2 Dễ Học",
+    desc: "Mẫu — sẽ thay bằng tài liệu thật. Rèn luyện bấm phân số, lũy thừa, căn bậc hai, tìm ƯCLN và BCNN cực chuẩn.",
+    outline: [
+      "Bài 1: Làm quen phím bấm và màn hình hiển thị tự nhiên",
+      "Bài 2: Tính toán phân số, số thập phân vô hạn tuần hoàn",
+      "Bài 3: Phân tích ra thừa số nguyên tố (phím FACT)",
+      "Bài 4: Giải phương trình bậc nhất và hệ 2 ẩn"
+    ]
+  },
+  {
+    id: "doc-ly-thpt-01",
+    title: "[Mẫu] Sổ Tay Bấm Máy Dao Động Cơ & Sóng Cơ Bằng Số Phức",
+    subject: "Vật Lý",
+    level: "THPT",
+    pages: 18,
+    size: "1.5 MB",
+    type: "PDF",
+    badge: "Bấm Nhanh 30s",
+    desc: "Mẫu — sẽ thay bằng tài liệu thật. Kỹ thuật tổng hợp dao động điều hòa cùng tần số và viết phương trình sóng.",
+    outline: [
+      "Mục 1: Chuyển đổi Mode Radian và số phức CMPLX",
+      "Mục 2: Tổng hợp 2 dao động lệch pha bất kỳ",
+      "Mục 3: Viết biểu thức điện xoay chiều u, i bằng số phức",
+      "Mục 4: Bài tập tự luyện kèm đáp số chi tiết"
+    ]
+  },
+  {
+    id: "doc-hoa-thpt-01",
+    title: "[Mẫu] Phương Pháp Bấm Hệ 4 Ẩn Trong Bài Toán Hóa Học",
+    subject: "Hóa Học",
+    level: "THPT",
+    pages: 14,
+    size: "1.1 MB",
+    type: "PDF",
+    badge: "Đột Phá Điểm",
+    desc: "Mẫu — sẽ thay bằng tài liệu thật. Ứng dụng giải hệ 4 phương trình 4 ẩn của fx-580VN X để xử lý bài toán vô cơ hỗn hợp.",
+    outline: [
+      "Dạng 1: Hệ phương trình bảo toàn electron và điện tích",
+      "Dạng 2: Bài toán hỗn hợp kim loại tác dụng HNO3 / H2SO4 đặc",
+      "Dạng 3: Bấm nhanh hệ bảo toàn khối lượng và nguyên tố",
+      "Dạng 4: Bẫy thường gặp khi nhập hệ số 0"
+    ]
+  },
+  {
+    id: "doc-daihoc-01",
+    title: "[Mẫu] Hướng Dẫn Tính Ma Trận & Định Thức Cho Sinh Viên",
+    subject: "Đại Học",
+    level: "Đại Học",
+    pages: 28,
+    size: "2.2 MB",
+    type: "PDF",
+    badge: "Toán Cao Cấp",
+    desc: "Mẫu — sẽ thay bằng tài liệu thật. Hướng dẫn sinh viên Đại học tính định thức det(A), nhân ma trận 4x4, ma trận nghịch đảo.",
+    outline: [
+      "Phần 1: Khởi tạo và lưu ma trận MatA, MatB cấp đến 4x4",
+      "Phần 2: Tính định thức Det và ma trận chuyển vị Trn",
+      "Phần 3: Tìm ma trận nghịch đảo A⁻¹ giải hệ Cramer",
+      "Phần 4: Lũy thừa ma trận và ứng dụng kinh tế"
+    ]
+  },
+  {
+    id: "doc-880-sgkmoi-01",
+    title: "[Mẫu] Cẩm Nang Khám Phá fx-880BTG: Quét Mã QR & Spreadsheet",
+    subject: "Toán",
+    level: "THPT",
+    pages: 22,
+    size: "2.5 MB",
+    type: "PDF",
+    badge: "Chuẩn SGK Mới",
+    desc: "Mẫu — sẽ thay bằng tài liệu thật. Hướng dẫn chi tiết tạo bảng tính Spreadsheet 45 dòng và quét mã QR xem đồ thị.",
+    outline: [
+      "Chương 1: Giao diện phím tròn và Menu biểu tượng mới",
+      "Chương 2: Thiết lập bảng tính Spreadsheet cho bài toán lãi suất",
+      "Chương 3: Quét QR hiển thị đồ thị và bảng biến thiên",
+      "Chương 4: Thống kê 1 biến và 2 biến theo SGK mới"
+    ]
+  }
+];
+
+const DEFAULT_STUDY_QUIZ = [
+  {
+    id: "q1",
+    topic: "Phương trình & Hệ PT",
+    question: "[Câu mẫu] Sử dụng máy tính Casio, nghiệm lớn nhất của phương trình 2x³ - 5x² + x + 2 = 0 là:",
+    options: [
+      "x = 2",
+      "x = 1",
+      "x = -0.5",
+      "x = 3"
+    ],
+    correct: 0,
+    explain: "Thao tác trên fx-580VN X: Bấm [MENU] -> [9] (Phương trình) -> [2] (Đa thức) -> [3] (Bậc 3). Nhập các hệ số: [2] [=] [-5] [=] [1] [=] [2] [=]. Máy cho 3 nghiệm: x₁ = 2, x₂ = 1, x₃ = -0.5. Nghiệm lớn nhất là x = 2."
+  },
+  {
+    id: "q2",
+    topic: "Số Phức",
+    question: "[Câu mẫu] Cho số phức z = (3 - 2i)(1 + 4i). Số phức liên hợp z̄ có giá trị bằng:",
+    options: [
+      "11 + 10i",
+      "11 - 10i",
+      "-11 + 10i",
+      "11 + 2i"
+    ],
+    correct: 1,
+    explain: "Thao tác: Vào chế độ số phức: [MENU] -> [2] (Complex). Nhập biểu thức: (3 - 2i)(1 + 4i) [=], máy hiển thị 11 + 10i. Số phức liên hợp z̄ đổi dấu phần ảo thành 11 - 10i (hoặc bấm [OPTN] -> [2] (Conjg) để máy tự lấy liên hợp)."
+  },
+  {
+    id: "q3",
+    topic: "Thống kê SGK Mới",
+    question: "[Câu mẫu] Bảng tính Spreadsheet trên dòng máy Casio fx-880BTG có thể lưu trữ tối đa bao nhiêu dòng và cột?",
+    options: [
+      "45 dòng và 5 cột (A đến E)",
+      "30 dòng và 4 cột (A đến D)",
+      "50 dòng và 6 cột (A đến F)",
+      "25 dòng và 3 cột (A đến C)"
+    ],
+    correct: 0,
+    explain: "Tính năng Spreadsheet trên fx-880BTG hỗ trợ ma trận dữ liệu tối đa 45 dòng (hàng 1 đến 45) và 5 cột (từ cột A đến cột E), đủ để giải quyết toàn bộ bài toán bảng tính thống kê, dãy số và lãi kép."
+  },
+  {
+    id: "q4",
+    topic: "Vector Oxyz",
+    question: "[Câu mẫu] Trong không gian Oxyz, cho hai vectơ u = (1, 2, -1) và v = (2, 0, 1). Tọa độ tích có hướng [u, v] là:",
+    options: [
+      "(2, -3, -4)",
+      "(-2, 3, 4)",
+      "(2, 3, -4)",
+      "(1, -2, 3)"
+    ],
+    correct: 0,
+    explain: "Thao tác: [MENU] -> [5] (Vector) -> Tạo VctA kích thước 3 nhập (1, 2, -1) -> [OPTN] -> [1] tạo VctB nhập (2, 0, 1). Bấm [AC] -> [OPTN] [3] (VctA) [×] [OPTN] [4] (VctB) [=], kết quả trả về vectơ (2, -3, -4)."
+  }
+];
+
+const DEFAULT_SAMPLE_REMINDERS = [
+  {
+    id: "rem_sample_1",
+    title: "[Mẫu] Luyện bấm nhanh 1 đề thi thử môn Toán",
+    date: new Date().toISOString().split('T')[0],
+    time: "19:30",
+    repeat: "daily",
+    completed: false,
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: "rem_sample_2",
+    title: "[Mẫu] Ôn lại công thức tính tích phân & ma trận",
+    date: new Date(Date.now() + 86400000).toISOString().split('T')[0],
+    time: "20:45",
+    repeat: "weekly",
+    completed: false,
+    createdAt: new Date().toISOString()
+  }
+];
+
+const DEFAULT_SAMPLE_EXAMS = [
+  {
+    id: "exam_sample_hocky",
+    name: "Kỳ thi Học Kỳ 1 (Năm học 2026–2027 - Mẫu)",
+    targetDate: "2026-12-20T07:30:00"
+  },
+  {
+    id: "exam_sample_dgnl",
+    name: "Kỳ thi Đánh giá năng lực ĐHQG Đợt 1 (Mẫu)",
+    targetDate: "2027-04-05T07:30:00"
+  },
+  {
+    id: "exam_sample_lop10",
+    name: "Kỳ thi Tuyển sinh Vào Lớp 10 (Mẫu)",
+    targetDate: "2027-06-06T07:30:00"
+  },
+  {
+    id: "exam_sample_thpt",
+    name: "Kỳ thi Tốt nghiệp THPT 2027 (Dự kiến - Mẫu)",
+    targetDate: "2027-06-25T07:30:00"
+  }
+];
+
+const DEFAULT_SAMPLE_NOTES = [
+  {
+    id: "note_sample_1",
+    date: new Date().toISOString().split('T')[0],
+    title: "[Mẫu] Mục tiêu hôm nay: giải 30 phút toán bấm máy",
+    content: "- Ôn lại cách bấm số phức liên hợp trên fx-580VN X\n- Bấm phương trình bậc 3 cẩn thận dấu âm\n- Nhớ kiểm tra lại nghiệm bằng tính năng CALC",
+    priority: "important",
+    done: false,
+    updatedAt: new Date().toISOString()
+  }
+];
+
+// Study Hub State
+let studyHubState = {
+  currentSubject: "all",
+  currentLevel: "all",
+  searchDocQuery: "",
+  quizAnswers: {},
+  quizChecked: false,
+  reminders: [],
+  exams: [],
+  notes: []
+};
+
+// Main Initializer
+function initStudyHub() {
+  loadStudyReminders();
+  loadStudyExams();
+  loadStudyNotes();
+  
+  renderStudyDocs();
+  renderStudyQuiz();
+  renderStudyReminders();
+  renderStudyExams();
+  renderDailyNotes();
+  
+  checkNotificationPermission();
+  
+  // Set default dates for form inputs
+  const todayStr = new Date().toISOString().split('T')[0];
+  const remDate = document.getElementById('rem-date');
+  if (remDate) remDate.value = todayStr;
+  const remTime = document.getElementById('rem-time');
+  if (remTime) {
+    const d = new Date();
+    d.setHours(d.getHours() + 1);
+    remTime.value = d.toTimeString().slice(0, 5);
+  }
+  const noteDate = document.getElementById('note-date');
+  if (noteDate) noteDate.value = todayStr;
+  
+  // Start tick for exam countdowns
+  setInterval(updateStudyExamsTick, 1000);
+}
+
+// Tab switcher
+function switchStudyTab(tabKey, btn) {
+  document.querySelectorAll('.study-tab-btn').forEach(b => {
+    b.classList.remove('bg-blue-600', 'text-white', 'shadow-sm');
+    b.classList.add('bg-slate-50', 'text-slate-700');
+  });
+  if (btn) {
+    btn.classList.add('bg-blue-600', 'text-white', 'shadow-sm');
+    btn.classList.remove('bg-slate-50', 'text-slate-700');
+  }
+  document.querySelectorAll('.study-tab-content').forEach(c => c.classList.add('hidden'));
+  const target = document.getElementById(`study-tab-${tabKey}`);
+  if (target) target.classList.remove('hidden');
+}
+
+// ----------------------------------------------------
+// 1. SÁCH ONLINE & TÀI LIỆU
+// ----------------------------------------------------
+function filterStudyDocSubject(subject, btn) {
+  studyHubState.currentSubject = subject;
+  document.querySelectorAll('.doc-subj-btn').forEach(b => {
+    b.classList.remove('bg-blue-600', 'text-white');
+    b.classList.add('bg-slate-100', 'text-slate-700');
+  });
+  if (btn) {
+    btn.classList.add('bg-blue-600', 'text-white');
+    btn.classList.remove('bg-slate-100', 'text-slate-700');
+  }
+  renderStudyDocs();
+}
+
+function filterStudyDocLevel(level) {
+  studyHubState.currentLevel = level;
+  renderStudyDocs();
+}
+
+function searchStudyDocs(query) {
+  studyHubState.searchDocQuery = (query || '').toLowerCase().trim();
+  renderStudyDocs();
+}
+
+function renderStudyDocs() {
+  const container = document.getElementById('study-docs-grid');
+  if (!container) return;
+
+  const filtered = DEFAULT_STUDY_DOCS.filter(doc => {
+    const matchSubj = studyHubState.currentSubject === 'all' || doc.subject === studyHubState.currentSubject;
+    const matchLevel = studyHubState.currentLevel === 'all' || doc.level === studyHubState.currentLevel;
+    const matchQuery = !studyHubState.searchDocQuery || 
+      doc.title.toLowerCase().includes(studyHubState.searchDocQuery) ||
+      doc.desc.toLowerCase().includes(studyHubState.searchDocQuery);
+    return matchSubj && matchLevel && matchQuery;
+  });
+
+  if (filtered.length === 0) {
+    container.innerHTML = `
+      <div class="col-span-full py-12 text-center bg-white rounded-2xl border border-slate-200">
+        <i class="fa-solid fa-folder-open text-3xl text-slate-400 mb-2"></i>
+        <h4 class="text-sm font-bold text-slate-800">Không tìm thấy tài liệu phù hợp</h4>
+        <p class="text-xs text-slate-500 mt-1">Thử chọn môn khác hoặc đổi từ khóa tìm kiếm</p>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = filtered.map(doc => {
+    let subjColor = 'bg-blue-100 text-blue-800 border-blue-200';
+    if (doc.subject === 'Vật Lý') subjColor = 'bg-amber-100 text-amber-800 border-amber-200';
+    if (doc.subject === 'Hóa Học') subjColor = 'bg-purple-100 text-purple-800 border-purple-200';
+    if (doc.subject === 'Đại Học') subjColor = 'bg-indigo-100 text-indigo-800 border-indigo-200';
+
+    return `
+      <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/90 hover:border-blue-300 shadow-sm hover:shadow-md transition flex flex-col justify-between group">
+        <div>
+          <div class="flex items-center justify-between gap-2 mb-2.5">
+            <div class="flex items-center gap-1.5 flex-wrap">
+              <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-md border ${subjColor}">
+                ${doc.subject}
+              </span>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-100 text-slate-700">
+                ${doc.level}
+              </span>
+            </div>
+            <span class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-blue-50 text-blue-700">
+              ${doc.badge}
+            </span>
+          </div>
+
+          <h4 class="text-sm font-extrabold text-slate-900 leading-snug group-hover:text-blue-600 transition mb-2">
+            ${doc.title}
+          </h4>
+
+          <p class="text-xs text-slate-600 line-clamp-2 leading-relaxed mb-3">
+            ${doc.desc}
+          </p>
+
+          <div class="flex items-center gap-3 text-[11px] text-slate-400 mb-4 pb-3 border-b border-slate-100">
+            <span><i class="fa-regular fa-file-pdf text-rose-500 mr-1"></i> ${doc.type}</span>
+            <span><i class="fa-solid fa-book-open text-blue-500 mr-1"></i> ${doc.pages} trang</span>
+            <span><i class="fa-solid fa-hard-drive text-emerald-500 mr-1"></i> ${doc.size}</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 pt-1">
+          <button onclick="openDocPreview('${doc.id}')" class="flex-1 py-2 px-3 bg-slate-100 hover:bg-blue-50 hover:text-blue-700 text-slate-800 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5">
+            <i class="fa-regular fa-eye"></i>
+            <span>Xem Mục Lục</span>
+          </button>
+          <button onclick="downloadStudyDoc('${doc.id}')" class="py-2 px-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1 shadow-sm" title="Tải tài liệu">
+            <i class="fa-solid fa-download"></i>
+          </button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function openDocPreview(docId) {
+  const doc = DEFAULT_STUDY_DOCS.find(d => d.id === docId);
+  if (!doc) return;
+
+  const modal = document.getElementById('doc-preview-modal');
+  const content = document.getElementById('doc-preview-content');
+  if (!modal || !content) return;
+
+  content.innerHTML = `
+    <div class="flex items-center gap-2 mb-2">
+      <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800">${doc.subject}</span>
+      <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-700">${doc.level}</span>
+      <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-800">Mẫu — sẽ thay bằng tài liệu thật</span>
+    </div>
+
+    <h3 class="text-base font-extrabold text-slate-900 leading-snug mb-2">
+      ${doc.title}
+    </h3>
+
+    <p class="text-xs text-slate-600 leading-relaxed mb-4">
+      ${doc.desc}
+    </p>
+
+    <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200 mb-4">
+      <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2.5">
+        <i class="fa-solid fa-list-check text-blue-600 mr-1"></i> Tóm tắt mục lục chuyên đề:
+      </h4>
+      <ul class="space-y-2 text-xs text-slate-700">
+        ${doc.outline.map(item => `
+          <li class="flex items-start gap-2">
+            <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
+            <span>${item}</span>
+          </li>
+        `).join('')}
+      </ul>
+    </div>
+
+    <div class="p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-900 mb-4 flex items-center gap-2">
+      <i class="fa-solid fa-info-circle text-amber-600 shrink-0"></i>
+      <span>File tài liệu PDF chính thức đang được chuẩn bị. Khi hoàn thành bạn có thể tải trọn bộ miễn phí tại đây!</span>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <button onclick="downloadStudyDoc('${doc.id}')" class="flex-1 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 shadow-sm">
+        <i class="fa-solid fa-download"></i>
+        <span>Nhận Tài Liệu Ngay</span>
+      </button>
+      <button onclick="closeDocPreview()" class="py-2.5 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold transition">
+        Đóng
+      </button>
+    </div>
+  `;
+
+  modal.classList.remove('hidden');
+}
+
+function closeDocPreview() {
+  const modal = document.getElementById('doc-preview-modal');
+  if (modal) modal.classList.add('hidden');
+}
+
+function downloadStudyDoc(docId) {
+  const doc = DEFAULT_STUDY_DOCS.find(d => d.id === docId);
+  const title = doc ? doc.title : "Tài liệu";
+  showToast(`[Mẫu] Đang kết nối tải "${title}". Cơ và shop sẽ cập nhật link file chính thức sớm nhất!`, "info");
+}
+
+// ----------------------------------------------------
+// 2. BÀI TẬP ÔN TẬP BẤM MÁY
+// ----------------------------------------------------
+function renderStudyQuiz() {
+  const container = document.getElementById('study-quiz-list');
+  if (!container) return;
+
+  container.innerHTML = DEFAULT_STUDY_QUIZ.map((q, qIdx) => {
+    const selected = studyHubState.quizAnswers[qIdx];
+    const isAnswered = selected !== undefined;
+    const isCorrect = selected === q.correct;
+
+    return `
+      <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/90 shadow-sm transition">
+        <div class="flex items-center justify-between gap-2 mb-2">
+          <div class="flex items-center gap-2">
+            <span class="w-6 h-6 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center text-xs font-extrabold">
+              ${qIdx + 1}
+            </span>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-700">
+              ${q.topic}
+            </span>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-50 text-amber-700 border border-amber-200">
+              Câu mẫu
+            </span>
+          </div>
+
+          ${isAnswered ? `
+            <span class="text-xs font-bold ${isCorrect ? 'text-emerald-600' : 'text-rose-600'} flex items-center gap-1">
+              <i class="fa-solid ${isCorrect ? 'fa-circle-check' : 'fa-circle-xmark'}"></i>
+              ${isCorrect ? 'Chính xác' : 'Chưa đúng'}
+            </span>
+          ` : ''}
+        </div>
+
+        <h4 class="text-sm font-bold text-slate-900 mb-3 leading-snug">
+          ${q.question}
+        </h4>
+
+        <!-- Options -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
+          ${q.options.map((opt, optIdx) => {
+            const isThisSelected = selected === optIdx;
+            let optClass = 'bg-slate-50 hover:bg-blue-50/70 border-slate-200 text-slate-700';
+            
+            if (isAnswered) {
+              if (optIdx === q.correct) {
+                optClass = 'bg-emerald-50 border-emerald-400 text-emerald-900 font-bold';
+              } else if (isThisSelected) {
+                optClass = 'bg-rose-50 border-rose-300 text-rose-800 font-bold line-through';
+              } else {
+                optClass = 'bg-slate-50 border-slate-200 text-slate-400 opacity-60';
+              }
+            }
+
+            const prefix = ['A', 'B', 'C', 'D'][optIdx];
+
+            return `
+              <button 
+                type="button" 
+                onclick="selectQuizOption(${qIdx}, ${optIdx})"
+                class="text-left p-2.5 rounded-xl border text-xs transition flex items-center gap-2.5 ${optClass}"
+              >
+                <span class="w-5 h-5 rounded-md ${isThisSelected ? 'bg-blue-600 text-white font-bold' : 'bg-white text-slate-600 border border-slate-200'} flex items-center justify-center text-[10px] shrink-0">
+                  ${prefix}
+                </span>
+                <span>${opt}</span>
+              </button>
+            `;
+          }).join('')}
+        </div>
+
+        <!-- Explanation (Shown once user answers) -->
+        ${isAnswered ? `
+          <div class="p-3 bg-blue-50/70 border border-blue-200 rounded-xl text-xs text-blue-950 leading-relaxed animate-fadeIn">
+            <strong class="font-bold text-blue-800 flex items-center gap-1 mb-1">
+              <i class="fa-solid fa-lightbulb text-amber-500"></i> Hướng dẫn bấm máy chi tiết:
+            </strong>
+            <p>${q.explain}</p>
+          </div>
+        ` : ''}
+      </div>
+    `;
+  }).join('');
+}
+
+function selectQuizOption(qIdx, optIdx) {
+  studyHubState.quizAnswers[qIdx] = optIdx;
+  renderStudyQuiz();
+}
+
+function calculateQuizScore() {
+  const total = DEFAULT_STUDY_QUIZ.length;
+  let correctCount = 0;
+  let answeredCount = 0;
+
+  DEFAULT_STUDY_QUIZ.forEach((q, idx) => {
+    if (studyHubState.quizAnswers[idx] !== undefined) {
+      answeredCount++;
+      if (studyHubState.quizAnswers[idx] === q.correct) {
+        correctCount++;
+      }
+    }
+  });
+
+  const banner = document.getElementById('quiz-score-banner');
+  if (!banner) return;
+
+  const score10 = ((correctCount / total) * 10).toFixed(1);
+  let feedback = "Hãy luyện tập thêm các mẹo bấm máy để tối ưu tốc độ cày đề nhé!";
+  if (correctCount === total) feedback = "Xuất sắc! Thao tác bấm máy và nắm kiến thức cực kỳ chuẩn xác!";
+  else if (correctCount >= total / 2) feedback = "Khá tốt! Bạn đã nắm vững các tính năng cơ bản của Casio.";
+
+  banner.innerHTML = `
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex flex-col items-center justify-center font-extrabold text-base shrink-0 shadow-sm">
+          <span>${score10}</span>
+          <span class="text-[9px] font-normal leading-none opacity-80">/10đ</span>
+        </div>
+        <div>
+          <h4 class="text-sm font-extrabold text-slate-900">
+            Kết quả: ${correctCount}/${total} câu đúng (${answeredCount}/${total} đã làm)
+          </h4>
+          <p class="text-xs text-slate-600 mt-0.5">${feedback}</p>
+        </div>
+      </div>
+      <button onclick="resetStudyQuiz()" class="py-2 px-3 bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 rounded-xl text-xs font-bold transition shrink-0">
+        Làm Lại Toàn Bộ
+      </button>
+    </div>
+  `;
+  banner.classList.remove('hidden');
+  banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function resetStudyQuiz() {
+  studyHubState.quizAnswers = {};
+  const banner = document.getElementById('quiz-score-banner');
+  if (banner) banner.classList.add('hidden');
+  renderStudyQuiz();
+  showToast("Đã đặt lại bài tập luyện bấm máy!", "info");
+}
+
+// ----------------------------------------------------
+// 3. LỊCH NHẮC NHỞ HỌC TẬP (LOCALSTORAGE + NOTIFICATION API)
+// ----------------------------------------------------
+function loadStudyReminders() {
+  try {
+    const raw = localStorage.getItem('abtn_study_reminders');
+    studyHubState.reminders = raw ? JSON.parse(raw) : [...DEFAULT_SAMPLE_REMINDERS];
+  } catch (_) {
+    studyHubState.reminders = [...DEFAULT_SAMPLE_REMINDERS];
+  }
+}
+
+function saveStudyReminders() {
+  try {
+    localStorage.setItem('abtn_study_reminders', JSON.stringify(studyHubState.reminders));
+  } catch (_) {}
+}
+
+function renderStudyReminders() {
+  const container = document.getElementById('study-reminders-list');
+  const countText = document.getElementById('reminders-count-text');
+  if (!container) return;
+
+  const count = studyHubState.reminders.filter(r => !r.completed).length;
+  if (countText) countText.textContent = `${count} lời nhắc sắp tới`;
+
+  if (studyHubState.reminders.length === 0) {
+    container.innerHTML = `
+      <div class="py-12 text-center text-slate-400">
+        <i class="fa-regular fa-bell-slash text-2xl mb-2"></i>
+        <p class="text-xs">Chưa có lời nhắc nào. Hãy thêm lời nhắc để không quên giờ học!</p>
+      </div>
+    `;
+    return;
+  }
+
+  // Sort by date + time
+  const sorted = [...studyHubState.reminders].sort((a, b) => {
+    return (a.date + ' ' + a.time).localeCompare(b.date + ' ' + b.time);
+  });
+
+  container.innerHTML = sorted.map(rem => {
+    const repeatLabel = rem.repeat === 'daily' ? 'Hàng ngày' : (rem.repeat === 'weekly' ? 'Hàng tuần' : '1 lần');
+    return `
+      <div class="p-3 bg-slate-50 hover:bg-slate-100/80 rounded-xl border border-slate-200 transition flex items-center justify-between gap-3 ${rem.completed ? 'opacity-60' : ''}">
+        <div class="flex items-center gap-2.5 flex-1 min-w-0">
+          <input 
+            type="checkbox" 
+            ${rem.completed ? 'checked' : ''} 
+            onchange="toggleReminderDone('${rem.id}')"
+            class="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 rounded cursor-pointer"
+          />
+          <div class="min-w-0 flex-1">
+            <span class="text-xs font-bold text-slate-900 block truncate ${rem.completed ? 'line-through text-slate-400' : ''}">
+              ${rem.title}
+            </span>
+            <div class="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+              <span><i class="fa-regular fa-calendar text-blue-500 mr-1"></i>${rem.date}</span>
+              <span><i class="fa-regular fa-clock text-amber-500 mr-1"></i>${rem.time}</span>
+              <span class="px-1.5 py-0.2 rounded bg-slate-200 text-slate-700 font-semibold">${repeatLabel}</span>
+            </div>
+          </div>
+        </div>
+
+        <button onclick="deleteStudyReminder('${rem.id}')" class="text-slate-400 hover:text-rose-600 text-xs p-1 transition" title="Xóa nhắc nhở">
+          <i class="fa-solid fa-trash-can"></i>
+        </button>
+      </div>
+    `;
+  }).join('');
+}
+
+function addStudyReminder(e) {
+  e.preventDefault();
+  const title = document.getElementById('rem-title').value.trim();
+  const date = document.getElementById('rem-date').value;
+  const time = document.getElementById('rem-time').value;
+  const repeat = document.getElementById('rem-repeat').value;
+
+  if (!title || !date || !time) return;
+
+  const newRem = {
+    id: 'rem_' + Date.now(),
+    title,
+    date,
+    time,
+    repeat,
+    completed: false,
+    createdAt: new Date().toISOString()
+  };
+
+  studyHubState.reminders.unshift(newRem);
+  saveStudyReminders();
+  renderStudyReminders();
+
+  document.getElementById('rem-title').value = '';
+  showToast("Đã lưu lời nhắc học tập trên máy của bạn!", "success");
+}
+
+function toggleReminderDone(id) {
+  const rem = studyHubState.reminders.find(r => r.id === id);
+  if (rem) {
+    rem.completed = !rem.completed;
+    saveStudyReminders();
+    renderStudyReminders();
+  }
+}
+
+function deleteStudyReminder(id) {
+  studyHubState.reminders = studyHubState.reminders.filter(r => r.id !== id);
+  saveStudyReminders();
+  renderStudyReminders();
+  showToast("Đã xóa lời nhắc!", "info");
+}
+
+function clearCompletedReminders() {
+  studyHubState.reminders = studyHubState.reminders.filter(r => !r.completed);
+  saveStudyReminders();
+  renderStudyReminders();
+  showToast("Đã dọn dẹp các lời nhắc đã xong!", "info");
+}
+
+function checkNotificationPermission() {
+  const badge = document.getElementById('notif-permission-badge');
+  if (!badge) return;
+
+  if (!('Notification' in window)) {
+    badge.textContent = "Không hỗ trợ";
+    badge.className = "text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500";
+    return;
+  }
+
+  if (Notification.permission === 'granted') {
+    badge.textContent = "Đã bật thông báo";
+    badge.className = "text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800";
+  } else if (Notification.permission === 'denied') {
+    badge.textContent = "Đang bị chặn";
+    badge.className = "text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-100 text-rose-800";
+  } else {
+    badge.textContent = "Chưa cấp quyền";
+    badge.className = "text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800";
+  }
+}
+
+function requestStudyNotificationPermission() {
+  if (!('Notification' in window)) {
+    alert("Trình duyệt này không hỗ trợ Notification API.");
+    return;
+  }
+
+  Notification.requestPermission().then(permission => {
+    checkNotificationPermission();
+    if (permission === 'granted') {
+      showToast("Đã bật quyền thông báo trình duyệt thành công!", "success");
+      try {
+        new Notification("Anh Ba Tự Nhiên", {
+          body: "Đã kích hoạt thông báo nhắc nhở học tập thành công!",
+          icon: "favicon.ico"
+        });
+      } catch (_) {}
+    } else if (permission === 'denied') {
+      showToast("Bạn đã chặn thông báo. Bạn có thể mở lại trong Cài đặt trình duyệt.", "info");
+    }
+  });
+}
+
+function testStudyNotification() {
+  if (!('Notification' in window)) {
+    showToast("Trình duyệt không hỗ trợ thông báo.", "error");
+    return;
+  }
+  if (Notification.permission !== 'granted') {
+    showToast("Vui lòng bấm 'Bật Thông Báo Trình Duyệt' trước!", "info");
+    return;
+  }
+
+  try {
+    new Notification("Anh Ba Tự Nhiên: Đến giờ học rồi bạn ơi!", {
+      body: "Hãy mở Casio và luyện nhanh 1 chuyên đề Toán hôm nay nhé!",
+      icon: "favicon.ico"
+    });
+    showToast("Đã gửi thông báo thử nghiệm ra màn hình!", "success");
+  } catch (err) {
+    showToast("Lỗi gửi thông báo: " + err.message, "error");
+  }
+}
+
+// ----------------------------------------------------
+// 4. ĐẾM NGÀY ĐẾN KÌ THI
+// ----------------------------------------------------
+function loadStudyExams() {
+  try {
+    const raw = localStorage.getItem('abtn_exam_countdowns');
+    studyHubState.exams = raw ? JSON.parse(raw) : [...DEFAULT_SAMPLE_EXAMS];
+  } catch (_) {
+    studyHubState.exams = [...DEFAULT_SAMPLE_EXAMS];
+  }
+}
+
+function saveStudyExams() {
+  try {
+    localStorage.setItem('abtn_exam_countdowns', JSON.stringify(studyHubState.exams));
+  } catch (_) {}
+}
+
+function toggleExamForm() {
+  const container = document.getElementById('add-exam-form-container');
+  if (container) {
+    container.classList.toggle('hidden');
+    if (!container.classList.contains('hidden')) {
+      const input = document.getElementById('exam-name-input');
+      if (input) input.focus();
+    }
+  }
+}
+
+function renderStudyExams() {
+  const container = document.getElementById('study-exams-grid');
+  if (!container) return;
+
+  if (studyHubState.exams.length === 0) {
+    container.innerHTML = `
+      <div class="col-span-full py-10 text-center text-slate-400">
+        <i class="fa-regular fa-clock text-2xl mb-2"></i>
+        <p class="text-xs">Chưa có kỳ thi nào được thêm. Hãy bấm "Thêm Kỳ Thi Mới" ở trên!</p>
+      </div>
+    `;
+    return;
+  }
+
+  const now = new Date().getTime();
+
+  // Sort by target date ascending
+  const sorted = [...studyHubState.exams].sort((a, b) => {
+    return new Date(a.targetDate).getTime() - new Date(b.targetDate).getTime();
+  });
+
+  container.innerHTML = sorted.map(exam => {
+    const target = new Date(exam.targetDate).getTime();
+    const diff = target - now;
+    const isPast = diff <= 0;
+
+    let days = 0, hours = 0, mins = 0, secs = 0;
+    if (!isPast) {
+      days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      secs = Math.floor((diff % (1000 * 60)) / 1000);
+    }
+
+    const dateFormatted = new Date(exam.targetDate).toLocaleString('vi-VN', {
+      hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: 'numeric'
+    });
+
+    return `
+      <div class="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-2xl p-4 sm:p-5 shadow-md flex flex-col justify-between relative overflow-hidden group">
+        <!-- Background decorative glow -->
+        <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-indigo-500/10 rounded-full blur-xl pointer-events-none"></div>
+
+        <div>
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-400/30">
+              ${isPast ? 'Đã diễn ra' : 'Sắp diễn ra'}
+            </span>
+            <button onclick="deleteExamCountdown('${exam.id}')" class="text-slate-400 hover:text-rose-400 text-xs transition p-1" title="Xóa kỳ thi">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </div>
+
+          <h4 class="text-sm font-extrabold text-white leading-snug mb-1">
+            ${exam.name}
+          </h4>
+          <span class="text-[11px] text-slate-400 block mb-4">
+            <i class="fa-regular fa-calendar-check text-indigo-400 mr-1"></i> ${dateFormatted}
+          </span>
+        </div>
+
+        <div>
+          ${isPast ? `
+            <div class="py-3 text-center bg-white/5 rounded-xl text-xs font-bold text-amber-300">
+              Kỳ thi đã qua hoặc đang diễn ra!
+            </div>
+          ` : `
+            <div class="grid grid-cols-4 gap-1.5 text-center">
+              <div class="bg-white/10 rounded-xl py-2 px-1">
+                <span class="text-lg sm:text-xl font-extrabold text-white font-mono block leading-none">${days}</span>
+                <span class="text-[9px] text-slate-400 uppercase font-semibold">Ngày</span>
+              </div>
+              <div class="bg-white/10 rounded-xl py-2 px-1">
+                <span class="text-lg sm:text-xl font-extrabold text-amber-300 font-mono block leading-none">${hours}</span>
+                <span class="text-[9px] text-slate-400 uppercase font-semibold">Giờ</span>
+              </div>
+              <div class="bg-white/10 rounded-xl py-2 px-1">
+                <span class="text-lg sm:text-xl font-extrabold text-white font-mono block leading-none">${mins}</span>
+                <span class="text-[9px] text-slate-400 uppercase font-semibold">Phút</span>
+              </div>
+              <div class="bg-white/10 rounded-xl py-2 px-1">
+                <span class="text-lg sm:text-xl font-extrabold text-indigo-300 font-mono block leading-none">${secs}</span>
+                <span class="text-[9px] text-slate-400 uppercase font-semibold">Giây</span>
+              </div>
+            </div>
+          `}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function updateStudyExamsTick() {
+  // If exams tab is visible, update countdown numbers
+  const examsTab = document.getElementById('study-tab-exams');
+  if (examsTab && !examsTab.classList.contains('hidden')) {
+    renderStudyExams();
+  }
+}
+
+function addExamCountdown(e) {
+  e.preventDefault();
+  const nameInput = document.getElementById('exam-name-input');
+  const dateInput = document.getElementById('exam-date-input');
+
+  const name = nameInput.value.trim();
+  const targetDate = dateInput.value;
+
+  if (!name || !targetDate) return;
+
+  const newExam = {
+    id: 'exam_' + Date.now(),
+    name,
+    targetDate
+  };
+
+  studyHubState.exams.push(newExam);
+  saveStudyExams();
+  renderStudyExams();
+
+  nameInput.value = '';
+  dateInput.value = '';
+  toggleExamForm();
+  showToast("Đã thêm kỳ thi mới vào đồng hồ đếm ngược!", "success");
+}
+
+function deleteExamCountdown(id) {
+  studyHubState.exams = studyHubState.exams.filter(e => e.id !== id);
+  saveStudyExams();
+  renderStudyExams();
+  showToast("Đã xóa kỳ thi!", "info");
+}
+
+// ----------------------------------------------------
+// 5. TỰ NOTE NGÀY (GHI CHÚ HỌC TẬP THEO NGÀY)
+// ----------------------------------------------------
+function loadStudyNotes() {
+  try {
+    const raw = localStorage.getItem('abtn_daily_notes');
+    studyHubState.notes = raw ? JSON.parse(raw) : [...DEFAULT_SAMPLE_NOTES];
+  } catch (_) {
+    studyHubState.notes = [...DEFAULT_SAMPLE_NOTES];
+  }
+}
+
+function saveStudyNotes() {
+  try {
+    localStorage.setItem('abtn_daily_notes', JSON.stringify(studyHubState.notes));
+  } catch (_) {}
+}
+
+let noteSearchQuery = '';
+function filterNotesBySearch(query) {
+  noteSearchQuery = (query || '').toLowerCase().trim();
+  renderDailyNotes();
+}
+
+function renderDailyNotes() {
+  const container = document.getElementById('study-notes-list');
+  const countText = document.getElementById('notes-count-text');
+  if (!container) return;
+
+  const filtered = studyHubState.notes.filter(n => {
+    if (!noteSearchQuery) return true;
+    return n.title.toLowerCase().includes(noteSearchQuery) || 
+           n.content.toLowerCase().includes(noteSearchQuery);
+  });
+
+  if (countText) countText.textContent = `${studyHubState.notes.length} ghi chú đã lưu`;
+
+  if (filtered.length === 0) {
+    container.innerHTML = `
+      <div class="py-12 text-center text-slate-400">
+        <i class="fa-regular fa-note-sticky text-2xl mb-2"></i>
+        <p class="text-xs">Chưa có ghi chú nào. Hãy viết lại mục tiêu học tập hôm nay nhé!</p>
+      </div>
+    `;
+    return;
+  }
+
+  // Sort by date descending
+  const sorted = [...filtered].sort((a, b) => b.date.localeCompare(a.date));
+
+  container.innerHTML = sorted.map(note => {
+    let prioBadge = 'bg-blue-100 text-blue-800';
+    let prioText = 'Bình thường';
+    if (note.priority === 'important') {
+      prioBadge = 'bg-amber-100 text-amber-800';
+      prioText = 'Quan trọng ⭐';
+    } else if (note.priority === 'urgent') {
+      prioBadge = 'bg-rose-100 text-rose-800';
+      prioText = 'Cần gấp 🔥';
+    }
+
+    const lines = note.content ? note.content.split('\n').filter(Boolean) : [];
+
+    return `
+      <div class="p-3.5 bg-slate-50 hover:bg-slate-100/90 rounded-2xl border border-slate-200 transition ${note.done ? 'opacity-60' : ''}">
+        <div class="flex items-start justify-between gap-3 mb-2">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded ${prioBadge}">
+              ${prioText}
+            </span>
+            <span class="text-xs font-bold text-slate-500">
+              <i class="fa-regular fa-calendar text-rose-500 mr-1"></i>${note.date}
+            </span>
+          </div>
+
+          <div class="flex items-center gap-1.5 shrink-0">
+            <button onclick="editDailyNote('${note.id}')" class="text-slate-400 hover:text-blue-600 text-xs p-1" title="Chỉnh sửa">
+              <i class="fa-solid fa-pen-to-square"></i>
+            </button>
+            <button onclick="deleteDailyNote('${note.id}')" class="text-slate-400 hover:text-rose-600 text-xs p-1" title="Xóa ghi chú">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </div>
+        </div>
+
+        <h4 class="text-xs sm:text-sm font-extrabold text-slate-900 mb-1.5 ${note.done ? 'line-through text-slate-400' : ''}">
+          ${note.title}
+        </h4>
+
+        ${lines.length > 0 ? `
+          <div class="space-y-1 text-xs text-slate-600 pl-1 border-l-2 border-rose-200 ml-1 mb-2">
+            ${lines.map(l => `<p class="leading-relaxed">${l}</p>`).join('')}
+          </div>
+        ` : ''}
+
+        <div class="flex items-center justify-between pt-2 border-t border-slate-200/60 text-[11px]">
+          <label class="flex items-center gap-1.5 text-slate-600 cursor-pointer">
+            <input type="checkbox" ${note.done ? 'checked' : ''} onchange="toggleNoteDone('${note.id}')" class="rounded text-rose-600 focus:ring-rose-500"/>
+            <span>${note.done ? 'Đã hoàn thành' : 'Đánh dấu xong'}</span>
+          </label>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function addDailyNote(e) {
+  e.preventDefault();
+  const editId = document.getElementById('note-edit-id').value;
+  const date = document.getElementById('note-date').value;
+  const title = document.getElementById('note-title').value.trim();
+  const content = document.getElementById('note-content').value.trim();
+  const priority = document.getElementById('note-priority').value;
+
+  if (!date || !title) return;
+
+  if (editId) {
+    const note = studyHubState.notes.find(n => n.id === editId);
+    if (note) {
+      note.date = date;
+      note.title = title;
+      note.content = content;
+      note.priority = priority;
+      note.updatedAt = new Date().toISOString();
+      showToast("Đã cập nhật ghi chú!", "success");
+    }
+    cancelEditNote();
+  } else {
+    const newNote = {
+      id: 'note_' + Date.now(),
+      date,
+      title,
+      content,
+      priority,
+      done: false,
+      updatedAt: new Date().toISOString()
+    };
+    studyHubState.notes.unshift(newNote);
+    showToast("Đã lưu ghi chú học tập vào máy của bạn!", "success");
+  }
+
+  saveStudyNotes();
+  renderDailyNotes();
+
+  document.getElementById('note-title').value = '';
+  document.getElementById('note-content').value = '';
+}
+
+function editDailyNote(id) {
+  const note = studyHubState.notes.find(n => n.id === id);
+  if (!note) return;
+
+  document.getElementById('note-edit-id').value = note.id;
+  document.getElementById('note-date').value = note.date;
+  document.getElementById('note-title').value = note.title;
+  document.getElementById('note-content').value = note.content;
+  document.getElementById('note-priority').value = note.priority;
+
+  const submitBtn = document.getElementById('note-submit-btn');
+  if (submitBtn) submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> Cập Nhật Ghi Chú';
+
+  const cancelBtn = document.getElementById('note-cancel-edit-btn');
+  if (cancelBtn) cancelBtn.classList.remove('hidden');
+
+  document.getElementById('note-title').focus();
+}
+
+function cancelEditNote() {
+  document.getElementById('note-edit-id').value = '';
+  document.getElementById('note-title').value = '';
+  document.getElementById('note-content').value = '';
+  document.getElementById('note-date').value = new Date().toISOString().split('T')[0];
+
+  const submitBtn = document.getElementById('note-submit-btn');
+  if (submitBtn) submitBtn.innerHTML = '<i class="fa-solid fa-bookmark"></i> Lưu Ghi Chú';
+
+  const cancelBtn = document.getElementById('note-cancel-edit-btn');
+  if (cancelBtn) cancelBtn.classList.add('hidden');
+}
+
+function toggleNoteDone(id) {
+  const note = studyHubState.notes.find(n => n.id === id);
+  if (note) {
+    note.done = !note.done;
+    saveStudyNotes();
+    renderDailyNotes();
+  }
+}
+
+function deleteDailyNote(id) {
+  studyHubState.notes = studyHubState.notes.filter(n => n.id !== id);
+  saveStudyNotes();
+  renderDailyNotes();
+  showToast("Đã xóa ghi chú!", "info");
+}
+
+function clearAllNotes() {
+  if (studyHubState.notes.length === 0) return;
+  if (confirm("Bạn có chắc chắn muốn xóa tất cả ghi chú cá nhân không?")) {
+    studyHubState.notes = [];
+    saveStudyNotes();
+    renderDailyNotes();
+    showToast("Đã xóa tất cả ghi chú!", "info");
+  }
 }

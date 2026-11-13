@@ -90,6 +90,7 @@
       <nav class="hidden lg:flex items-center gap-5 text-xs font-semibold text-slate-600">
         <a href="#products-section" class="hover:text-blue-600 transition">Kho Máy</a>
         <a href="#compare-section" class="hover:text-blue-600 transition">So Sánh</a>
+        <a href="#study-hub-section" class="hover:text-blue-600 transition text-blue-600 font-bold flex items-center gap-1"><i class="fa-solid fa-graduation-cap text-xs"></i> Học Tập</a>
         <a href="#simulator-section" class="hover:text-blue-600 transition">Test Máy</a>
         <a href="#serial-check-section" class="hover:text-blue-600 transition">Check Seri</a>
         <a href="#tips-section" class="hover:text-blue-600 transition">Mẹo Bấm Casio</a>
@@ -846,6 +847,418 @@
     </div>
   </section>
 
+  
+  <!-- STUDY HUB SECTION (Khu học tập thông minh cho học sinh, sinh viên) -->
+  <section id="study-hub-section" class="py-14 bg-gradient-to-b from-white via-blue-50/40 to-white border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-2 flex-wrap">
+            <span class="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold uppercase tracking-wider bg-blue-100 text-blue-800 border border-blue-200">
+              <i class="fa-solid fa-graduation-cap mr-1"></i> Góc Học Tập Sĩ Tử 2026
+            </span>
+            <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-200 flex items-center gap-1">
+              <i class="fa-solid fa-lock text-[10px]"></i> 100% Riêng Tư • Lưu Trình Duyệt (localStorage)
+            </span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
+            Khu Tự Học &amp; Ôn Thi Thông Minh
+          </h2>
+          <p class="text-slate-600 text-sm mt-1 max-w-2xl">
+            Sách online, bài tập bấm máy, nhắc giờ học, đếm ngược ngày thi và nhật ký ghi chú mỗi ngày — Hoàn toàn miễn phí, không cần đăng nhập.
+          </p>
+        </div>
+
+        <div class="text-xs text-slate-600 bg-white p-3 rounded-2xl border border-slate-200 shadow-sm self-start md:self-auto flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+            <i class="fa-solid fa-shield-halved text-sm"></i>
+          </div>
+          <div>
+            <strong class="text-slate-900 block text-[11px]">Bảo mật dữ liệu cá nhân</strong>
+            <span class="text-[10px] text-slate-500">Chỉ lưu trong máy bạn, không gửi về server</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bento Tab Navigation -->
+      <div class="bg-white p-1.5 sm:p-2 rounded-2xl border border-slate-200 shadow-sm mb-8">
+        <div class="flex items-center gap-1 sm:gap-2 overflow-x-auto no-scrollbar pb-1 sm:pb-0" id="study-hub-tab-bar">
+          <button onclick="switchStudyTab('docs', this)" class="study-tab-btn px-3.5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 whitespace-nowrap bg-blue-600 text-white shadow-sm">
+            <i class="fa-solid fa-book-open"></i>
+            <span>1. Sách &amp; Tài Liệu</span>
+          </button>
+          <button onclick="switchStudyTab('quiz', this)" class="study-tab-btn px-3.5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 whitespace-nowrap bg-slate-50 hover:bg-slate-100 text-slate-700">
+            <i class="fa-solid fa-clipboard-question text-emerald-600"></i>
+            <span>2. Bài Tập Bấm Máy</span>
+          </button>
+          <button onclick="switchStudyTab('reminders', this)" class="study-tab-btn px-3.5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 whitespace-nowrap bg-slate-50 hover:bg-slate-100 text-slate-700">
+            <i class="fa-solid fa-bell text-amber-500"></i>
+            <span>3. Nhắc Nhở Học Tập</span>
+          </button>
+          <button onclick="switchStudyTab('exams', this)" class="study-tab-btn px-3.5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 whitespace-nowrap bg-slate-50 hover:bg-slate-100 text-slate-700">
+            <i class="fa-solid fa-hourglass-half text-indigo-600"></i>
+            <span>4. Đếm Ngày Thi</span>
+          </button>
+          <button onclick="switchStudyTab('notes', this)" class="study-tab-btn px-3.5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 whitespace-nowrap bg-slate-50 hover:bg-slate-100 text-slate-700">
+            <i class="fa-solid fa-calendar-check text-rose-500"></i>
+            <span>5. Tự Note Ngày</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- TAB 1: SÁCH ONLINE & TÀI LIỆU -->
+      <!-- ========================================== -->
+      <div id="study-tab-docs" class="study-tab-content space-y-6">
+        
+        <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <!-- Filters -->
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-xs font-bold text-slate-700 mr-1"><i class="fa-solid fa-filter text-blue-600 mr-1"></i> Môn:</span>
+            <button onclick="filterStudyDocSubject('all', this)" class="doc-subj-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-blue-600 text-white transition">Tất Cả</button>
+            <button onclick="filterStudyDocSubject('Toán', this)" class="doc-subj-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition">Toán</button>
+            <button onclick="filterStudyDocSubject('Vật Lý', this)" class="doc-subj-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition">Vật Lý</button>
+            <button onclick="filterStudyDocSubject('Hóa Học', this)" class="doc-subj-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition">Hóa Học</button>
+            <button onclick="filterStudyDocSubject('Đại Học', this)" class="doc-subj-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition">Đại Học</button>
+          </div>
+
+          <!-- Level Filter & Search -->
+          <div class="flex items-center gap-2 flex-wrap">
+            <select id="doc-level-select" onchange="filterStudyDocLevel(this.value)" class="bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <option value="all">Mọi cấp học (THCS, THPT, ĐH)</option>
+              <option value="THCS">Cấp 2 (THCS Lớp 6–9)</option>
+              <option value="THPT">Cấp 3 (THPT Lớp 10–12)</option>
+              <option value="Đại Học">Sinh viên Đại học</option>
+            </select>
+
+            <div class="relative">
+              <input type="text" id="doc-search-input" oninput="searchStudyDocs(this.value)" placeholder="Tìm tài liệu..." class="bg-slate-50 border border-slate-200 rounded-xl pl-8 pr-3 py-1.5 text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 w-36 sm:w-44"/>
+              <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-2 text-slate-400 text-xs"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Document Grid -->
+        <div id="study-docs-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <!-- Populated by app.js -->
+        </div>
+
+        <div class="p-3.5 bg-blue-50/70 border border-blue-200 rounded-2xl text-xs text-blue-900 flex items-center justify-between gap-3">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-circle-info text-blue-600 text-base shrink-0"></i>
+            <span>Các tài liệu trên hiện là <strong>khung mẫu</strong>. Cơ và Anh Ba đang biên soạn các bộ file PDF chính thức để cập nhật trong thời gian sớm nhất!</span>
+          </div>
+          <span class="text-[11px] font-bold text-blue-700 bg-white px-2.5 py-1 rounded-lg border border-blue-200 shrink-0">Mẫu — sẽ thay bằng tài liệu thật</span>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- TAB 2: BÀI TẬP ÔN TẬP BẤM MÁY -->
+      <!-- ========================================== -->
+      <div id="study-tab-quiz" class="study-tab-content hidden space-y-6">
+        
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800">
+                Thực Chiến Casio
+              </span>
+              <span class="text-xs text-slate-500 font-medium">Bấm máy nhanh • Chấm điểm tức thì</span>
+            </div>
+            <h3 class="text-lg font-extrabold text-slate-900 mt-1">Luyện Kỹ Năng Bấm Máy Tính &amp; Giải Nhanh</h3>
+            <p class="text-xs text-slate-500 mt-0.5">Chọn đáp án để xem giải thích thao tác bấm phím chi tiết ngay bên dưới mỗi câu.</p>
+          </div>
+
+          <div class="flex items-center gap-2 shrink-0">
+            <button onclick="calculateQuizScore()" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition shadow-sm flex items-center gap-1.5">
+              <i class="fa-solid fa-check-double"></i>
+              <span>Chấm Điểm Bài Làm</span>
+            </button>
+            <button onclick="resetStudyQuiz()" class="px-3 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold transition" title="Làm lại từ đầu">
+              <i class="fa-solid fa-rotate-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Quiz Score Result Banner (Hidden initially) -->
+        <div id="quiz-score-banner" class="hidden bg-emerald-50 border border-emerald-200 rounded-2xl p-4 transition-all"></div>
+
+        <!-- Quiz Questions List -->
+        <div id="study-quiz-list" class="space-y-4">
+          <!-- Populated by app.js -->
+        </div>
+
+        <div class="p-3.5 bg-amber-50/70 border border-amber-200 rounded-2xl text-xs text-amber-900 flex items-center justify-between gap-3">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-triangle-exclamation text-amber-600 text-base shrink-0"></i>
+            <span>Đây là các <strong>câu hỏi mẫu</strong> minh họa cách bấm máy tính Casio. Sẽ được cập nhật đề luyện tập chuyên sâu theo từng chương trình thi thật.</span>
+          </div>
+          <span class="text-[11px] font-bold text-amber-800 bg-white px-2.5 py-1 rounded-lg border border-amber-200 shrink-0">Câu mẫu</span>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- TAB 3: LỊCH NHẮC NHỞ HỌC TẬP -->
+      <!-- ========================================== -->
+      <div id="study-tab-reminders" class="study-tab-content hidden space-y-6">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          
+          <!-- Add Reminder Form (Bento Left) -->
+          <div class="lg:col-span-5 bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-2 mb-3">
+                <div class="w-8 h-8 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-sm font-bold">
+                  <i class="fa-solid fa-plus"></i>
+                </div>
+                <div>
+                  <h3 class="text-base font-extrabold text-slate-900">Thêm Lịch Nhắc Học Tập</h3>
+                  <p class="text-[11px] text-slate-500">Tự tạo lời nhắc cho bản thân, lưu trên máy bạn</p>
+                </div>
+              </div>
+
+              <form onsubmit="addStudyReminder(event)" class="space-y-3">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Nội dung việc cần học / ôn *</label>
+                  <input type="text" id="rem-title" required placeholder="Ví dụ: Luyện 1 đề Toán, ôn từ vựng Anh..." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2.5">
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Ngày nhắc</label>
+                    <input type="date" id="rem-date" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Giờ nhắc</label>
+                    <input type="time" id="rem-time" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Chế độ lặp lại</label>
+                  <select id="rem-repeat" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium">
+                    <option value="none">Không lặp lại (Chỉ 1 lần)</option>
+                    <option value="daily">Lặp lại hàng ngày (Mỗi ngày nhắc 1 lần)</option>
+                    <option value="weekly">Lặp lại hàng tuần (Theo thứ này hàng tuần)</option>
+                  </select>
+                </div>
+
+                <button type="submit" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold transition shadow-sm flex items-center justify-center gap-1.5">
+                  <i class="fa-solid fa-calendar-plus"></i>
+                  <span>Lưu Lời Nhắc Học Tập</span>
+                </button>
+              </form>
+            </div>
+
+            <!-- Browser Notification Permission Box -->
+            <div class="mt-5 pt-4 border-t border-slate-100">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                  <i class="fa-solid fa-bell text-amber-500"></i> Thông báo trình duyệt:
+                </span>
+                <span id="notif-permission-badge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">
+                  Đang kiểm tra...
+                </span>
+              </div>
+              <p class="text-[11px] text-slate-500 mb-2.5 leading-relaxed">
+                Chỉ gửi thông báo khi bạn tự nguyện cho phép. Tuyệt đối không làm phiền khi chưa được đồng ý.
+              </p>
+              <div class="flex items-center gap-2">
+                <button type="button" onclick="requestStudyNotificationPermission()" class="flex-1 py-1.5 px-2.5 bg-amber-500 hover:bg-amber-600 text-white rounded-xl text-[11px] font-bold transition flex items-center justify-center gap-1 shadow-sm">
+                  <i class="fa-solid fa-hand"></i>
+                  <span>Bật Thông Báo Trình Duyệt</span>
+                </button>
+                <button type="button" onclick="testStudyNotification()" class="py-1.5 px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-[11px] font-semibold transition" title="Gửi thử 1 thông báo">
+                  Thử ngay
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Reminders List (Bento Right) -->
+          <div class="lg:col-span-7 bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col">
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+              <div>
+                <h3 class="text-base font-extrabold text-slate-900">Danh Sách Lời Nhắc</h3>
+                <span id="reminders-count-text" class="text-xs text-slate-500">0 lời nhắc sắp tới</span>
+              </div>
+              <button onclick="clearCompletedReminders()" class="text-xs text-slate-400 hover:text-slate-600 transition">
+                Dọn mục đã xong
+              </button>
+            </div>
+
+            <!-- List Container -->
+            <div id="study-reminders-list" class="space-y-2.5 flex-1 max-h-[460px] overflow-y-auto pr-1">
+              <!-- Populated by app.js -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ========================================== -->
+      <!-- TAB 4: ĐẾM NGÀY ĐẾN KÌ THI -->
+      <!-- ========================================== -->
+      <div id="study-tab-exams" class="study-tab-content hidden space-y-6">
+        
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4 pb-4 border-b border-slate-100">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-indigo-100 text-indigo-800">
+                  Đồng Hồ Sĩ Tử
+                </span>
+                <span class="text-xs text-slate-500 font-medium">Đếm ngược thời gian thực từng giây</span>
+              </div>
+              <h3 class="text-lg font-extrabold text-slate-900 mt-1">Đếm Ngày Đến Các Kỳ Thi Quan Trọng</h3>
+              <p class="text-xs text-slate-500 mt-0.5">Tự thêm các mốc thi của trường, lớp hoặc kỳ thi quốc gia để tạo động lực học tập.</p>
+            </div>
+
+            <button onclick="toggleExamForm()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition shadow-sm flex items-center gap-1.5 self-start sm:self-auto">
+              <i class="fa-solid fa-plus"></i>
+              <span>Thêm Kỳ Thi Mới</span>
+            </button>
+          </div>
+
+          <!-- Add Exam Form (Hidden by default, toggled via button) -->
+          <div id="add-exam-form-container" class="hidden mb-6 p-4 bg-slate-50 rounded-2xl border border-slate-200">
+            <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2.5">Nhập thông tin kỳ thi cần đếm ngược</h4>
+            <form onsubmit="addExamCountdown(event)" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-600 mb-1">Tên kỳ thi *</label>
+                <input type="text" id="exam-name-input" required placeholder="VD: Thi Tốt Nghiệp THPT, Thi Học Kỳ..." class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-600 mb-1">Ngày &amp; Giờ thi *</label>
+                <input type="datetime-local" id="exam-date-input" required class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
+              </div>
+              <div class="flex items-end gap-2">
+                <button type="submit" class="flex-1 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition shadow-sm">
+                  Lưu Kì Thi
+                </button>
+                <button type="button" onclick="toggleExamForm()" class="py-2 px-3 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl text-xs font-semibold transition">
+                  Hủy
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Exam Countdowns Grid -->
+          <div id="study-exams-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Populated by app.js -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ========================================== -->
+      <!-- TAB 5: TỰ NOTE NGÀY -->
+      <!-- ========================================== -->
+      <div id="study-tab-notes" class="study-tab-content hidden space-y-6">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          
+          <!-- Add Note Form (Bento Left) -->
+          <div class="lg:col-span-5 bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-2 mb-3">
+                <div class="w-8 h-8 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center text-sm font-bold">
+                  <i class="fa-solid fa-pen-nib"></i>
+                </div>
+                <div>
+                  <h3 class="text-base font-extrabold text-slate-900">Ghi Chú Học Tập Theo Ngày</h3>
+                  <p class="text-[11px] text-slate-500">Lưu lại bài học, mẹo thi cử, mục tiêu hàng ngày</p>
+                </div>
+              </div>
+
+              <form onsubmit="addDailyNote(event)" class="space-y-3">
+                <input type="hidden" id="note-edit-id" value=""/>
+                
+                <div class="grid grid-cols-2 gap-2.5">
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Ngày ghi chú *</label>
+                    <input type="date" id="note-date" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-rose-500"/>
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Mức độ ưu tiên</label>
+                    <select id="note-priority" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-rose-500 font-medium">
+                      <option value="normal">Bình thường 📘</option>
+                      <option value="important">Quan trọng ⭐</option>
+                      <option value="urgent">Cần gấp 🔥</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Tiêu đề ghi chú *</label>
+                  <input type="text" id="note-title" required placeholder="Ví dụ: Mục tiêu hôm nay, lỗi bấm Casio hay sai..." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-rose-500"/>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Nội dung chi tiết / Gạch đầu dòng</label>
+                  <textarea id="note-content" rows="4" placeholder="- Ôn lại cách bấm số phức liên hợp&#10;- Bấm phương trình bậc 3 cẩn thận dấu âm&#10;- Giải xong 2 đề trắc nghiệm Toán..." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-rose-500"></textarea>
+                </div>
+
+                <div class="flex items-center gap-2">
+                  <button type="submit" id="note-submit-btn" class="flex-1 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-bold transition shadow-sm flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-bookmark"></i>
+                    <span>Lưu Ghi Chú</span>
+                  </button>
+                  <button type="button" id="note-cancel-edit-btn" onclick="cancelEditNote()" class="hidden py-2.5 px-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold transition">
+                    Hủy
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
+              <span><i class="fa-solid fa-lock text-emerald-600 mr-1"></i> Lưu trên thiết bị của bạn</span>
+              <button onclick="clearAllNotes()" class="text-slate-400 hover:text-rose-600 transition">Xóa tất cả</button>
+            </div>
+          </div>
+
+          <!-- Notes Timeline / List (Bento Right) -->
+          <div class="lg:col-span-7 bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col">
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+              <div>
+                <h3 class="text-base font-extrabold text-slate-900">Sổ Tay Ghi Chú Học Tập</h3>
+                <span id="notes-count-text" class="text-xs text-slate-500">0 ghi chú đã lưu</span>
+              </div>
+              
+              <div class="relative">
+                <input type="text" id="note-filter-search" oninput="filterNotesBySearch(this.value)" placeholder="Tìm ghi chú..." class="bg-slate-50 border border-slate-200 rounded-xl pl-7 pr-2.5 py-1 text-xs focus:bg-white focus:outline-none focus:ring-2 focus:ring-rose-500 w-32 sm:w-40"/>
+                <i class="fa-solid fa-magnifying-glass absolute left-2 top-2 text-slate-400 text-xs"></i>
+              </div>
+            </div>
+
+            <!-- Notes List Container -->
+            <div id="study-notes-list" class="space-y-3 flex-1 max-h-[460px] overflow-y-auto pr-1">
+              <!-- Populated by app.js -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DOCUMENT PREVIEW MODAL -->
+  <div id="doc-preview-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 relative shadow-2xl max-h-[90vh] overflow-y-auto">
+      <button onclick="closeDocPreview()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-lg">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div id="doc-preview-content"></div>
+    </div>
+  </div>
+
+
   <!-- TIKTOK & FACEBOOK COMMUNITY + STUDENT REVIEWS -->
   <section id="tiktok-section" class="py-14 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1124,6 +1537,10 @@
     <a href="#products-section" class="flex flex-col items-center gap-0.5 hover:text-blue-600">
       <i class="fa-solid fa-store text-base text-blue-600"></i>
       <span>Kho Máy</span>
+    </a>
+    <a href="#study-hub-section" class="flex flex-col items-center gap-0.5 hover:text-blue-600 text-blue-600 font-bold">
+      <i class="fa-solid fa-graduation-cap text-base"></i>
+      <span>Học Tập</span>
     </a>
     <a href="#simulator-section" class="flex flex-col items-center gap-0.5 hover:text-blue-600">
       <i class="fa-solid fa-microchip text-base text-emerald-600"></i>
