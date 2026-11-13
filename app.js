@@ -2007,10 +2007,10 @@ function renderStudyDocs() {
     let emptyMsg = "Không tìm thấy tài liệu phù hợp";
     let emptySub = "Thử chọn môn khác hoặc đổi từ khóa tìm kiếm";
     if (isMyDocs) {
-      emptyMsg = "Bạn chưa tải lên tài liệu cá nhân nào";
+      emptyMsg = 'Mục "Tài liệu của tôi" chưa có file nào tải lên';
       emptySub = "Bấm nút '+ Tải Lên / Đóng Góp File' ở trên để lưu tài liệu học tập vào máy dùng riêng.";
     } else if (isPending) {
-      emptyMsg = "Chưa có tài liệu nào trong danh sách chờ duyệt";
+      emptyMsg = 'Danh sách "Chờ duyệt" chưa có tài liệu nào';
       emptySub = "Khi bạn gửi đóng góp tài liệu cho shop duyệt, thông tin sẽ hiển thị tại đây.";
     }
 
@@ -2049,7 +2049,7 @@ function renderStudyDocs() {
                 </span>
               </div>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 flex items-center gap-1">
-                <i class="fa-solid fa-lock text-[9px]"></i> Trên máy bạn
+                <i class="fa-solid fa-lock text-[9px]"></i> Tài liệu của tôi (Trên máy bạn)
               </span>
             </div>
 
@@ -2150,7 +2150,7 @@ function renderStudyDocs() {
                 </span>
               </div>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
-                <i class="fa-solid fa-circle-check text-[9px] mr-0.5"></i> ${doc.badge}
+                <i class="fa-solid fa-circle-check text-[9px] mr-0.5"></i> Tài Liệu Đóng Góp (Đã duyệt)
               </span>
             </div>
 
