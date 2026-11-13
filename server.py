@@ -14,6 +14,7 @@ PRODUCTS_FILE = os.path.join(DATA_DIR, "products.json")
 CONFIG_FILE = os.path.join(DATA_DIR, "shop-config.json")
 TRICKS_FILE = os.path.join(DATA_DIR, "casio-tricks.json")
 QUIZ_FILE = os.path.join(DATA_DIR, "quiz.json")
+LEADERBOARD_FILE = os.path.join(DATA_DIR, "leaderboard.json")
 
 os.makedirs(DATA_DIR, exist_ok=True)
 
@@ -66,6 +67,10 @@ class CasioShopHandler(http.server.SimpleHTTPRequestHandler):
 
         elif path == "/api/quiz":
             self._send_json_file(QUIZ_FILE)
+            return
+
+        elif path == "/api/leaderboard":
+            self._send_json_file(LEADERBOARD_FILE)
             return
 
         elif path == "/api/orders":

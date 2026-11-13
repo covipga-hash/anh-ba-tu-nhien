@@ -1,0 +1,76 @@
+{
+  "title": "Bảng Xếp Hạng Những Người Góp Công Xây Dựng (Mẫu)",
+  "subtitle": "Tôn vinh các bạn học sinh, sinh viên tích cực đóng góp tài liệu, ôn luyện bấm máy và xây dựng cộng đồng",
+  "badge": "Bảng mẫu cộng đồng",
+  "note": "Toàn bộ tên, điểm số và số liệu trên bảng cộng đồng này là dữ liệu MẪU minh họa. Do web chạy tĩnh trên GitHub Pages, khi học sinh muốn vinh danh tên mình lên Bảng Cộng Đồng chính thức, vui lòng gửi tên và ảnh chụp lịch sử điểm trên máy về shop qua Zalo hoặc Threads @_hgtuditto để shop duyệt và cập nhật vào file dữ liệu.",
+  "scoringRules": {
+    "docContributed": 50,
+    "docDownloaded": 5,
+    "examBase": 10,
+    "examBonus": "Cộng thêm theo điểm bài làm (tối đa +10 điểm bài làm, tổng +20 điểm/bài)",
+    "antiSpamNote": "Làm lại bài hoặc tải tài liệu vẫn được tính điểm nhưng có giới hạn tần suất (cooldown) để tránh cộng trùng vô hạn.",
+    "proposalNote": "Đây là thang điểm đề xuất để Cơ duyệt."
+  },
+  "topContributors": [
+    {
+      "rank": 1,
+      "name": "[Mẫu] Minh Khang (THPT Chuyên)",
+      "points": 380,
+      "docsContributed": 5,
+      "docsDownloaded": 18,
+      "examsCompleted": 12,
+      "badge": "Quán Quân Bấm Máy",
+      "avatar": "fa-crown",
+      "avatarBg": "from-amber-400 to-amber-600"
+    },
+    {
+      "rank": 2,
+      "name": "[Mẫu] Thuỳ Dương (Lớp 12 A1)",
+      "points": 295,
+      "docsContributed": 4,
+      "docsDownloaded": 15,
+      "examsCompleted": 8,
+      "badge": "Á Quân Đóng Góp",
+      "avatar": "fa-medal",
+      "avatarBg": "from-slate-300 to-slate-500"
+    },
+    {
+      "rank": 3,
+      "name": "[Mẫu] Hoàng Nam (THCS Chu Văn An)",
+      "points": 210,
+      "docsContributed": 2,
+      "docsDownloaded": 22,
+      "examsCompleted": 9,
+      "badge": "Top 3 Tích Cực",
+      "avatar": "fa-award",
+      "avatarBg": "from-amber-600 to-amber-800"
+    },
+    {
+      "rank": 4,
+      "name": "[Mẫu] Phương Thảo (ĐH Sư Phạm)",
+      "points": 165,
+      "docsContributed": 2,
+      "docsDownloaded": 11,
+      "examsCompleted": 6,
+      "badge": "Học Sinh Chăm Chỉ"
+    },
+    {
+      "rank": 5,
+      "name": "[Mẫu] Tuấn Kiệt (Khối 11)",
+      "points": 140,
+      "docsContributed": 1,
+      "docsDownloaded": 16,
+      "examsCompleted": 5,
+      "badge": "Chiến Binh Casio"
+    },
+    {
+      "rank": 6,
+      "name": "[Mẫu] Bảo Ngọc (Khối 10)",
+      "points": 95,
+      "docsContributed": 1,
+      "docsDownloaded": 9,
+      "examsCompleted": 4,
+      "badge": "Thành Viên Mới Tích Cực"
+    }
+  ]
+}

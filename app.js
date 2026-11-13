@@ -1965,6 +1965,9 @@ function initStudyHub() {
   renderStudyExams();
   renderDailyNotes();
   
+  loadLeaderboardData();
+  loadMyPointsData();
+  
   checkNotificationPermission();
   
   // Set default dates for form inputs
@@ -2356,6 +2359,7 @@ function downloadStudyDoc(docId) {
   const doc = DEFAULT_STUDY_DOCS.find(d => d.id === docId);
   const title = doc ? doc.title : "Tài liệu";
   showToast(`[Mẫu] Đang kết nối tải "${title}". Cơ và shop sẽ cập nhật link file chính thức sớm nhất!`, "info");
+  addMyPoints('download', `Tải tài liệu: ${title}`, 5, { docId: docId });
 }
 
 // ----------------------------------------------------
@@ -2779,6 +2783,11 @@ function submitExam(isAuto = false) {
   examState.history.unshift(historyEntry);
   if (examState.history.length > 25) examState.history = examState.history.slice(0, 25);
   saveExamHistory();
+
+  // Add leaderboard points: +10 base + score on 10-point scale
+  const examScoreBonus = Math.round(parseFloat(score));
+  const totalExamPts = 10 + examScoreBonus;
+  addMyPoints('exam', `Làm bài kiểm tra Casio (${score}/10đ)`, totalExamPts, { score: score });
 
   // Render Result Banner & Questions
   renderExamResultBanner(score, correct, total, answered, timeTakenFormatted, isAuto);
@@ -3858,6 +3867,7 @@ async function handleDocUploadSubmit(e) {
       await idbSaveDoc('pending_docs', docObj);
       await loadUploadedDocs();
       closeUploadDocModal();
+      addMyPoints('contrib', `Đóng góp tài liệu: "${title}" (Chờ shop duyệt)`, 50, { docId: docId });
 
       // Open Contribution Success Modal with prefilled messages
       openContribSuccessModal(docObj);
@@ -4028,6 +4038,7 @@ async function downloadUploadedDoc(storeName, docId) {
   a.click();
   document.body.removeChild(a);
   showToast("Đang tải file về máy...", "success");
+  addMyPoints('download', `Tải tài liệu cá nhân: ${doc.title || doc.fileName}`, 5, { docId: docId });
 }
 
 // Delete document from my_docs or pending_docs
@@ -4051,4 +4062,551 @@ async function resendPendingDoc(docId) {
   if (doc) {
     openContribSuccessModal(doc);
   }
+}
+
+
+// ====================================================
+// 6. BẢNG XẾP HẠNG GÓP CÔNG XÂY DỰNG & TÍCH ĐIỂM
+// ====================================================
+
+const DEFAULT_LEADERBOARD_DATA = {
+  title: "Bảng Xếp Hạng Những Người Góp Công Xây Dựng (Mẫu)",
+  subtitle: "Tôn vinh các bạn học sinh, sinh viên tích cực đóng góp tài liệu, ôn luyện bấm máy và xây dựng cộng đồng",
+  badge: "Bảng mẫu cộng đồng",
+  note: "Toàn bộ tên, điểm số và số liệu trên bảng cộng đồng này là dữ liệu MẪU minh họa. Do web chạy tĩnh trên GitHub Pages, khi học sinh muốn vinh danh tên mình lên Bảng Cộng Đồng chính thức, vui lòng gửi tên và ảnh chụp lịch sử điểm trên máy về shop qua Zalo hoặc Threads @_hgtuditto để shop duyệt và cập nhật vào file dữ liệu.",
+  scoringRules: {
+    docContributed: 50,
+    docDownloaded: 5,
+    examBase: 10,
+    examBonus: "Cộng thêm theo điểm bài làm (tối đa +10 điểm bài làm, tổng +20 điểm/bài)",
+    antiSpamNote: "Làm lại bài hoặc tải tài liệu vẫn được tính điểm nhưng có giới hạn tần suất (cooldown) để tránh cộng trùng vô hạn.",
+    proposalNote: "Đây là thang điểm đề xuất để Cơ duyệt."
+  },
+  topContributors: [
+    {
+      rank: 1,
+      name: "[Mẫu] Minh Khang (THPT Chuyên)",
+      points: 380,
+      docsContributed: 5,
+      docsDownloaded: 18,
+      examsCompleted: 12,
+      badge: "Quán Quân Bấm Máy",
+      avatar: "fa-crown",
+      avatarBg: "from-amber-400 to-amber-600"
+    },
+    {
+      rank: 2,
+      name: "[Mẫu] Thuỳ Dương (Lớp 12 A1)",
+      points: 295,
+      docsContributed: 4,
+      docsDownloaded: 15,
+      examsCompleted: 8,
+      badge: "Á Quân Đóng Góp",
+      avatar: "fa-medal",
+      avatarBg: "from-slate-300 to-slate-500"
+    },
+    {
+      rank: 3,
+      name: "[Mẫu] Hoàng Nam (THCS Chu Văn An)",
+      points: 210,
+      docsContributed: 2,
+      docsDownloaded: 22,
+      examsCompleted: 9,
+      badge: "Top 3 Tích Cực",
+      avatar: "fa-award",
+      avatarBg: "from-amber-600 to-amber-800"
+    },
+    {
+      rank: 4,
+      name: "[Mẫu] Phương Thảo (ĐH Sư Phạm)",
+      points: 165,
+      docsContributed: 2,
+      docsDownloaded: 11,
+      examsCompleted: 6,
+      badge: "Học Sinh Chăm Chỉ"
+    },
+    {
+      rank: 5,
+      name: "[Mẫu] Tuấn Kiệt (Khối 11)",
+      points: 140,
+      docsContributed: 1,
+      docsDownloaded: 16,
+      examsCompleted: 5,
+      badge: "Chiến Binh Casio"
+    },
+    {
+      rank: 6,
+      name: "[Mẫu] Bảo Ngọc (Khối 10)",
+      points: 95,
+      docsContributed: 1,
+      docsDownloaded: 9,
+      examsCompleted: 4,
+      badge: "Thành Viên Mới Tích Cực"
+    }
+  ]
+};
+
+let leaderboardData = { ...DEFAULT_LEADERBOARD_DATA };
+
+// Personal Points State (localStorage)
+let myPointsState = {
+  profileName: "Học sinh chăm chỉ",
+  totalPoints: 0,
+  stats: {
+    contributed: 0,
+    downloaded: 0,
+    exams: 0
+  },
+  history: [],
+  lastDownloadTimes: {},
+  lastExamSubmitTime: 0
+};
+
+// Load leaderboard from API or fallback
+async function loadLeaderboardData() {
+  try {
+    const res = await fetch('/api/leaderboard');
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.topContributors) {
+        leaderboardData = data;
+      }
+    } else {
+      const resStatic = await fetch('data/leaderboard.json');
+      if (resStatic.ok) {
+        const dataStatic = await resStatic.json();
+        if (dataStatic && dataStatic.topContributors) {
+          leaderboardData = dataStatic;
+        }
+      }
+    }
+  } catch (err) {
+    console.warn("Could not fetch leaderboard.json, using fallback", err);
+  }
+  renderLeaderboard();
+}
+
+// Load personal points from localStorage
+function loadMyPointsData() {
+  try {
+    const raw = localStorage.getItem('abtn_user_points_data');
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      myPointsState.profileName = parsed.profileName || "Học sinh chăm chỉ";
+      myPointsState.totalPoints = typeof parsed.totalPoints === 'number' ? parsed.totalPoints : 0;
+      myPointsState.stats = parsed.stats || { contributed: 0, downloaded: 0, exams: 0 };
+      myPointsState.history = Array.isArray(parsed.history) ? parsed.history : [];
+      myPointsState.lastDownloadTimes = parsed.lastDownloadTimes || {};
+      myPointsState.lastExamSubmitTime = parsed.lastExamSubmitTime || 0;
+    }
+  } catch (e) {
+    console.warn("Error loading myPointsState", e);
+  }
+  renderMyPointsView();
+}
+
+function saveMyPointsData() {
+  try {
+    localStorage.setItem('abtn_user_points_data', JSON.stringify(myPointsState));
+  } catch (e) {
+    console.warn("Error saving myPointsState", e);
+  }
+}
+
+// Add Points Engine with Cooldown / Anti-Spam protection
+function addMyPoints(type, title, points, meta = {}) {
+  const now = Date.now();
+
+  // Cooldown rules to prevent infinite duplicate point farming
+  if (type === 'download') {
+    const docKey = meta.docId || 'general';
+    const lastTime = myPointsState.lastDownloadTimes[docKey] || 0;
+    if (now - lastTime < 15000) { // 15 seconds cooldown per document
+      console.log("Download points on cooldown for doc:", docKey);
+      return false;
+    }
+    myPointsState.lastDownloadTimes[docKey] = now;
+    myPointsState.stats.downloaded++;
+  } else if (type === 'exam') {
+    if (now - myPointsState.lastExamSubmitTime < 10000) { // 10 seconds cooldown between exam submits
+      console.log("Exam points on cooldown");
+      return false;
+    }
+    myPointsState.lastExamSubmitTime = now;
+    myPointsState.stats.exams++;
+  } else if (type === 'contrib') {
+    myPointsState.stats.contributed++;
+  }
+
+  myPointsState.totalPoints += points;
+
+  // Prepend to history
+  myPointsState.history.unshift({
+    id: 'pts_' + now,
+    type: type,
+    title: title,
+    points: points,
+    timestamp: new Date().toLocaleString('vi-VN', { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit' })
+  });
+
+  if (myPointsState.history.length > 50) {
+    myPointsState.history = myPointsState.history.slice(0, 50);
+  }
+
+  saveMyPointsData();
+  renderMyPointsView();
+
+  showToast(`+${points} điểm! ${title}`, "success");
+  return true;
+}
+
+// Rank & Badge Logic
+function getMyRankInfo(points) {
+  if (points >= 500) {
+    return { name: "Đại Kiện Tướng", color: "bg-amber-100 text-amber-800 border-amber-300", next: "Đã đạt cấp tối đa! 👑", percent: 100 };
+  } else if (points >= 250) {
+    const rem = 500 - points;
+    const pct = Math.round(((points - 250) / 250) * 100);
+    return { name: "Cao Thủ Bấm Máy", color: "bg-purple-100 text-purple-800 border-purple-300", next: `Cần thêm ${rem} điểm để lên Đại Kiện Tướng`, percent: pct };
+  } else if (points >= 100) {
+    const rem = 250 - points;
+    const pct = Math.round(((points - 100) / 150) * 100);
+    return { name: "Chiến Binh Casio", color: "bg-emerald-100 text-emerald-800 border-emerald-300", next: `Cần thêm ${rem} điểm để lên Cao Thủ`, percent: pct };
+  } else if (points >= 30) {
+    const rem = 100 - points;
+    const pct = Math.round(((points - 30) / 70) * 100);
+    return { name: "Học Sinh Chăm Chỉ", color: "bg-blue-100 text-blue-800 border-blue-300", next: `Cần thêm ${rem} điểm để lên Chiến Binh`, percent: pct };
+  } else {
+    const rem = 30 - points;
+    const pct = Math.round((points / 30) * 100);
+    return { name: "Học Viên Khởi Động", color: "bg-slate-100 text-slate-700 border-slate-300", next: `Cần thêm ${rem} điểm để lên Chăm Chỉ`, percent: pct };
+  }
+}
+
+// Render Leaderboard Community View
+function renderLeaderboard() {
+  const podiumEl = document.getElementById('lb-podium-container');
+  const tableEl = document.getElementById('lb-community-table-body');
+  if (!podiumEl || !tableEl) return;
+
+  const top3 = (leaderboardData.topContributors || []).slice(0, 3);
+  const rest = (leaderboardData.topContributors || []).slice(3);
+
+  const gold = top3.find(c => c.rank === 1) || top3[0];
+  const silver = top3.find(c => c.rank === 2) || top3[1];
+  const bronze = top3.find(c => c.rank === 3) || top3[2];
+
+  let podiumHtml = '';
+
+  // Silver (Rank 2)
+  if (silver) {
+    podiumHtml += `
+      <div class="order-2 md:order-1 bg-white rounded-3xl p-5 border-2 border-slate-300 shadow-sm flex flex-col justify-between relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-24 h-24 bg-slate-200/50 rounded-full blur-2xl -mr-6 -mt-6"></div>
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="w-8 h-8 rounded-xl bg-slate-200 text-slate-700 flex items-center justify-center font-black text-sm shadow-sm">
+              🥈 2
+            </span>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">
+              ${silver.badge}
+            </span>
+          </div>
+
+          <div class="text-center my-3">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-slate-200 to-slate-400 text-white flex items-center justify-center text-2xl mx-auto shadow-md">
+              <i class="fa-solid fa-medal"></i>
+            </div>
+            <h4 class="text-sm font-black text-slate-900 mt-2 truncate">${silver.name}</h4>
+            <div class="text-2xl font-black text-slate-800 mt-1">${silver.points} <span class="text-xs font-bold text-slate-500">điểm</span></div>
+          </div>
+
+          <div class="grid grid-cols-3 gap-1.5 text-center text-[10px] mt-4 pt-3 border-t border-slate-100">
+            <div class="p-1.5 bg-slate-50 rounded-xl">
+              <strong class="block text-slate-800">${silver.docsContributed}</strong>
+              <span class="text-slate-400">Nộp</span>
+            </div>
+            <div class="p-1.5 bg-slate-50 rounded-xl">
+              <strong class="block text-slate-800">${silver.docsDownloaded}</strong>
+              <span class="text-slate-400">Tải</span>
+            </div>
+            <div class="p-1.5 bg-slate-50 rounded-xl">
+              <strong class="block text-slate-800">${silver.examsCompleted}</strong>
+              <span class="text-slate-400">Bài thi</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // Gold (Rank 1 - Center piece)
+  if (gold) {
+    podiumHtml += `
+      <div class="order-1 md:order-2 bg-gradient-to-b from-amber-50/80 via-white to-amber-50/40 rounded-3xl p-6 border-2 border-amber-400 shadow-lg flex flex-col justify-between relative overflow-hidden ring-4 ring-amber-400/20 transform md:-translate-y-2">
+        <div class="absolute top-0 right-0 w-32 h-32 bg-amber-300/40 rounded-full blur-3xl -mr-8 -mt-8"></div>
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-3 py-1 rounded-xl bg-amber-400 text-amber-950 flex items-center gap-1.5 font-black text-xs shadow-md">
+              <i class="fa-solid fa-crown text-amber-900"></i>
+              <span>🥇 QUÁN QUÂN</span>
+            </span>
+            <span class="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300">
+              ${gold.badge}
+            </span>
+          </div>
+
+          <div class="text-center my-4">
+            <div class="w-18 h-18 rounded-3xl bg-gradient-to-tr from-amber-400 to-amber-500 text-amber-950 flex items-center justify-center text-3xl mx-auto shadow-lg ring-4 ring-amber-200">
+              <i class="fa-solid fa-trophy animate-bounce"></i>
+            </div>
+            <h4 class="text-base font-black text-slate-900 mt-3 truncate">${gold.name}</h4>
+            <div class="text-3xl font-black text-amber-600 mt-1">${gold.points} <span class="text-xs font-bold text-slate-500">điểm</span></div>
+          </div>
+
+          <div class="grid grid-cols-3 gap-2 text-center text-xs mt-4 pt-3 border-t border-amber-200/80">
+            <div class="p-2 bg-white/80 rounded-xl border border-amber-200">
+              <strong class="block text-amber-900 font-extrabold">${gold.docsContributed}</strong>
+              <span class="text-[10px] text-amber-700">Tài liệu nộp</span>
+            </div>
+            <div class="p-2 bg-white/80 rounded-xl border border-amber-200">
+              <strong class="block text-amber-900 font-extrabold">${gold.docsDownloaded}</strong>
+              <span class="text-[10px] text-amber-700">Lượt tải về</span>
+            </div>
+            <div class="p-2 bg-white/80 rounded-xl border border-amber-200">
+              <strong class="block text-amber-900 font-extrabold">${gold.examsCompleted}</strong>
+              <span class="text-[10px] text-amber-700">Bài kiểm tra</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // Bronze (Rank 3)
+  if (bronze) {
+    podiumHtml += `
+      <div class="order-3 bg-white rounded-3xl p-5 border-2 border-amber-600/30 shadow-sm flex flex-col justify-between relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-24 h-24 bg-amber-600/10 rounded-full blur-2xl -mr-6 -mt-6"></div>
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center font-black text-sm shadow-sm">
+              🥉 3
+            </span>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-50 text-amber-800">
+              ${bronze.badge}
+            </span>
+          </div>
+
+          <div class="text-center my-3">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-600 to-amber-800 text-white flex items-center justify-center text-2xl mx-auto shadow-md">
+              <i class="fa-solid fa-award"></i>
+            </div>
+            <h4 class="text-sm font-black text-slate-900 mt-2 truncate">${bronze.name}</h4>
+            <div class="text-2xl font-black text-amber-800 mt-1">${bronze.points} <span class="text-xs font-bold text-slate-500">điểm</span></div>
+          </div>
+
+          <div class="grid grid-cols-3 gap-1.5 text-center text-[10px] mt-4 pt-3 border-t border-slate-100">
+            <div class="p-1.5 bg-slate-50 rounded-xl">
+              <strong class="block text-slate-800">${bronze.docsContributed}</strong>
+              <span class="text-slate-400">Nộp</span>
+            </div>
+            <div class="p-1.5 bg-slate-50 rounded-xl">
+              <strong class="block text-slate-800">${bronze.docsDownloaded}</strong>
+              <span class="text-slate-400">Tải</span>
+            </div>
+            <div class="p-1.5 bg-slate-50 rounded-xl">
+              <strong class="block text-slate-800">${bronze.examsCompleted}</strong>
+              <span class="text-slate-400">Bài thi</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  podiumEl.innerHTML = podiumHtml;
+
+  // Render Table for Ranks 4+
+  tableEl.innerHTML = rest.map(c => `
+    <tr class="hover:bg-slate-50/80 transition">
+      <td class="py-3 pl-2 font-black text-slate-500">
+        <span class="w-6 h-6 rounded-lg bg-slate-100 flex items-center justify-center text-xs">
+          ${c.rank}
+        </span>
+      </td>
+      <td class="py-3 font-bold text-slate-900">
+        <div class="flex items-center gap-2">
+          <span>${c.name}</span>
+          ${c.badge ? `<span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-100 text-slate-600 font-semibold">${c.badge}</span>` : ''}
+        </div>
+      </td>
+      <td class="py-3 text-center text-slate-600">${c.docsContributed}</td>
+      <td class="py-3 text-center text-slate-600">${c.docsDownloaded}</td>
+      <td class="py-3 text-center text-slate-600">${c.examsCompleted}</td>
+      <td class="py-3 text-right pr-2 font-black text-blue-600 text-sm">${c.points} đ</td>
+    </tr>
+  `).join('');
+}
+
+// Render Personal Points View
+function renderMyPointsView() {
+  const nameEl = document.getElementById('my-profile-name');
+  const pointsEl = document.getElementById('my-total-points-display');
+  const badgeEl = document.getElementById('my-rank-badge');
+  const nextEl = document.getElementById('my-next-rank-text');
+
+  const statContribEl = document.getElementById('my-stat-contributed');
+  const statDownEl = document.getElementById('my-stat-downloaded');
+  const statExamEl = document.getElementById('my-stat-exams');
+
+  const historyListEl = document.getElementById('my-points-history-list');
+  const historyCountEl = document.getElementById('my-history-count-text');
+
+  if (nameEl) nameEl.textContent = myPointsState.profileName;
+  if (pointsEl) pointsEl.textContent = myPointsState.totalPoints;
+
+  const rankInfo = getMyRankInfo(myPointsState.totalPoints);
+  if (badgeEl) {
+    badgeEl.textContent = rankInfo.name;
+    badgeEl.className = `px-2 py-0.5 rounded-full text-[10px] font-bold border ${rankInfo.color}`;
+  }
+  if (nextEl) nextEl.textContent = rankInfo.next;
+
+  if (statContribEl) statContribEl.textContent = myPointsState.stats.contributed;
+  if (statDownEl) statDownEl.textContent = myPointsState.stats.downloaded;
+  if (statExamEl) statExamEl.textContent = myPointsState.stats.exams;
+
+  if (historyCountEl) historyCountEl.textContent = `${myPointsState.history.length} hoạt động`;
+
+  if (historyListEl) {
+    if (myPointsState.history.length === 0) {
+      historyListEl.innerHTML = `
+        <div class="text-center py-8 text-slate-400">
+          <i class="fa-solid fa-coins text-3xl mb-2 text-slate-300"></i>
+          <p class="text-xs font-medium">Bạn chưa có điểm tích lũy nào.</p>
+          <p class="text-[11px] text-slate-400 mt-0.5">Tải tài liệu (+5đ), nộp bài kiểm tra (+10-20đ), hoặc gửi tài liệu (+50đ) để nhận điểm nhé!</p>
+        </div>
+      `;
+    } else {
+      historyListEl.innerHTML = myPointsState.history.map(item => {
+        let icon = "fa-star";
+        let color = "bg-blue-100 text-blue-700";
+        if (item.type === 'contrib') {
+          icon = "fa-file-circle-plus";
+          color = "bg-amber-100 text-amber-700";
+        } else if (item.type === 'download') {
+          icon = "fa-cloud-arrow-down";
+          color = "bg-blue-100 text-blue-700";
+        } else if (item.type === 'exam') {
+          icon = "fa-clipboard-check";
+          color = "bg-emerald-100 text-emerald-700";
+        }
+
+        return `
+          <div class="p-3 bg-slate-50 hover:bg-slate-100/80 rounded-2xl border border-slate-200/80 flex items-center justify-between gap-3 transition">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <div class="w-8 h-8 rounded-xl ${color} flex items-center justify-center text-xs shrink-0">
+                <i class="fa-solid ${icon}"></i>
+              </div>
+              <div class="min-w-0">
+                <div class="text-xs font-bold text-slate-900 truncate">${item.title}</div>
+                <div class="text-[10px] text-slate-400">${item.timestamp}</div>
+              </div>
+            </div>
+            <span class="text-xs font-black text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-lg border border-emerald-200 shrink-0">
+              +${item.points}đ
+            </span>
+          </div>
+        `;
+      }).join('');
+    }
+  }
+}
+
+// Switch between Community, My Stats, Rules subtabs
+function switchLeaderboardView(viewName, btn) {
+  document.querySelectorAll('.lb-subtab-btn').forEach(b => {
+    b.classList.remove('bg-white', 'text-slate-900', 'shadow-sm');
+    b.classList.add('text-slate-600');
+  });
+  if (btn) {
+    btn.classList.add('bg-white', 'text-slate-900', 'shadow-sm');
+    btn.classList.remove('text-slate-600');
+  }
+
+  document.querySelectorAll('.lb-view-section').forEach(sec => sec.classList.add('hidden'));
+
+  const target = document.getElementById(`lb-view-${viewName}`);
+  if (target) target.classList.remove('hidden');
+}
+
+// Edit nickname
+function editMyProfileName() {
+  const current = myPointsState.profileName || "Học sinh chăm chỉ";
+  const name = prompt("Nhập tên / biệt danh hiển thị trên máy của bạn:", current);
+  if (name && name.trim()) {
+    myPointsState.profileName = name.trim();
+    saveMyPointsData();
+    renderMyPointsView();
+    showToast("Đã cập nhật biệt danh của bạn!", "success");
+  }
+}
+
+// Reset points
+function resetMyPointsData() {
+  if (confirm("Bạn có chắc chắn muốn đặt lại toàn bộ điểm và lịch sử tích lũy trên máy này về 0?")) {
+    myPointsState.totalPoints = 0;
+    myPointsState.stats = { contributed: 0, downloaded: 0, exams: 0 };
+    myPointsState.history = [];
+    myPointsState.lastDownloadTimes = {};
+    myPointsState.lastExamSubmitTime = 0;
+    saveMyPointsData();
+    renderMyPointsView();
+    showToast("Đã đặt lại dữ liệu điểm cá nhân!", "info");
+  }
+}
+
+// Submit score modal helpers
+function submitMyScoreToShopModal() {
+  const previewEl = document.getElementById('submit-score-preview');
+  if (previewEl) {
+    previewEl.innerHTML = `
+      <div><strong>Học sinh:</strong> ${myPointsState.profileName}</div>
+      <div><strong>Tổng điểm tích lũy:</strong> <span class="text-amber-600 font-black text-sm">${myPointsState.totalPoints} điểm</span></div>
+      <div><strong>Danh hiệu:</strong> ${getMyRankInfo(myPointsState.totalPoints).name}</div>
+      <div><strong>Hoạt động:</strong> ${myPointsState.stats.contributed} tài liệu nộp • ${myPointsState.stats.downloaded} lượt tải • ${myPointsState.stats.exams} bài thi</div>
+    `;
+  }
+  const modal = document.getElementById('submit-score-modal');
+  if (modal) modal.classList.remove('hidden');
+}
+
+function closeSubmitScoreModal() {
+  const modal = document.getElementById('submit-score-modal');
+  if (modal) modal.classList.add('hidden');
+}
+
+function getScoreSubmissionText() {
+  return `Chào shop Anh Ba Tự Nhiên! Mình là ${myPointsState.profileName}, muốn gửi xét duyệt lên Bảng Xếp Hạng Cộng Đồng web:
+- Tổng điểm trên máy: ${myPointsState.totalPoints} điểm
+- Danh hiệu: ${getMyRankInfo(myPointsState.totalPoints).name}
+- Thống kê: ${myPointsState.stats.contributed} tài liệu đóng góp, ${myPointsState.stats.downloaded} lượt tải, ${myPointsState.stats.exams} bài kiểm tra hoàn thành.
+Nhờ shop kiểm tra và duyệt đưa tên mình lên Bảng Vinh Danh Cộng Đồng nhé!`;
+}
+
+function copyScoreMessageAndOpenThreads() {
+  const text = getScoreSubmissionText();
+  navigator.clipboard.writeText(text).then(() => {
+    showToast("Đã sao chép nội dung thành tích!", "success");
+  }).catch(() => {});
+  window.open("https://www.threads.com/@_hgtuditto", "_blank");
+}
+
+function copyScoreMessageAndOpenZalo() {
+  const text = getScoreSubmissionText();
+  navigator.clipboard.writeText(text).then(() => {
+    showToast("Đã sao chép nội dung thành tích!", "success");
+  }).catch(() => {});
+  window.open("https://zalo.me/0971075326", "_blank");
 }
