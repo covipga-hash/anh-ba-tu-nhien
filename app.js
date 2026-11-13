@@ -2000,6 +2000,11 @@ function switchStudyTab(tabKey, btn) {
   document.querySelectorAll('.study-tab-content').forEach(c => c.classList.add('hidden'));
   const target = document.getElementById(`study-tab-${tabKey}`);
   if (target) target.classList.remove('hidden');
+
+  if (tabKey === 'leaderboard') {
+    renderLeaderboard();
+    renderMyPointsView();
+  }
 }
 
 // ----------------------------------------------------
@@ -4162,27 +4167,41 @@ let myPointsState = {
   lastExamSubmitTime: 0
 };
 
-// Load leaderboard from API or fallback
+// Load leaderboard from API or fallback to static data/leaderboard.json
 async function loadLeaderboardData() {
+  // Render fallback data immediately so UI is never blank while fetching
+  renderLeaderboard();
+
+  let loaded = false;
+
   try {
     const res = await fetch('/api/leaderboard');
     if (res.ok) {
       const data = await res.json();
       if (data && data.topContributors) {
         leaderboardData = data;
+        loaded = true;
       }
-    } else {
+    }
+  } catch (_) {
+    // /api/leaderboard is only available on local Python server
+  }
+
+  if (!loaded) {
+    try {
       const resStatic = await fetch('data/leaderboard.json');
       if (resStatic.ok) {
         const dataStatic = await resStatic.json();
         if (dataStatic && dataStatic.topContributors) {
           leaderboardData = dataStatic;
+          loaded = true;
         }
       }
+    } catch (err) {
+      console.warn("Could not fetch data/leaderboard.json, using fallback", err);
     }
-  } catch (err) {
-    console.warn("Could not fetch leaderboard.json, using fallback", err);
   }
+
   renderLeaderboard();
 }
 
@@ -4537,7 +4556,8 @@ function switchLeaderboardView(viewName, btn) {
 
   document.querySelectorAll('.lb-view-section').forEach(sec => sec.classList.add('hidden'));
 
-  const target = document.getElementById(`lb-view-${viewName}`);
+  const normalizedView = String(viewName || '').replace(/_/g, '-');
+  const target = document.getElementById(`lb-view-${normalizedView}`) || document.getElementById(`lb-view-${viewName}`);
   if (target) target.classList.remove('hidden');
 }
 
