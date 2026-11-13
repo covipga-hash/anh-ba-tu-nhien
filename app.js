@@ -385,10 +385,10 @@ const DEFAULT_TRICKS = [
 
 const state = {
   config: { ...DEFAULT_CONFIG },
-  products: [],
-  filteredProducts: [],
-  tricks: [],
-  filteredTricks: [],
+  products: [...DEFAULT_PRODUCTS],
+  filteredProducts: [...DEFAULT_PRODUCTS],
+  tricks: [...DEFAULT_TRICKS],
+  filteredTricks: [...DEFAULT_TRICKS],
   cart: JSON.parse(localStorage.getItem('abtn_cart') || '[]'),
   currentCategory: 'all',
   currentClassification: 'all',
@@ -424,14 +424,18 @@ let VOUCHERS = { ...DEFAULT_CONFIG.vouchers };
 // Initialize App
 document.addEventListener('DOMContentLoaded', async () => {
   initCountdown();
-  await loadShopConfig();
-  await loadProducts();
-  await loadTricks();
   renderProducts();
   renderTricks();
   updateCartUI();
   setupEventListeners();
   initDiagnosticSimulator();
+
+  // Async refresh from server or static JSON
+  await loadShopConfig();
+  await loadProducts();
+  await loadTricks();
+  renderProducts();
+  renderTricks();
 });
 
 // Shared JSON loader with API -> local file -> embedded fallback
@@ -775,32 +779,6 @@ function resetFilters(shouldRender = true) {
   if (searchInput) searchInput.value = '';
   const searchInputMobile = document.getElementById('search-input-mobile');
   if (searchInputMobile) searchInputMobile.value = '';
-  if (shouldRender) applyFilters();
-}
-  state.currentCategory = 'all';
-  state.currentGrade = 'all';
-  state.currentTag = null;
-  state.searchQuery = '';
-  const searchDesk = document.getElementById('search-input');
-  const searchMob = document.getElementById('search-input-mobile');
-  if (searchDesk) searchDesk.value = '';
-  if (searchMob) searchMob.value = '';
-
-  document.querySelectorAll('.cat-btn').forEach((b, i) => {
-    b.classList.toggle('bg-blue-600', i === 0);
-    b.classList.toggle('text-white', i === 0);
-    b.classList.toggle('bg-slate-100', i !== 0);
-    b.classList.toggle('text-slate-700', i !== 0);
-  });
-
-  document.querySelectorAll('.grade-btn').forEach((b, i) => {
-    b.classList.toggle('border-blue-600', i === 0);
-    b.classList.toggle('bg-blue-50', i === 0);
-    b.classList.toggle('text-blue-700', i === 0);
-    b.classList.toggle('border-slate-200', i !== 0);
-    b.classList.toggle('text-slate-600', i !== 0);
-  });
-
   if (shouldRender) applyFilters();
 }
 
