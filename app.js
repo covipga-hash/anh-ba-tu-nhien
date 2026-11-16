@@ -52,7 +52,7 @@ const DEFAULT_PRODUCTS = [
       "Đã qua 40 bước test kỹ thuật của Anh Ba"
     ],
     "gift": "Tặng Bảng 100 Công Thức + Pin Maxell Nhật Mới",
-    "image": "assets/images/products/casio-580vnx.svg",
+    "image": "assets/images/products/fx-580vnx-99.jpg",
     "tags": [
       "fx-580",
       "likenew",
@@ -85,7 +85,7 @@ const DEFAULT_PRODUCTS = [
       "Tem chống giả Bitex phản quang 3D chuẩn chỉ"
     ],
     "gift": "Tặng Pin Nhật Mới + Ebook Mẹo Bấm Casio 9+",
-    "image": "assets/images/products/casio-580vnx.svg",
+    "image": "assets/images/products/fx-580vnx-95.jpg",
     "tags": [
       "fx-580",
       "tietkiem",
@@ -117,7 +117,7 @@ const DEFAULT_PRODUCTS = [
       "Được Bộ GD&ĐT cho phép mang vào phòng thi"
     ],
     "gift": "Tặng Bao Da Chống Sốc + Tài Liệu 880BTG",
-    "image": "assets/images/products/casio-880btg.jpg",
+    "image": "assets/images/products/fx-880btg-99.jpg",
     "tags": [
       "fx-880",
       "caocap",
@@ -150,7 +150,7 @@ const DEFAULT_PRODUCTS = [
       "Hỗ trợ tốt cả THPTQG mới & Đại học"
     ],
     "gift": "Tặng Ebook Hướng Dẫn 880BTG + Pin Dự Phòng",
-    "image": "assets/images/products/casio-880btg.jpg",
+    "image": "assets/images/products/fx-880btg-95.jpg",
     "tags": [
       "fx-880",
       "tietkiem",
@@ -183,7 +183,7 @@ const DEFAULT_PRODUCTS = [
       "Đã kiểm tra kỹ bo mạch & thay pin mới"
     ],
     "gift": "Tặng Pin Maxell Zin + Bảng Công Thức Cấp 2",
-    "image": "assets/images/products/casio-570vnplus.svg",
+    "image": "assets/images/products/fx-570vnplus-99.jpg",
     "tags": [
       "fx-570",
       "giare",
@@ -215,7 +215,7 @@ const DEFAULT_PRODUCTS = [
       "Cam kết không loạn phím, không mờ nét"
     ],
     "gift": "Tặng Pin Mới Thay Sẵn Trong Máy",
-    "image": "assets/images/products/casio-570vnplus.svg",
+    "image": "assets/images/products/fx-570esplus-95.jpg",
     "tags": [
       "fx-570",
       "giare",
@@ -248,7 +248,7 @@ const DEFAULT_PRODUCTS = [
       "Bảng tóm tắt đạo hàm - nguyên hàm ép dẻo"
     ],
     "gift": "Miễn phí ship khi mua kèm máy tính Casio",
-    "image": "assets/images/products/combo-accessories.svg",
+    "image": "assets/images/products/combo-phu-kien-si-tu.jpg",
     "tags": [
       "phukien",
       "combo",
@@ -280,7 +280,7 @@ const DEFAULT_PRODUCTS = [
       "Bảo hành 1 đổi 1 toàn quốc + Freeship hỏa tốc"
     ],
     "gift": "Miễn Phí Ship + Tặng Thước Parabol & Bút Chì 2B",
-    "image": "assets/images/products/casio-880btg.jpg",
+    "image": "assets/images/products/combo-880btg-99.jpg",
     "tags": [
       "fx-880",
       "combo",
