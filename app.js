@@ -3266,7 +3266,7 @@ function formatExamTime(sec) {
 // Load exam data from API / data/quiz.json / fallback
 async function loadExamData() {
   try {
-    const res = await fetch('/api/quiz');
+    const res = await fetch((window.location.hostname.includes('github.io') || window.location.protocol === 'file:') ? 'data/quiz.json' : '/api/quiz');
     if (res.ok) {
       const data = await res.json();
       if (data && data.questions && data.questions.length > 0) {
@@ -5036,7 +5036,7 @@ async function loadLeaderboardData() {
   let loaded = false;
 
   try {
-    const res = await fetch('/api/leaderboard');
+    const res = await fetch((window.location.hostname.includes('github.io') || window.location.protocol === 'file:') ? 'data/leaderboard.json' : '/api/leaderboard');
     if (res.ok) {
       const data = await res.json();
       if (data && data.topContributors) {
