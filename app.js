@@ -62,7 +62,12 @@ const DEFAULT_PRODUCTS = [
     "condition_percent": 99,
     "lid": null,
     "seals": null,
-    "classification": null
+    "classification": null,
+    "photoType": "stock",
+    "photoNote": "Ảnh minh họa Casio/Bitex/retailer — chưa có ảnh thật máy của Cơ",
+    "images": [
+      "assets/images/products/fx-580vnx-99.jpg"
+    ]
   },
   {
     "id": "fx-580vnx-95",
@@ -94,7 +99,12 @@ const DEFAULT_PRODUCTS = [
     "condition_percent": 95,
     "lid": true,
     "seals": null,
-    "classification": null
+    "classification": null,
+    "photoType": "stock",
+    "photoNote": "Ảnh minh họa Casio/Bitex/retailer — chưa có ảnh thật máy của Cơ",
+    "images": [
+      "assets/images/products/fx-580vnx-95.jpg"
+    ]
   },
   {
     "id": "fx-880btg-99",
@@ -127,14 +137,19 @@ const DEFAULT_PRODUCTS = [
     "condition_percent": 99,
     "lid": null,
     "seals": null,
-    "classification": null
+    "classification": null,
+    "photoType": "stock",
+    "photoNote": "Ảnh minh họa Casio/Bitex/retailer — chưa có ảnh thật máy của Cơ",
+    "images": [
+      "assets/images/products/fx-880btg-99.jpg"
+    ]
   },
   {
     "id": "fx-880btg-95",
     "name": "Casio fx-880BTG (Hạng A • Đẹp 95% Giá Sinh Viên)",
     "series": "fx-880BTG",
     "grade": "95%",
-    "badge": "Tiết Kiệm ~360k",
+    "badge": "Tiết Kiệm 360k",
     "originalPrice": 890000,
     "salePrice": 530000,
     "savePercent": 40,
@@ -160,7 +175,12 @@ const DEFAULT_PRODUCTS = [
     "condition_percent": 95,
     "lid": null,
     "seals": null,
-    "classification": null
+    "classification": null,
+    "photoType": "stock",
+    "photoNote": "Ảnh minh họa Casio/Bitex/retailer — chưa có ảnh thật máy của Cơ",
+    "images": [
+      "assets/images/products/fx-880btg-95.jpg"
+    ]
   },
   {
     "id": "fx-570vnplus-99",
@@ -192,14 +212,19 @@ const DEFAULT_PRODUCTS = [
     "condition_percent": 99,
     "lid": null,
     "seals": null,
-    "classification": null
+    "classification": null,
+    "photoType": "stock",
+    "photoNote": "Ảnh minh họa Casio/Bitex/retailer — chưa có ảnh thật máy của Cơ",
+    "images": [
+      "assets/images/products/fx-570vnplus-99.jpg"
+    ]
   },
   {
     "id": "fx-570esplus-95",
     "name": "Casio fx-570ES Plus (Hạng A • Giá Siêu Mềm Sinh Viên)",
     "series": "fx-570ES Plus",
     "grade": "95%",
-    "badge": "Chỉ ~220K",
+    "badge": "Chỉ 220K",
     "originalPrice": 480000,
     "salePrice": 220000,
     "savePercent": 54,
@@ -225,7 +250,12 @@ const DEFAULT_PRODUCTS = [
     "condition_percent": 95,
     "lid": null,
     "seals": null,
-    "classification": null
+    "classification": null,
+    "photoType": "stock",
+    "photoNote": "Ảnh minh họa Casio/Bitex/retailer — chưa có ảnh thật máy của Cơ",
+    "images": [
+      "assets/images/products/fx-570esplus-95.jpg"
+    ]
   },
   {
     "id": "combo-phu-kien-vip",
@@ -257,7 +287,12 @@ const DEFAULT_PRODUCTS = [
     "condition_percent": 100,
     "lid": null,
     "seals": null,
-    "classification": "Phụ kiện"
+    "classification": "Phụ kiện",
+    "photoType": "stock",
+    "photoNote": "Ảnh minh họa Casio/Bitex/retailer — chưa có ảnh thật máy của Cơ",
+    "images": [
+      "assets/images/products/combo-phu-kien-si-tu.jpg"
+    ]
   },
   {
     "id": "combo-luoi-hoc-chinh-phuc-9",
@@ -292,7 +327,767 @@ const DEFAULT_PRODUCTS = [
     "condition_percent": 99,
     "lid": null,
     "seals": null,
+    "classification": null,
+    "photoType": "stock",
+    "photoNote": "Ảnh minh họa Casio/Bitex/retailer — chưa có ảnh thật máy của Cơ",
+    "images": [
+      "assets/images/products/combo-880btg-99.jpg"
+    ]
+  },
+  {
+    "id": "may-000a0090afcc",
+    "name": "Casio fx-580VN X • Xanh nhạt • SN 000A0090AFCC",
+    "series": "fx-580VN X",
+    "grade": "Chờ xác nhận",
+    "badge": "Máy thật #1",
+    "originalPrice": null,
+    "salePrice": null,
+    "savePercent": null,
+    "rating": null,
+    "sold": null,
+    "warranty": "Chờ Cơ xác nhận",
+    "color": "Xanh nhạt",
+    "status": "Còn hàng (máy riêng, 1 chiếc)",
+    "features": [
+      "Máy riêng, số serial trên màn hình: 000A0090AFCC",
+      "2 tem Bitex • Không nắp",
+      "Ảnh thật chụp ngày 24/11/2026 (mặt trước + mặt sau)",
+      "Độ mới và giá: chờ Cơ xác nhận"
+    ],
+    "gift": "Chờ Cơ xác nhận",
+    "image": "assets/images/machines/sn-000A0090AFCC-truoc.jpg",
+    "images": [
+      "assets/images/machines/sn-000A0090AFCC-truoc.jpg",
+      "assets/images/machines/sn-000A0090AFCC-sau.jpg"
+    ],
+    "photoType": "real",
+    "serial": "000A0090AFCC",
+    "machineColor": "Xanh nhạt",
+    "shotDate": "24/11/2026",
+    "lidColor": null,
+    "lidQuality": null,
+    "modelPending": false,
+    "tags": [
+      "fx-580",
+      "maythat"
+    ],
+    "condition_percent": null,
+    "lid": false,
+    "seals": 2,
+    "classification": "Không nắp, 2 tem"
+  },
+  {
+    "id": "may-000a00626026",
+    "name": "Casio fx-580VN X • Xanh nhạt • SN 000A00626026",
+    "series": "fx-580VN X",
+    "grade": "Chờ xác nhận",
+    "badge": "Máy thật #2",
+    "originalPrice": null,
+    "salePrice": null,
+    "savePercent": null,
+    "rating": null,
+    "sold": null,
+    "warranty": "Chờ Cơ xác nhận",
+    "color": "Xanh nhạt",
+    "status": "Còn hàng (máy riêng, 1 chiếc)",
+    "features": [
+      "Máy riêng, số serial trên màn hình: 000A00626026",
+      "2 tem Bitex • Có nắp xanh (Xấu)",
+      "Ảnh thật chụp ngày 24/11/2026 (mặt trước + mặt sau)",
+      "Độ mới và giá: chờ Cơ xác nhận"
+    ],
+    "gift": "Chờ Cơ xác nhận",
+    "image": "assets/images/machines/sn-000A00626026-truoc.jpg",
+    "images": [
+      "assets/images/machines/sn-000A00626026-truoc.jpg",
+      "assets/images/machines/sn-000A00626026-sau.jpg"
+    ],
+    "photoType": "real",
+    "serial": "000A00626026",
+    "machineColor": "Xanh nhạt",
+    "shotDate": "24/11/2026",
+    "lidColor": "xanh",
+    "lidQuality": "Xấu",
+    "modelPending": false,
+    "tags": [
+      "fx-580",
+      "maythat"
+    ],
+    "condition_percent": null,
+    "lid": true,
+    "seals": 2,
     "classification": null
+  },
+  {
+    "id": "may-000c007ce5b1",
+    "name": "Casio fx-580VN X • Đen • SN 000C007CE5B1",
+    "series": "fx-580VN X",
+    "grade": "Chờ xác nhận",
+    "badge": "Máy thật #3",
+    "originalPrice": null,
+    "salePrice": null,
+    "savePercent": null,
+    "rating": null,
+    "sold": null,
+    "warranty": "Chờ Cơ xác nhận",
+    "color": "Đen",
+    "status": "Còn hàng (máy riêng, 1 chiếc)",
+    "features": [
+      "Máy riêng, số serial trên màn hình: 000C007CE5B1",
+      "2 tem Bitex • Có nắp trắng (Trung Bình)",
+      "Ảnh thật chụp ngày 07/11/2026 (mặt trước + mặt sau)",
+      "Độ mới và giá: chờ Cơ xác nhận"
+    ],
+    "gift": "Chờ Cơ xác nhận",
+    "image": "assets/images/machines/sn-000C007CE5B1-truoc.jpg",
+    "images": [
+      "assets/images/machines/sn-000C007CE5B1-truoc.jpg",
+      "assets/images/machines/sn-000C007CE5B1-sau.jpg"
+    ],
+    "photoType": "real",
+    "serial": "000C007CE5B1",
+    "machineColor": "Đen",
+    "shotDate": "07/11/2026",
+    "lidColor": "trắng",
+    "lidQuality": "Trung Bình",
+    "modelPending": false,
+    "tags": [
+      "fx-580",
+      "maythat"
+    ],
+    "condition_percent": null,
+    "lid": true,
+    "seals": 2,
+    "classification": null
+  },
+  {
+    "id": "may-000a00657a7d",
+    "name": "Casio fx-580VN X • Đen • SN 000A00657A7D",
+    "series": "fx-580VN X",
+    "grade": "Chờ xác nhận",
+    "badge": "Máy thật #4",
+    "originalPrice": null,
+    "salePrice": null,
+    "savePercent": null,
+    "rating": null,
+    "sold": null,
+    "warranty": "Chờ Cơ xác nhận",
+    "color": "Đen",
+    "status": "Còn hàng (máy riêng, 1 chiếc)",
+    "features": [
+      "Máy riêng, số serial trên màn hình: 000A00657A7D",
+      "2 tem Bitex • Có nắp trắng (Trung Bình)",
+      "Ảnh thật chụp ngày 30/10/2026 (mặt trước, chưa có ảnh mặt sau)",
+      "Độ mới và giá: chờ Cơ xác nhận"
+    ],
+    "gift": "Chờ Cơ xác nhận",
+    "image": "assets/images/machines/sn-000A00657A7D-truoc.jpg",
+    "images": [
+      "assets/images/machines/sn-000A00657A7D-truoc.jpg"
+    ],
+    "photoType": "real",
+    "serial": "000A00657A7D",
+    "machineColor": "Đen",
+    "shotDate": "30/10/2026",
+    "lidColor": "trắng",
+    "lidQuality": "Trung Bình",
+    "modelPending": false,
+    "tags": [
+      "fx-580",
+      "maythat"
+    ],
+    "condition_percent": null,
+    "lid": true,
+    "seals": 2,
+    "classification": null
+  },
+  {
+    "id": "may-000c0082a50e",
+    "name": "Casio fx-580VN X • Xanh nhạt • SN 000C0082A50E",
+    "series": "fx-580VN X",
+    "grade": "Chờ xác nhận",
+    "badge": "Máy thật #5",
+    "originalPrice": null,
+    "salePrice": null,
+    "savePercent": null,
+    "rating": null,
+    "sold": null,
+    "warranty": "Chờ Cơ xác nhận",
+    "color": "Xanh nhạt",
+    "status": "Còn hàng (máy riêng, 1 chiếc)",
+    "features": [
+      "Máy riêng, số serial trên màn hình: 000C0082A50E",
+      "2 tem Bitex • Có nắp xanh (Trung Bình)",
+      "Ảnh thật chụp ngày 20/11/2026 (mặt trước + mặt sau)",
+      "Độ mới và giá: chờ Cơ xác nhận"
+    ],
+    "gift": "Chờ Cơ xác nhận",
+    "image": "assets/images/machines/sn-000C0082A50E-truoc.jpg",
+    "images": [
+      "assets/images/machines/sn-000C0082A50E-truoc.jpg",
+      "assets/images/machines/sn-000C0082A50E-sau.jpg"
+    ],
+    "photoType": "real",
+    "serial": "000C0082A50E",
+    "machineColor": "Xanh nhạt",
+    "shotDate": "20/11/2026",
+    "lidColor": "xanh",
+    "lidQuality": "Trung Bình",
+    "modelPending": false,
+    "tags": [
+      "fx-580",
+      "maythat"
+    ],
+    "condition_percent": null,
+    "lid": true,
+    "seals": 2,
+    "classification": null
+  },
+  {
+    "id": "may-000c00785e67",
+    "name": "Casio fx-580VN X • Xanh nhạt • SN 000C00785E67",
+    "series": "fx-580VN X",
+    "grade": "Chờ xác nhận",
+    "badge": "Máy thật #6",
+    "originalPrice": null,
+    "salePrice": null,
+    "savePercent": null,
+    "rating": null,
+    "sold": null,
+    "warranty": "Chờ Cơ xác nhận",
+    "color": "Xanh nhạt",
+    "status": "Còn hàng (máy riêng, 1 chiếc)",
+    "features": [
+      "Máy riêng, số serial trên màn hình: 000C00785E67",
+      "2 tem Bitex • Có nắp xanh (Trung Bình)",
+      "Ảnh thật chụp ngày 24/11/2026 (mặt trước + mặt sau)",
+      "Độ mới và giá: chờ Cơ xác nhận"
+    ],
+    "gift": "Chờ Cơ xác nhận",
+    "image": "assets/images/machines/sn-000C00785E67-truoc.jpg",
+    "images": [
+      "assets/images/machines/sn-000C00785E67-truoc.jpg",
+      "assets/images/machines/sn-000C00785E67-sau.jpg"
+    ],
+    "photoType": "real",
+    "serial": "000C00785E67",
+    "machineColor": "Xanh nhạt",
+    "shotDate": "24/11/2026",
+    "lidColor": "xanh",
+    "lidQuality": "Trung Bình",
+    "modelPending": false,
+    "tags": [
+      "fx-580",
+      "maythat"
+    ],
+    "condition_percent": null,
+    "lid": true,
+    "seals": 2,
+    "classification": null
+  },
+  {
+    "id": "may-000a008eccb5",
+    "name": "Casio fx-580VN X • Hồng • SN 000A008ECCB5",
+    "series": "fx-580VN X",
+    "grade": "Chờ xác nhận",
+    "badge": "Máy thật #7",
+    "originalPrice": null,
+    "salePrice": null,
+    "savePercent": null,
+    "rating": null,
+    "sold": null,
+    "warranty": "Chờ Cơ xác nhận",
+    "color": "Hồng",
+    "status": "Còn hàng (máy riêng, 1 chiếc)",
+    "features": [
+      "Máy riêng, số serial trên màn hình: 000A008ECCB5",
+      "2 tem Bitex • Có nắp hồng (Trung Bình)",
+      "Ảnh thật chụp ngày 24/11/2026 (mặt trước + mặt sau)",
+      "Độ mới và giá: chờ Cơ xác nhận"
+    ],
+    "gift": "Chờ Cơ xác nhận",
+    "image": "assets/images/machines/sn-000A008ECCB5-truoc.jpg",
+    "images": [
+      "assets/images/machines/sn-000A008ECCB5-truoc.jpg",
+      "assets/images/machines/sn-000A008ECCB5-sau.jpg"
+    ],
+    "photoType": "real",
+    "serial": "000A008ECCB5",
+    "machineColor": "Hồng",
+    "shotDate": "24/11/2026",
+    "lidColor": "hồng",
+    "lidQuality": "Trung Bình",
+    "modelPending": false,
+    "tags": [
+      "fx-580",
+      "maythat"
+    ],
+    "condition_percent": null,
+    "lid": true,
+    "seals": 2,
+    "classification": null
+  },
+  {
+    "id": "may-000c008a8dfc",
+    "name": "Casio fx-580VN X • Đen • SN 000C008A8DFC",
+    "series": "fx-580VN X",
+    "grade": "Chờ xác nhận",
+    "badge": "Máy thật #8",
+    "originalPrice": null,
+    "salePrice": null,
+    "savePercent": null,
+    "rating": null,
+    "sold": null,
+    "warranty": "Chờ Cơ xác nhận",
+    "color": "Đen",
+    "status": "Còn hàng (máy riêng, 1 chiếc)",
+    "features": [
+      "Máy riêng, số serial trên màn hình: 000C008A8DFC",
+      "2 tem Bitex • Có nắp trắng (Đẹp)",
+      "Ảnh thật chụp ngày 30/10/2026 (mặt trước + mặt sau)",
+      "Độ mới và giá: chờ Cơ xác nhận"
+    ],
+    "gift": "Chờ Cơ xác nhận",
+    "image": "assets/images/machines/sn-000C008A8DFC-truoc.jpg",
+    "images": [
+      "assets/images/machines/sn-000C008A8DFC-truoc.jpg",
+      "assets/images/machines/sn-000C008A8DFC-sau.jpg"
+    ],
+    "photoType": "real",
+    "serial": "000C008A8DFC",
+    "machineColor": "Đen",
+    "shotDate": "30/10/2026",
+    "lidColor": "trắng",
+    "lidQuality": "Đẹp",
+    "modelPending": false,
+    "tags": [
+      "fx-580",
+      "maythat"
+    ],
+    "condition_percent": null,
+    "lid": true,
+    "seals": 2,
+    "classification": null
+  },
+  {
+    "id": "may-000c00859a5c",
+    "name": "Casio fx-580VN X • Đen • SN 000C00859A5C",
+    "series": "fx-580VN X",
+    "grade": "Chờ xác nhận",
+    "badge": "Máy thật #9",
+    "originalPrice": null,
+    "salePrice": null,
+    "savePercent": null,
+    "rating": null,
+    "sold": null,
+    "warranty": "Chờ Cơ xác nhận",
+    "color": "Đen",
+    "status": "Còn hàng (máy riêng, 1 chiếc)",
+    "features": [
+      "Máy riêng, số serial trên màn hình: 000C00859A5C",
+      "2 tem Bitex • Có nắp trắng (Đẹp)",
+      "Ảnh thật chụp ngày 30/10/2026 (mặt trước + mặt sau)",
+      "Độ mới và giá: chờ Cơ xác nhận"
+    ],
+    "gift": "Chờ Cơ xác nhận",
+    "image": "assets/images/machines/sn-000C00859A5C-truoc.jpg",
+    "images": [
+      "assets/images/machines/sn-000C00859A5C-truoc.jpg",
+      "assets/images/machines/sn-000C00859A5C-sau.jpg"
+    ],
+    "photoType": "real",
+    "serial": "000C00859A5C",
+    "machineColor": "Đen",
+    "shotDate": "30/10/2026",
+    "lidColor": "trắng",
+    "lidQuality": "Đẹp",
+    "modelPending": false,
+    "tags": [
+      "fx-580",
+      "maythat"
+    ],
+    "condition_percent": null,
+    "lid": true,
+    "seals": 2,
+    "classification": null
+  },
+  {
+    "id": "may-000c00bfdd05",
+    "name": "Casio fx-580VN X • Đen • SN 000C00BFDD05",
+    "series": "fx-580VN X",
+    "grade": "Chờ xác nhận",
+    "badge": "Máy thật #10",
+    "originalPrice": null,
+    "salePrice": null,
+    "savePercent": null,
+    "rating": null,
+    "sold": null,
+    "warranty": "Chờ Cơ xác nhận",
+    "color": "Đen",
+    "status": "Còn hàng (máy riêng, 1 chiếc)",
+    "features": [
+      "Máy riêng, số serial trên màn hình: 000C00BFDD05",
+      "2 tem Bitex • Có nắp trắng (Đẹp)",
+      "Ảnh thật chụp ngày 30/10/2026 (mặt trước + mặt sau)",
+      "Độ mới và giá: chờ Cơ xác nhận"
+    ],
+    "gift": "Chờ Cơ xác nhận",
+    "image": "assets/images/machines/sn-000C00BFDD05-truoc.jpg",
+    "images": [
+      "assets/images/machines/sn-000C00BFDD05-truoc.jpg",
+      "assets/images/machines/sn-000C00BFDD05-sau.jpg"
+    ],
+    "photoType": "real",
+    "serial": "000C00BFDD05",
+    "machineColor": "Đen",
+    "shotDate": "30/10/2026",
+    "lidColor": "trắng",
+    "lidQuality": "Đẹp",
+    "modelPending": false,
+    "tags": [
+      "fx-580",
+      "maythat"
+    ],
+    "condition_percent": null,
+    "lid": true,
+    "seals": 2,
+    "classification": null
+  },
+  {
+    "id": "may-000a009d5bfc",
+    "name": "Casio fx-580VN X • Đen • SN 000A009D5BFC",
+    "series": "fx-580VN X",
+    "grade": "Chờ xác nhận",
+    "badge": "Máy thật #11",
+    "originalPrice": null,
+    "salePrice": null,
+    "savePercent": null,
+    "rating": null,
+    "sold": null,
+    "warranty": "Chờ Cơ xác nhận",
+    "color": "Đen",
+    "status": "Còn hàng (máy riêng, 1 chiếc)",
+    "features": [
+      "Máy riêng, số serial trên màn hình: 000A009D5BFC",
+      "2 tem Bitex • Có nắp trắng (Đẹp)",
+      "Ảnh thật chụp ngày 18/11/2026 (mặt trước + mặt sau)",
+      "Độ mới và giá: chờ Cơ xác nhận"
+    ],
+    "gift": "Chờ Cơ xác nhận",
+    "image": "assets/images/machines/sn-000A009D5BFC-truoc.jpg",
+    "images": [
+      "assets/images/machines/sn-000A009D5BFC-truoc.jpg",
+      "assets/images/machines/sn-000A009D5BFC-sau.jpg"
+    ],
+    "photoType": "real",
+    "serial": "000A009D5BFC",
+    "machineColor": "Đen",
+    "shotDate": "18/11/2026",
+    "lidColor": "trắng",
+    "lidQuality": "Đẹp",
+    "modelPending": false,
+    "tags": [
+      "fx-580",
+      "maythat"
+    ],
+    "condition_percent": null,
+    "lid": true,
+    "seals": 2,
+    "classification": null
+  },
+  {
+    "id": "may-000c0084703c",
+    "name": "Casio fx-580VN X • Đen • SN 000C0084703C",
+    "series": "fx-580VN X",
+    "grade": "Chờ xác nhận",
+    "badge": "Máy thật #12",
+    "originalPrice": null,
+    "salePrice": null,
+    "savePercent": null,
+    "rating": null,
+    "sold": null,
+    "warranty": "Chờ Cơ xác nhận",
+    "color": "Đen",
+    "status": "Còn hàng (máy riêng, 1 chiếc)",
+    "features": [
+      "Máy riêng, số serial trên màn hình: 000C0084703C",
+      "2 tem Bitex • Có nắp trắng (Đẹp)",
+      "Ảnh thật chụp ngày 24/11/2026 (mặt trước + mặt sau)",
+      "Độ mới và giá: chờ Cơ xác nhận"
+    ],
+    "gift": "Chờ Cơ xác nhận",
+    "image": "assets/images/machines/sn-000C0084703C-truoc.jpg",
+    "images": [
+      "assets/images/machines/sn-000C0084703C-truoc.jpg",
+      "assets/images/machines/sn-000C0084703C-sau.jpg"
+    ],
+    "photoType": "real",
+    "serial": "000C0084703C",
+    "machineColor": "Đen",
+    "shotDate": "24/11/2026",
+    "lidColor": "trắng",
+    "lidQuality": "Đẹp",
+    "modelPending": false,
+    "tags": [
+      "fx-580",
+      "maythat"
+    ],
+    "condition_percent": null,
+    "lid": true,
+    "seals": 2,
+    "classification": null
+  },
+  {
+    "id": "may-000c00888323",
+    "name": "Casio fx-580VN X • Đen • SN 000C00888323",
+    "series": "fx-580VN X",
+    "grade": "Chờ xác nhận",
+    "badge": "Máy thật #13",
+    "originalPrice": null,
+    "salePrice": null,
+    "savePercent": null,
+    "rating": null,
+    "sold": null,
+    "warranty": "Chờ Cơ xác nhận",
+    "color": "Đen",
+    "status": "Còn hàng (máy riêng, 1 chiếc)",
+    "features": [
+      "Máy riêng, số serial trên màn hình: 000C00888323",
+      "2 tem Bitex • Có nắp trắng (Đẹp)",
+      "Ảnh thật chụp ngày 24/11/2026 (mặt trước + mặt sau)",
+      "Độ mới và giá: chờ Cơ xác nhận"
+    ],
+    "gift": "Chờ Cơ xác nhận",
+    "image": "assets/images/machines/sn-000C00888323-truoc.jpg",
+    "images": [
+      "assets/images/machines/sn-000C00888323-truoc.jpg",
+      "assets/images/machines/sn-000C00888323-sau.jpg"
+    ],
+    "photoType": "real",
+    "serial": "000C00888323",
+    "machineColor": "Đen",
+    "shotDate": "24/11/2026",
+    "lidColor": "trắng",
+    "lidQuality": "Đẹp",
+    "modelPending": false,
+    "tags": [
+      "fx-580",
+      "maythat"
+    ],
+    "condition_percent": null,
+    "lid": true,
+    "seals": 2,
+    "classification": null
+  },
+  {
+    "id": "may-000c00917545",
+    "name": "Casio fx-580VN X • Xanh nhạt • SN 000C00917545",
+    "series": "fx-580VN X",
+    "grade": "Chờ xác nhận",
+    "badge": "Máy thật #14",
+    "originalPrice": null,
+    "salePrice": null,
+    "savePercent": null,
+    "rating": null,
+    "sold": null,
+    "warranty": "Chờ Cơ xác nhận",
+    "color": "Xanh nhạt",
+    "status": "Còn hàng (máy riêng, 1 chiếc)",
+    "features": [
+      "Máy riêng, số serial trên màn hình: 000C00917545",
+      "2 tem Bitex • Có nắp xanh (Đẹp)",
+      "Ảnh thật chụp ngày 24/11/2026 (mặt trước + mặt sau)",
+      "Độ mới và giá: chờ Cơ xác nhận"
+    ],
+    "gift": "Chờ Cơ xác nhận",
+    "image": "assets/images/machines/sn-000C00917545-truoc.jpg",
+    "images": [
+      "assets/images/machines/sn-000C00917545-truoc.jpg",
+      "assets/images/machines/sn-000C00917545-sau.jpg"
+    ],
+    "photoType": "real",
+    "serial": "000C00917545",
+    "machineColor": "Xanh nhạt",
+    "shotDate": "24/11/2026",
+    "lidColor": "xanh",
+    "lidQuality": "Đẹp",
+    "modelPending": false,
+    "tags": [
+      "fx-580",
+      "maythat"
+    ],
+    "condition_percent": null,
+    "lid": true,
+    "seals": 2,
+    "classification": null
+  },
+  {
+    "id": "may-000a008e2531",
+    "name": "Casio fx-580VN X • Xanh nhạt • SN 000A008E2531",
+    "series": "fx-580VN X",
+    "grade": "Chờ xác nhận",
+    "badge": "Máy thật #15",
+    "originalPrice": null,
+    "salePrice": null,
+    "savePercent": null,
+    "rating": null,
+    "sold": null,
+    "warranty": "Chờ Cơ xác nhận",
+    "color": "Xanh nhạt",
+    "status": "Còn hàng (máy riêng, 1 chiếc)",
+    "features": [
+      "Máy riêng, số serial trên màn hình: 000A008E2531",
+      "1 tem Bitex • Có nắp xanh (Trung Bình)",
+      "Ảnh thật chụp ngày 24/11/2026 (mặt trước + mặt sau)",
+      "Độ mới và giá: chờ Cơ xác nhận"
+    ],
+    "gift": "Chờ Cơ xác nhận",
+    "image": "assets/images/machines/sn-000A008E2531-truoc.jpg",
+    "images": [
+      "assets/images/machines/sn-000A008E2531-truoc.jpg",
+      "assets/images/machines/sn-000A008E2531-sau.jpg"
+    ],
+    "photoType": "real",
+    "serial": "000A008E2531",
+    "machineColor": "Xanh nhạt",
+    "shotDate": "24/11/2026",
+    "lidColor": "xanh",
+    "lidQuality": "Trung Bình",
+    "modelPending": false,
+    "tags": [
+      "fx-580",
+      "maythat"
+    ],
+    "condition_percent": null,
+    "lid": true,
+    "seals": 1,
+    "classification": null
+  },
+  {
+    "id": "may-000c0034aefa",
+    "name": "Casio fx-580VN X • Đen • SN 000C0034AEFA",
+    "series": "fx-580VN X",
+    "grade": "Chờ xác nhận",
+    "badge": "Máy thật #16",
+    "originalPrice": null,
+    "salePrice": null,
+    "savePercent": null,
+    "rating": null,
+    "sold": null,
+    "warranty": "Chờ Cơ xác nhận",
+    "color": "Đen",
+    "status": "Còn hàng (máy riêng, 1 chiếc)",
+    "features": [
+      "Máy riêng, số serial trên màn hình: 000C0034AEFA",
+      "0 tem Bitex • Có nắp trắng (viết tay nhiều chữ) (Xấu)",
+      "Ảnh thật chụp ngày 20/11/2026 (mặt trước + mặt sau)",
+      "Độ mới và giá: chờ Cơ xác nhận"
+    ],
+    "gift": "Chờ Cơ xác nhận",
+    "image": "assets/images/machines/sn-000C0034AEFA-truoc.jpg",
+    "images": [
+      "assets/images/machines/sn-000C0034AEFA-truoc.jpg",
+      "assets/images/machines/sn-000C0034AEFA-sau.jpg"
+    ],
+    "photoType": "real",
+    "serial": "000C0034AEFA",
+    "machineColor": "Đen",
+    "shotDate": "20/11/2026",
+    "lidColor": "trắng (viết tay nhiều chữ)",
+    "lidQuality": "Xấu",
+    "modelPending": false,
+    "tags": [
+      "fx-580",
+      "maythat"
+    ],
+    "condition_percent": null,
+    "lid": true,
+    "seals": 0,
+    "classification": "Có nắp, 0 tem"
+  },
+  {
+    "id": "may-000a0065dde5",
+    "name": "Máy chờ xác nhận model (skin Hello Kitty) • SN 000A0065DDE5",
+    "series": "Chờ xác nhận",
+    "grade": "Chờ xác nhận",
+    "badge": "Máy thật #17",
+    "originalPrice": null,
+    "salePrice": null,
+    "savePercent": null,
+    "rating": null,
+    "sold": null,
+    "warranty": "Chờ Cơ xác nhận",
+    "color": "Hồng/trắng (skin Hello Kitty)",
+    "status": "Còn hàng (máy riêng, 1 chiếc)",
+    "features": [
+      "Máy riêng (SN 000A0065DDE5) — skin Hello Kitty che tên model, CHƯA xác nhận model",
+      "0 tem Bitex • Có nắp Hello Kitty (Trung Bình)",
+      "Ảnh thật chụp ngày 06/11/2026 (mặt trước + mặt sau)",
+      "Độ mới và giá: chờ Cơ xác nhận"
+    ],
+    "gift": "Chờ Cơ xác nhận",
+    "image": "assets/images/machines/sn-000A0065DDE5-truoc.jpg",
+    "images": [
+      "assets/images/machines/sn-000A0065DDE5-truoc.jpg",
+      "assets/images/machines/sn-000A0065DDE5-sau.jpg"
+    ],
+    "photoType": "real",
+    "serial": "000A0065DDE5",
+    "machineColor": "Hồng/trắng (skin Hello Kitty)",
+    "shotDate": "06/11/2026",
+    "lidColor": "Hello Kitty",
+    "lidQuality": "Trung Bình",
+    "modelPending": true,
+    "tags": [
+      "maythat",
+      "chowacnhan"
+    ],
+    "condition_percent": null,
+    "lid": true,
+    "seals": 0,
+    "classification": "Có nắp, 0 tem"
+  },
+  {
+    "id": "may-000a00d88f7",
+    "name": "Casio fx-580VN X • Đen • SN 000A00D88F7",
+    "series": "fx-580VN X",
+    "grade": "Chờ xác nhận",
+    "badge": "Máy thật #18",
+    "originalPrice": null,
+    "salePrice": null,
+    "savePercent": null,
+    "rating": null,
+    "sold": null,
+    "warranty": "Chờ Cơ xác nhận",
+    "color": "Đen",
+    "status": "Còn hàng (máy riêng, 1 chiếc)",
+    "features": [
+      "Máy riêng, số serial trên màn hình: 000A00D88F7",
+      "0 tem Bitex • Có nắp trắng (Trung Bình)",
+      "Ảnh thật chụp ngày 20/11/2026 (mặt trước + mặt sau)",
+      "Độ mới và giá: chờ Cơ xác nhận"
+    ],
+    "gift": "Chờ Cơ xác nhận",
+    "image": "assets/images/machines/sn-000A00D88F7-truoc.jpg",
+    "images": [
+      "assets/images/machines/sn-000A00D88F7-truoc.jpg",
+      "assets/images/machines/sn-000A00D88F7-sau.jpg"
+    ],
+    "photoType": "real",
+    "serial": "000A00D88F7",
+    "machineColor": "Đen",
+    "shotDate": "20/11/2026",
+    "lidColor": "trắng",
+    "lidQuality": "Trung Bình",
+    "modelPending": false,
+    "tags": [
+      "fx-580",
+      "maythat"
+    ],
+    "condition_percent": null,
+    "lid": true,
+    "seals": 0,
+    "classification": "Có nắp, 0 tem"
   }
 ];
 
@@ -417,6 +1212,53 @@ function getProductClassification(product) {
     return 'Không nắp không tem';
   }
   return 'Chờ Cơ xác nhận';
+}
+
+// ---- Máy thật của Cơ (serial riêng) & sản phẩm chờ báo giá ----
+function hasPrice(p) {
+  return !!p && p.salePrice != null && !isNaN(Number(p.salePrice));
+}
+
+function photoBadgeHTML(p) {
+  if (p.photoType === 'real') {
+    return '<span class="absolute bottom-3 left-3 bg-emerald-600/95 text-white text-[10px] font-bold px-2 py-0.5 rounded-md shadow-sm"><i class="fa-solid fa-camera mr-1"></i>Ảnh thật máy của Cơ</span>';
+  }
+  return '<span class="absolute bottom-3 left-3 bg-amber-500/95 text-white text-[10px] font-bold px-2 py-0.5 rounded-md shadow-sm" title="Ảnh Casio/Bitex/retailer, chưa phải ảnh máy thật của Cơ">Ảnh minh họa — chưa có ảnh thật</span>';
+}
+
+function machineMetaHTML(p) {
+  if (!p.serial && !p.modelPending) return '';
+  const parts = [];
+  if (p.serial) parts.push(`<span class="font-mono font-bold text-slate-800">SN ${p.serial}</span>`);
+  if (p.machineColor) parts.push(`Màu ${p.machineColor}`);
+  if (p.lidQuality) parts.push(`Nắp ${p.lidColor ? p.lidColor + ' ' : ''}${p.lidQuality}`);
+  else if (p.lid === false) parts.push('Không nắp');
+  if (p.shotDate) parts.push(`Chụp ${p.shotDate}`);
+  return `<div class="text-[11px] text-slate-600 mb-2 leading-snug">${parts.join(' • ')}</div>`;
+}
+
+function priceBlockHTML(p, mode) {
+  if (!hasPrice(p)) {
+    const cls = mode === 'qv' ? 'text-lg' : 'text-sm';
+    return `<span class="${cls} font-extrabold text-amber-600"><i class="fa-solid fa-hourglass-half mr-1"></i>Chờ Cơ báo giá</span>`;
+  }
+  if (mode === 'qv') {
+    return `<span class="text-2xl font-extrabold text-blue-600">${formatMoney(p.salePrice)}</span>
+          <span class="text-sm text-slate-400 line-through">${formatMoney(p.originalPrice)}</span>
+          <span class="bg-blue-50 text-blue-700 text-xs font-bold px-2 py-0.5 rounded">-${p.savePercent}%</span>`;
+  }
+  return `<span class="text-lg font-extrabold text-slate-900">${formatMoney(p.salePrice)}</span>
+                <span class="text-xs text-slate-400 line-through ml-1">${formatMoney(p.originalPrice)}</span>`;
+}
+
+function quoteNoteHTML(p) {
+  if (hasPrice(p)) return '';
+  return '<div class="mb-2 px-3 py-2 rounded-xl bg-amber-50 border border-amber-200 text-[11px] text-amber-800 font-semibold">Máy này chưa có giá chốt — nhắn shop trên Threads để Cơ báo giá. Chưa thể đặt COD/thêm giỏ.</div>';
+}
+
+function setQvMainImage(src) {
+  const el = document.getElementById('qv-main-img');
+  if (el) el.src = src;
 }
 
 let VOUCHERS = { ...DEFAULT_CONFIG.vouchers };
@@ -551,9 +1393,10 @@ function renderProducts() {
             ` : ''}
           </div>
 
-          <span class="absolute top-3 right-3 bg-blue-600 text-white text-[11px] font-extrabold px-2 py-0.5 rounded-md shadow-sm">
+          ${hasPrice(product) && product.savePercent ? `<span class="absolute top-3 right-3 bg-blue-600 text-white text-[11px] font-extrabold px-2 py-0.5 rounded-md shadow-sm">
             -${product.savePercent}%
-          </span>
+          </span>` : ''}
+          ${photoBadgeHTML(product)}
 
           <button 
             onclick="openQuickView('${product.id}')"
@@ -567,12 +1410,14 @@ function renderProducts() {
         <div class="p-4 flex-1 flex flex-col">
           <div class="flex items-center justify-between text-[11px] text-slate-500 mb-1">
             <span class="font-bold text-blue-600">${product.series}</span>
-            <span><i class="fa-solid fa-star text-amber-400 mr-0.5"></i> ${product.rating} • Đã bán ${product.sold}+</span>
+            ${product.rating != null ? `<span><i class="fa-solid fa-star text-amber-400 mr-0.5"></i> ${product.rating} • Đã bán ${product.sold}+</span>` : `<span class="text-[10px] text-slate-500">${product.modelPending ? 'Chờ xác nhận model' : 'Máy riêng có serial'}</span>`}
           </div>
 
           <h3 class="font-bold text-slate-900 text-sm leading-snug line-clamp-2 min-h-[2.5rem] mb-2" title="${product.name}">
             ${product.name}
           </h3>
+
+          ${machineMetaHTML(product)}
 
           <!-- SPEC BAR: Có nắp hay không, mấy tem, độ mới bao nhiêu % -->
           <div class="grid grid-cols-3 gap-1 p-2 bg-slate-50 rounded-xl border border-slate-200/80 text-center mb-3">
@@ -610,15 +1455,15 @@ function renderProducts() {
           <div class="pt-3 border-t border-slate-100 mt-auto">
             <div class="flex items-baseline justify-between mb-3">
               <div>
-                <span class="text-lg font-extrabold text-slate-900">${formatMoney(product.salePrice)}</span>
-                <span class="text-xs text-slate-400 line-through ml-1">${formatMoney(product.originalPrice)}</span>
+                ${priceBlockHTML(product, 'card')}
               </div>
               <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
                 ${product.warranty}
               </span>
             </div>
 
-            <div class="grid grid-cols-5 gap-2 mb-2">
+            ${quoteNoteHTML(product)}
+            <div class="grid grid-cols-5 gap-2 mb-2 ${hasPrice(product) ? '' : 'hidden'}">
               <button 
                 onclick="addToCart('${product.id}', true)" 
                 class="col-span-3 py-2.5 px-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold transition shadow-sm flex items-center justify-center gap-1"
@@ -752,8 +1597,16 @@ function filterGrade(grade, btn) {
 }
 
 function sortProducts(order) {
-  if (order === 'price-asc') state.filteredProducts.sort((a, b) => a.salePrice - b.salePrice);
-  else if (order === 'price-desc') state.filteredProducts.sort((a, b) => b.salePrice - a.salePrice);
+  const pv = (p) => (hasPrice(p) ? Number(p.salePrice) : null);
+  const byPrice = (dir) => (a, b) => {
+    const x = pv(a), y = pv(b);
+    if (x === null && y === null) return 0;
+    if (x === null) return 1;
+    if (y === null) return -1;
+    return dir * (x - y);
+  };
+  if (order === 'price-asc') state.filteredProducts.sort(byPrice(1));
+  else if (order === 'price-desc') state.filteredProducts.sort(byPrice(-1));
   else if (order === 'best-seller') state.filteredProducts.sort((a, b) => b.sold - a.sold);
   renderProducts();
 }
@@ -787,6 +1640,10 @@ function resetFilters(shouldRender = true) {
 function addToCart(productId, openCheckoutDirectly = false) {
   const product = state.products.find(p => p.id === productId);
   if (!product) return;
+  if (!hasPrice(product)) {
+    showToast('Máy này đang chờ Cơ báo giá — vui lòng nhắn shop trên Threads.', 'warning');
+    return;
+  }
 
   const existing = state.cart.find(item => item.id === productId);
   if (existing) existing.quantity += 1;
@@ -956,7 +1813,9 @@ function openQuickView(productId) {
   container.innerHTML = `
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div class="bg-slate-100 rounded-2xl p-4 flex flex-col items-center justify-center">
-        <img src="${product.image}" alt="${product.name}" class="w-full max-h-64 object-cover rounded-xl"/>
+        <img id="qv-main-img" src="${product.image}" alt="${product.name}" class="w-full max-h-64 object-cover rounded-xl"/>
+        ${(product.images && product.images.length > 1) ? `<div class="mt-2 flex gap-2 justify-center">${product.images.map((src, i) => `<button type="button" onclick="setQvMainImage('${src}')" class="w-16 h-12 rounded-lg overflow-hidden border border-slate-300 hover:border-blue-500"><img src="${src}" alt="Ảnh ${i + 1}" class="w-full h-full object-cover"/></button>`).join('')}</div>` : ''}
+        <div class="mt-2">${photoBadgeHTML(product).replace('absolute bottom-3 left-3', 'inline-block')}</div>
         <div class="mt-3 flex flex-wrap gap-2 justify-center text-[11px]">
           <span class="px-2.5 py-1 bg-white border border-slate-200 rounded-md font-semibold text-slate-700">
             <i class="fa-solid fa-shield-check text-emerald-600 mr-1"></i> Main Zin Bitex 100%
@@ -976,9 +1835,7 @@ function openQuickView(productId) {
         <h3 class="text-lg font-extrabold text-slate-900 leading-snug">${product.name}</h3>
         
         <div class="flex items-baseline gap-2.5 my-3">
-          <span class="text-2xl font-extrabold text-blue-600">${formatMoney(product.salePrice)}</span>
-          <span class="text-sm text-slate-400 line-through">${formatMoney(product.originalPrice)}</span>
-          <span class="bg-blue-50 text-blue-700 text-xs font-bold px-2 py-0.5 rounded">-${product.savePercent}%</span>
+          ${priceBlockHTML(product, 'qv')}
         </div>
 
         <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 mb-4 space-y-1.5 text-xs text-slate-700">
@@ -1003,6 +1860,9 @@ function openQuickView(productId) {
           </div>
           <div><strong>Bảo hành:</strong> ${product.warranty}</div>
           <div><strong>Màu sắc:</strong> ${product.color}</div>
+          ${product.serial ? `<div><strong>Số serial:</strong> <span class="font-mono font-bold">${product.serial}</span></div>` : ''}
+          ${product.lidQuality ? `<div><strong>Chất lượng nắp:</strong> Nắp ${product.lidColor || ''} — ${product.lidQuality}</div>` : ''}
+          ${product.shotDate ? `<div><strong>Ngày chụp ảnh:</strong> ${product.shotDate}</div>` : ''}
           <div><strong>Quà tặng kèm:</strong> <span class="text-blue-700 font-semibold">${product.gift}</span></div>
         </div>
 
@@ -1015,7 +1875,8 @@ function openQuickView(productId) {
           `).join('')}
         </ul>
 
-        <div class="mt-auto grid grid-cols-2 gap-3 pt-4 border-t border-slate-100 mb-2">
+        ${quoteNoteHTML(product)}
+        <div class="mt-auto grid grid-cols-2 gap-3 pt-4 border-t border-slate-100 mb-2 ${hasPrice(product) ? '' : 'hidden'}">
           <button onclick="addToCart('${product.id}', true); closeQuickView();" class="py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs transition">
             Đặt Mua Ngay (COD)
           </button>
