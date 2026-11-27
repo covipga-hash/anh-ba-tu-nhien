@@ -2772,17 +2772,22 @@
             <label class="block text-xs font-bold text-slate-700 mb-1" for="of-phone">Số điện thoại của bạn *</label>
             <input id="of-phone" type="tel" inputmode="tel" required placeholder="Ví dụ: 0987654321" autocomplete="tel" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white focus:border-blue-500 focus:outline-none" />
           </div>
-          <div class="p-2.5 bg-amber-50 border border-amber-200 rounded-xl text-[11px] text-amber-900">Web chạy tĩnh trên GitHub Pages nên chưa tự gửi thông tin về shop. Sau khi bấm gửi, bạn bấm tiếp "Gửi qua Messenger" để shop nhận được ngay.</div>
-          <button type="submit" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs shadow-md transition"><i class="fa-solid fa-paper-plane mr-1"></i> Gửi thông tin cho shop</button>
+          <div class="p-2.5 bg-amber-50 border border-amber-200 rounded-xl text-[11px] text-amber-900">Web chạy tĩnh trên GitHub Pages nên chưa tự gửi thông tin về shop. Khi bấm gửi, web mở Messenger Page Anh Ba Tự Nhiên và sao chép sẵn nội dung bạn vừa điền; bạn chỉ cần dán vào khung chat và bấm gửi tin.</div>
+          <button type="submit" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs shadow-md transition"><i class="fa-solid fa-paper-plane mr-1"></i> Gửi qua Messenger Page</button>
         </form>
       </div>
-      <div id="order-form-done" class="hidden text-center space-y-3">
-        <div class="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl"><i class="fa-solid fa-check"></i></div>
-        <h3 class="text-lg font-extrabold text-slate-900">Đã ghi nhận thông tin</h3>
-        <p class="text-xs text-slate-600">Shop sẽ liên hệ lại với bạn qua điện thoại hoặc Messenger. Để shop nhận được ngay, hãy gửi nội dung dưới đây qua Messenger Page Anh Ba Tự Nhiên.</p>
-        <pre id="order-form-message" class="text-left whitespace-pre-wrap bg-slate-50 border border-slate-200 rounded-xl p-3 text-[11px] text-slate-700"></pre>
-        <button onclick="sendOrderFormViaMessenger()" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs transition"><i class="fa-brands fa-facebook-messenger mr-1"></i> Sao chép &amp; gửi qua Messenger</button>
-        <button onclick="closeOrderForm()" class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold transition">Đóng</button>
+      <div id="order-form-done" class="hidden space-y-3">
+        <div class="text-center">
+          <div class="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl"><i class="fa-solid fa-check"></i></div>
+          <h3 class="text-lg font-extrabold text-slate-900 mt-2">Gửi tin cho shop qua Messenger</h3>
+        </div>
+        <p id="order-form-status" class="text-xs text-slate-600"></p>
+        <label class="block text-xs font-bold text-slate-700" for="order-form-message">Nội dung đã điền (dán vào khung chat Messenger rồi bấm gửi):</label>
+        <textarea id="order-form-message" readonly rows="6" onclick="this.select()" class="w-full whitespace-pre-wrap bg-slate-50 border border-slate-200 rounded-xl p-3 text-[12px] text-slate-800 focus:outline-none focus:border-blue-500"></textarea>
+        <button type="button" id="order-form-copy-btn" onclick="copyOrderFormMessage()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-xs transition"><i class="fa-regular fa-copy mr-1"></i> Sao chép nội dung (1 chạm)</button>
+        <button type="button" onclick="openOrderFormMessenger()" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs transition"><i class="fa-brands fa-facebook-messenger mr-1"></i> Mở Messenger Page Anh Ba Tự Nhiên</button>
+        <p class="text-[11px] text-slate-500">Messenger không cho web tự điền sẵn hay tự gửi tin thay bạn, nên bạn cần dán nội dung và bấm gửi. Shop sẽ liên hệ lại qua điện thoại hoặc Messenger.</p>
+        <button type="button" onclick="closeOrderForm()" class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold transition">Đóng</button>
       </div>
     </div>
   </div>

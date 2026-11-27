@@ -940,6 +940,8 @@ function openOrderForm(productId) {
   if (!modal) return;
   document.getElementById('order-form-body').classList.remove('hidden');
   document.getElementById('order-form-done').classList.add('hidden');
+  const cb = document.getElementById('order-form-copy-btn');
+  if (cb) cb.innerHTML = '<i class="fa-regular fa-copy mr-1"></i> Sao chép nội dung (1 chạm)';
   document.getElementById('order-form-machine').innerHTML = `
     <div class="flex items-center gap-3 p-2.5 bg-slate-50 border border-slate-200 rounded-xl">
       <img src="${product.image}" alt="${product.name}" class="w-14 h-14 rounded-lg object-cover shrink-0"/>
@@ -989,16 +991,60 @@ function submitOrderForm(e) {
     list.unshift({ at: new Date().toISOString(), productId: orderFormProductId, cls, price, phone });
     localStorage.setItem('abtn_interest_requests', JSON.stringify(list.slice(0, 20)));
   } catch (_) {}
-  document.getElementById('order-form-message').textContent = orderFormMessage;
+  document.getElementById('order-form-message').value = orderFormMessage;
   document.getElementById('order-form-body').classList.add('hidden');
   document.getElementById('order-form-done').classList.remove('hidden');
+  const statusEl = document.getElementById('order-form-status');
+  // Mở Messenger Page ngay trong cú bấm của khách (tránh bị chặn popup) và thử sao chép sẵn nội dung
+  copyTextToClipboard(orderFormMessage).then(ok => {
+    statusEl.textContent = ok
+      ? 'Đã sao chép nội dung và mở Messenger Page Anh Ba Tự Nhiên. Hãy dán (giữ ô chat → Dán) rồi bấm gửi.'
+      : 'Chưa sao chép tự động được. Bấm "Sao chép nội dung" bên dưới, rồi mở Messenger để dán và gửi.';
+  });
+  window.open(MESSENGER_URL, '_blank', 'noopener');
 }
 
-function sendOrderFormViaMessenger() {
+function copyTextToClipboard(text) {
+  const fallback = () => {
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      const ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      return Promise.resolve(!!ok);
+    } catch (_) {
+      return Promise.resolve(false);
+    }
+  };
   try {
-    navigator.clipboard.writeText(orderFormMessage).then(() => showToast('Đã sao chép nội dung, hãy dán vào Messenger!', 'success')).catch(() => {});
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(text).then(() => true).catch(fallback);
+    }
   } catch (_) {}
-  window.open(MESSENGER_URL, '_blank');
+  return fallback();
+}
+
+function copyOrderFormMessage() {
+  const btn = document.getElementById('order-form-copy-btn');
+  copyTextToClipboard(orderFormMessage).then(ok => {
+    if (ok) {
+      if (btn) btn.innerHTML = '<i class="fa-solid fa-check mr-1"></i> Đã sao chép';
+      showToast('Đã sao chép nội dung, hãy dán vào Messenger!', 'success');
+    } else {
+      const box = document.getElementById('order-form-message');
+      if (box) { box.focus(); box.select(); }
+      showToast('Không sao chép tự động được: nội dung đã được chọn sẵn, hãy bấm Ctrl+C (hoặc giữ → Sao chép).', 'warning');
+    }
+  });
+}
+
+function openOrderFormMessenger() {
+  window.open(MESSENGER_URL, '_blank', 'noopener');
 }
 
 
