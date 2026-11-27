@@ -1,26 +1,12 @@
 {
   "shopName": "ANH BA TỰ NHIÊN",
-  "tagline": "Kho Máy Tính Casio Cũ Chuẩn Sĩ Tử",
+  "tagline": "Máy Tính Casio Thật Từng Chiếc Có Serial",
   "hotline": "0987.xxx.xxx",
   "zaloPhone": "0987654321",
   "facebookUrl": "https://www.facebook.com/anh3tunhien/",
   "tiktokUrl": "https://www.tiktok.com/@anh3tunhien",
   "tiktokHandle": "@anh3tunhien",
-  "threadsUrl": "https://www.threads.com/@_hgtuditto",
-  "threadsHandle": "@_hgtuditto",
-  "promoBanner": "Tặng Bảng 100 Công Thức Bấm Máy Casio + Pin Nhật Zin + Miễn Phí Giao Hàng Toàn Quốc!",
-  "vouchers": {
-    "ANHBA20K": {
-      "discount": 20000,
-      "desc": "Giảm ~20.000đ trực tiếp cho sĩ tử"
-    },
-    "SITU2026": {
-      "discount": 30000,
-      "desc": "Giảm ~30.000đ ưu đãi mùa thi"
-    },
-    "FREESHIP": {
-      "discount": 25000,
-      "desc": "Hỗ trợ ~25.000đ phí vận chuyển"
-    }
-  }
+  "promoBanner": "Chỉ bán máy tính Casio, Flexio, Vinacal. Xem máy thật theo số serial, nhắn Messenger Page Anh Ba Tự Nhiên để mua.",
+  "messengerUrl": "https://www.facebook.com/anh3tunhien/",
+  "messengerLabel": "Nhắn qua Messenger Page Anh Ba Tự Nhiên"
 }
