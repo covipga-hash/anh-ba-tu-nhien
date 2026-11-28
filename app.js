@@ -11,7 +11,7 @@ const DEFAULT_CONFIG = {
   "facebookUrl": "https://www.facebook.com/anh3tunhien/",
   "tiktokUrl": "https://www.tiktok.com/@anh3tunhien",
   "tiktokHandle": "@anh3tunhien",
-  "messengerUrl": "https://www.facebook.com/anh3tunhien/",
+  "messengerUrl": "https://m.me/anh3tunhien",
   "messengerLabel": "Nhắn qua Messenger Page Anh Ba Tự Nhiên",
   "promoBanner": "Chỉ bán máy tính Casio, Flexio, Vinacal. Xem máy thật theo số serial, nhắn Messenger Page Anh Ba Tự Nhiên để mua."
 };
@@ -878,8 +878,8 @@ function getProductClassification(product) {
   return `${seals} tem, ${lidTxt}`;
 }
 
-// ---- Messenger Page Anh Ba Tự Nhiên (link Page Facebook có sẵn; chưa có m.me đã xác minh) ----
-const MESSENGER_URL = "https://www.facebook.com/anh3tunhien/";
+// ---- Messenger Page Anh Ba Tự Nhiên (link m.me do Cơ xác nhận 28/11/2026) ----
+const MESSENGER_URL = "https://m.me/anh3tunhien";
 const MESSENGER_LABEL = "Nhắn qua Messenger Page Anh Ba Tự Nhiên";
 try { localStorage.removeItem('abtn_cart'); } catch (_) {}
 
