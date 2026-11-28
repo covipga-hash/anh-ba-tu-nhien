@@ -995,13 +995,9 @@ function submitOrderForm(e) {
   document.getElementById('order-form-body').classList.add('hidden');
   document.getElementById('order-form-done').classList.remove('hidden');
   const statusEl = document.getElementById('order-form-status');
-  // Mở Messenger Page ngay trong cú bấm của khách (tránh bị chặn popup) và thử sao chép sẵn nội dung
-  copyTextToClipboard(orderFormMessage).then(ok => {
-    statusEl.textContent = ok
-      ? 'Đã sao chép nội dung và mở Messenger Page Anh Ba Tự Nhiên. Hãy dán (giữ ô chat → Dán) rồi bấm gửi.'
-      : 'Chưa sao chép tự động được. Bấm "Sao chép nội dung" bên dưới, rồi mở Messenger để dán và gửi.';
-  });
-  window.open(MESSENGER_URL, '_blank', 'noopener');
+  if (statusEl) {
+    statusEl.textContent = 'Bấm "Sao chép nội dung (1 chạm)" để sao chép, rồi bấm "Mở Messenger Page Anh Ba Tự Nhiên" để dán và gửi — chỉ cần mở Messenger 1 lần ở bước dán.';
+  }
 }
 
 function copyTextToClipboard(text) {
